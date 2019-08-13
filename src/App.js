@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
 
-function App() {
+// following this tutorial:
+//https://programmingwithmosh.com/javascript/react-file-upload-proper-server-side-nodejs-easy/
+
+class App extends Component {
+  render() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <div class="container">
+	      <div class="row">
+
+          <div class="col-md-6">
+	          <form method="post" action="#" id="#">
+              <div class="form-group files">
+                <label>Upload Your File </label>
+                <input type="file" class="form-control" multiple=""></input>
+              </div>
+            </form>
+          </div>
+	    </div>
+	  </div>
+  </div>
+  )
+}
 }
 
 export default App;
