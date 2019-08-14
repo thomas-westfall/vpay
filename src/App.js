@@ -7,7 +7,7 @@ import {fetchUsersThunk} from "./store/utilities/users";
 //PAGE IMPORTS
 
 import HomePage from './components/HomePage';
-
+import LoginPage from './components/Login';
 class AppContainer extends Component {
   constructor() {
     super();
@@ -25,11 +25,14 @@ class AppContainer extends Component {
 
   render() {
     const HomeComponent = () => (<HomePage/>);
+    const LoginComponent = () => (<LoginPage/>)
     // const AllCampusesComponent = () => (<AllCampuses students={this.props.students} campuses={this.props.campuses} removeCampus={this.removeCampus} addCampus={this.addCampus} grabCampus={this.grabCampus}/>);
     return (
       <Router>
         <Switch>
-          <Route exact path="/" render={HomeComponent} />
+          <Route exact path="/" render={LoginComponent} />
+          <Route exact path="/login" render={LoginComponent} />
+          <Route exact path="/home" render={HomeComponent} />
           {/* <Route exact path="/allcampuses" render={AllCampusesComponent}/> */}
         </Switch>
       </Router>
