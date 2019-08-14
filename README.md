@@ -17,6 +17,7 @@
 ![wireframe4](./media/wireframe4.png "Wireframe4")
 
 ### ERD
+![vpayERD](./media/vpayERD.jpeg "vPay ERD")
 
 ### Project Time Frame Given: 8/14-8/23
 
