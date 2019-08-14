@@ -52,6 +52,7 @@ class HomePage extends Component {
               </form>
               <button type="button" class="btn btn-success btn-block" onClick={this.onClickHandler}>Upload</button> 
             </div>
+            <Link to="/orders">Go Orders</Link>
           </div>
         </div>
     </div>
