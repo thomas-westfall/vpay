@@ -40,6 +40,7 @@ class HomePage extends Component {
     render() {
     return (
       <div className="HomePage">
+        <h1>HOME PAGE</h1>
         <div class="container">
             <div class="row">
   

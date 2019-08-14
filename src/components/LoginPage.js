@@ -9,6 +9,7 @@ class LoginPage extends Component {
     render() {
     return (
         <div className="HomePage">
+          <h1>LOGIN PAGE</h1>
             <Link to="/home">Go Home</Link>
             <Link to="/register">Register</Link>
         </div>

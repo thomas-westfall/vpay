@@ -9,7 +9,8 @@ class AssignOrders extends Component {
     render() {
     return (
         <div className="HomePage">
-            <Link to="/">Go Home</Link>
+          <h1>ASSIGN ORDER PAGE</h1>
+            <Link to="/home">Back Home</Link>
         </div>
     )
   }
