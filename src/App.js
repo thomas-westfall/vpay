@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import {fetchUsersThunk} from "./store/utilities/users";
 import {logInThunk, logOutThunk} from "./store/utilities/loggeduser";
 
+import {fetchReceiptDataThunk} from "./store/utilities/receiptdata"
+
 //PAGE IMPORTS
 
 import HomePage from './components/HomePage';
@@ -37,12 +39,10 @@ class AppContainer extends Component {
   render() {
     const { isLoggedIn } = this.props;
 
-    const HomeComponent = () => (<HomePage logOut={this.logOut} loggeduser={this.props.loggeduser}/>);
+    const HomeComponent = () => (<HomePage logOut={this.logOut} loggeduser={this.props.loggeduser} fetchReceiptData={this.props.fetchReceiptData} data={this.props.receiptdata}/>);
     const LoginComponent = () => (<LoginPage logIn={this.logIn} isLoggedIn={this.props.isLoggedIn}/>);
     const RegisterComponent = () => (<RegisterPage users={this.props.users}/>);
-    const AssignOrdersComponent = () => (<AssignOrders/>);
-
-    
+    const AssignOrdersComponent = () => (<AssignOrders data={this.props.receiptdata}/>);
     // const AllCampusesComponent = () => (<AllCampuses students={this.props.students} campuses={this.props.campuses} removeCampus={this.removeCampus} addCampus={this.addCampus} grabCampus={this.grabCampus}/>);
     return (
       <Router>
@@ -68,7 +68,9 @@ const mapState = (state) => {
   return {
     users: state.users,
     loggeduser: state.loggeduser,
-    isLoggedIn: !!state.loggeduser.username
+    isLoggedIn: !!state.loggeduser.username,
+    receiptdata: state.receiptdata
+
   }
 }
 
@@ -77,6 +79,7 @@ const mapDispatch = (dispatch) => {
     fetchAllUsers: () => dispatch(fetchUsersThunk()),
     logIn: (user) => dispatch(logInThunk(user)),
     logOut: () => dispatch(logOutThunk()),
+    fetchReceiptData: (filename) => dispatch(fetchReceiptDataThunk(filename))
   }
 }
 export default connect(mapState, mapDispatch)(AppContainer);
