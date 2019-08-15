@@ -40,6 +40,8 @@ class HomePage extends Component {
     render() {
     return (
       <div className="HomePage">
+        <h1>HOME PAGE</h1>
+        <Link to="/">Log out</Link>
         <div class="container">
             <div class="row">
   
@@ -52,6 +54,7 @@ class HomePage extends Component {
               </form>
               <button type="button" class="btn btn-success btn-block" onClick={this.onClickHandler}>Upload</button> 
             </div>
+            <Link to="/orders">Go Orders</Link>
           </div>
         </div>
     </div>
