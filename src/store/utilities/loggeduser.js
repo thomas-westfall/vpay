@@ -27,17 +27,18 @@ const error = (err) => {
 // Thunks go here!
 export const logInThunk = (user) => async (dispatch) => {
 
-    // await axios.put(`localhost:1234/api/login`, {
-    //     username : user.username,
-    //     password : user.password
-    // })
-    // .then(res => {
-    //     dispatch(logIn(user));
-    // })
-    // .catch(err => {
-    //     dispatch(error(err));
-    // })
-    dispatch(logIn(user));
+    await axios.put(`localhost:1234/api/login`, {
+        username : user.username,
+        password : user.password
+    })
+    .then(res => {
+        console.log(res);
+        // dispatch(logIn(res));
+    })
+    .catch(err => {
+        dispatch(error(err));
+    })
+    // dispatch(logIn(user));
 }
 export const logOutThunk = () => (dispatch) => {
     dispatch(logOut());
