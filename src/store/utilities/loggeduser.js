@@ -2,6 +2,7 @@ import axios from 'axios';
 // ACTION TYPES;
 const LOG_IN = "LOG_IN";
 const LOG_OUT = "LOG_OUT";
+const ERROR = "ERROR";
 
 // ACTION CREATOR;
 const logIn = (user) => {
@@ -25,17 +26,18 @@ const error = (err) => {
 }
 // Thunks go here!
 export const logInThunk = (user) => async (dispatch) => {
-    // axios.get(`localhost:1234/api/login`)
-    await axios.put(`localhost:1234/api/login`, {
-        username : user.username,
-        password : user.password
-    })
-    .then(res => {
-        dispatch(logIn(user));
-    })
-    .catch(err => {
-        dispatch(error(err));
-    })
+
+    // await axios.put(`localhost:1234/api/login`, {
+    //     username : user.username,
+    //     password : user.password
+    // })
+    // .then(res => {
+    //     dispatch(logIn(user));
+    // })
+    // .catch(err => {
+    //     dispatch(error(err));
+    // })
+    dispatch(logIn(user));
 }
 export const logOutThunk = () => (dispatch) => {
     dispatch(logOut());
