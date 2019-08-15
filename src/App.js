@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import {fetchUsersThunk} from "./store/utilities/users";
+import {logInThunk, logOutThunk} from "./store/utilities/loggeduser";
 
 //PAGE IMPORTS
 
@@ -23,25 +24,39 @@ class AppContainer extends Component {
   componentDidMount() {
     this.props.fetchAllUsers();
   }
-
+  logIn =(user)=> {
+    this.props.logIn(user);
+  }
+  logOut =()=> {
+    this.props.logOut();
+  }
   // addStudent = (student) => {
   //   this.props.addStudent(student);
   // }
 
   render() {
-    const HomeComponent = () => (<HomePage/>);
-    const LoginComponent = () => (<LoginPage/>);
+    const { isLoggedIn } = this.props;
+
+    const HomeComponent = () => (<HomePage logOut={this.logOut} loggeduser={this.props.loggeduser}/>);
+    const LoginComponent = () => (<LoginPage logIn={this.logIn} isLoggedIn={this.props.isLoggedIn}/>);
     const RegisterComponent = () => (<RegisterPage users={this.props.users}/>);
     const AssignOrdersComponent = () => (<AssignOrders/>);
+
+    
     // const AllCampusesComponent = () => (<AllCampuses students={this.props.students} campuses={this.props.campuses} removeCampus={this.removeCampus} addCampus={this.addCampus} grabCampus={this.grabCampus}/>);
     return (
       <Router>
         <Switch>
           <Route exact path="/" render={LoginComponent} />
           <Route exact path="/login" render={LoginComponent} />
-          <Route exact path="/home" render={HomeComponent} />
           <Route exact path="/register" render={RegisterComponent} />
-          <Route exact path="/orders" render={AssignOrdersComponent} />
+          {isLoggedIn && (
+          <Switch>
+            <Route exact path="/home" render={HomeComponent} />
+            <Route exact path="/orders" render={AssignOrdersComponent} />
+          </Switch>
+          )}
+          <Route component={LoginComponent} />
           {/* <Route exact path="/allcampuses" render={AllCampusesComponent}/> */}
         </Switch>
       </Router>
@@ -52,12 +67,16 @@ class AppContainer extends Component {
 const mapState = (state) => {
   return {
     users: state.users,
+    loggeduser: state.loggeduser,
+    isLoggedIn: !!state.loggeduser.username
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
-    fetchAllUsers: () => dispatch(fetchUsersThunk())
+    fetchAllUsers: () => dispatch(fetchUsersThunk()),
+    logIn: (user) => dispatch(logInThunk(user)),
+    logOut: () => dispatch(logOutThunk()),
   }
 }
 export default connect(mapState, mapDispatch)(AppContainer);

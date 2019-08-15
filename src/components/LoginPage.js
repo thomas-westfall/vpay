@@ -16,25 +16,42 @@ class LoginPage extends Component {
     handleChangeUsername = (event) => {
       this.setState({username: event.target.value})
     }
+    handleSubmit = (submit) => {
+      submit.preventDefault()
+      const userToLog = {
+        "username": this.state.username,
+        "password": this.state.password,
+      }
+      this.props.logIn(userToLog)
+    }
     render() {
     return (
         <div className="HomePage">
           <h1>LOGIN PAGE</h1>
-            <Link to="/home">Go Home</Link>
-            <Link to="/register">Register</Link>
+            {this.props.isLoggedIn ? 
             <div>
-            <form onSubmit={this.handleSubmit} className="form">
+              <p>Successfully Logged in!</p>
+              <Link to ="/home">Go to Home</Link>
+            </div>
+            :
+            <div>
+            <Link to="/register">Register</Link>
               <div>
-                <label htmlFor="Username">Username: </label>
-                <input type="text" className="Username" onChange={this.handleChangeUsername} />
+                <form onSubmit={this.handleSubmit} className="form">
+                  <div>
+                    <label htmlFor="Username">Username: </label>
+                    <input type="text" className="Username" onChange={this.handleChangeUsername} />
+                  </div>
+                  <div>
+                    <label htmlFor="Password">Password: </label>
+                    <input type="password" className="Password" id="password" onChange={this.handleChangePassword}></input><input type="checkbox" onClick={this.showPass}></input>
+                  </div>
+                  <button>Login</button>
+                </form>
               </div>
-              <div>
-                <label htmlFor="Password">Password: </label>
-                <input type="password" className="Password" id="password" onChange={this.handleChangePassword}></input><input type="checkbox" onClick={this.showPass}></input>
-              </div>
-              <button>Login</button>
-            </form>
-        </div>
+            </div>
+            }
+
         </div>
     )
   }
