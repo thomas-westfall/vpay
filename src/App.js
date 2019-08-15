@@ -30,7 +30,7 @@ class AppContainer extends Component {
   // }
 
   render() {
-    const HomeComponent = () => (<HomePage fetchReceiptData={this.props.fetchReceiptData}/>);
+    const HomeComponent = () => (<HomePage fetchReceiptData={this.props.fetchReceiptData} data={this.props.receiptdata}/>);
     const LoginComponent = () => (<LoginPage/>);
     const RegisterComponent = () => (<RegisterPage users={this.props.users}/>);
     const AssignOrdersComponent = () => (<AssignOrders data={this.props.receiptdata}/>);

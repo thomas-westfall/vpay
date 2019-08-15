@@ -37,7 +37,13 @@ class HomePage extends Component {
               </form>
               <button type="button" class="btn btn-success btn-block" onClick={()=>this.props.fetchReceiptData(this.state.selectedFile)}>Upload</button> 
             </div>
+
+            {this.props.data.amounts ?
+          <div>
+            <br></br>
             <Link class="btn btn-success btn-block" to="/orders">Go Orders</Link>
+          </div>
+            : ''}
           </div>
         </div>
     </div>
