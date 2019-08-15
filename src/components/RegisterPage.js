@@ -15,12 +15,41 @@ class Register extends Component {
       }
     }
     showPass(){
-      var x = document.getElementById("password");
-      if (x.type === "password") {
-        x.type = "text";
+      var pass = document.getElementById("password");
+      if (pass.type === "password") {
+        pass.type = "text";
       } else {
-        x.type = "password";
+        pass.type = "password";
       }
+    }
+    handleChangeFirstName = (event) => {
+      this.setState({firstName: event.target.value})
+    }
+    handleChangeLastName = (event) => {
+      this.setState({lastName: event.target.value})
+    }
+    handleChangePassword = (event) => {
+      this.setState({password: event.target.value})
+    }
+    handleChangeUsername = (event) => {
+      this.setState({username: event.target.value})
+    }
+    handleChangePhone = (event) => {
+      this.setState({phonenumber: event.target.value})
+    }
+    handleChangeEmail = (event) => {
+      this.setState({email: event.target.value})
+    }
+    handleSubmit = (submit) => {
+      submit.preventDefault()
+      const newUser = {
+        "firstName": this.state.firstName,
+        "lastName": this.state.lastName,
+        "password": this.state.password,
+        "username": this.state.username,
+        "phonenumber": this.state.phonenumber,
+        "email": this.state.email,
+      }  
     }
     render() {
     return (
@@ -30,29 +59,29 @@ class Register extends Component {
             <form onSubmit={this.handleSubmit} className="form">
               <div>
                 <label htmlFor="Username">Username: </label>
-                <input type="text" className="Username" onChange={this.handleChangeName} />
+                <input type="text" className="Username" onChange={this.handleChangeUsername} />
               </div>
               <div>
                 <label htmlFor="Password">Password: </label>
-                <input type="password" className="Password" id="password" onChange={this.handleChangeAddress}></input><input type="checkbox" onClick={this.showPass}></input>
+                <input type="password" className="Password" id="password" onChange={this.handleChangePassword}></input><input type="checkbox" onClick={this.showPass}></input>
               </div>
               <div>
                 <label htmlFor="FirstName">First Name: </label>
-                <input type="text" name="campusName" onChange={this.handleChangeName} />
+                <input type="text" name="firstName" onChange={this.handleChangeFirstName} />
               </div>
               <div>
-                <label htmlFor="campusAddress">Last Name: </label>
-                <input type="text" name="campusAddress" onChange={this.handleChangeAddress} />
+                <label htmlFor="LastName">Last Name: </label>
+                <input type="text" name="lastName" onChange={this.handleChangeLastName} />
               </div>
               <div>
-                <label htmlFor="campusName">Phonenumber: </label>
-                <input type="text" name="campusName" onChange={this.handleChangeName} />
+                <label htmlFor="phone">Phone Number: </label>
+                <input type="number" name="phone" onChange={this.handleChangePhone} />
               </div>
               <div>
-                <label htmlFor="campusAddress">Email: </label>
-                <input type="text" name="campusAddress" onChange={this.handleChangeAddress} />
+                <label htmlFor="Email">Email: </label>
+                <input type="text" name="email" onChange={this.handleChangeEmail} />
               </div>
-              <button>Add Campus</button>
+              <button>Register</button>
             </form>
         </div>
     )

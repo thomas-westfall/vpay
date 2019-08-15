@@ -41,6 +41,7 @@ class HomePage extends Component {
     return (
       <div className="HomePage">
         <h1>HOME PAGE</h1>
+        <Link to="/">Log out</Link>
         <div class="container">
             <div class="row">
   
