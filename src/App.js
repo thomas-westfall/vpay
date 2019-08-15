@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import {fetchUsersThunk} from "./store/utilities/users";
+import {fetchReceiptDataThunk} from "./store/utilities/receiptdata"
 
 //PAGE IMPORTS
 
@@ -29,7 +30,7 @@ class AppContainer extends Component {
   // }
 
   render() {
-    const HomeComponent = () => (<HomePage/>);
+    const HomeComponent = () => (<HomePage fetchReceiptData={this.props.fetchReceiptData}/>);
     const LoginComponent = () => (<LoginPage/>);
     const RegisterComponent = () => (<RegisterPage users={this.props.users}/>);
     const AssignOrdersComponent = () => (<AssignOrders/>);
@@ -52,12 +53,14 @@ class AppContainer extends Component {
 const mapState = (state) => {
   return {
     users: state.users,
+    receiptdata: state.receiptdata
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
-    fetchAllUsers: () => dispatch(fetchUsersThunk())
+    fetchAllUsers: () => dispatch(fetchUsersThunk()),
+    fetchReceiptData: (filename) => dispatch(fetchReceiptDataThunk(filename))
   }
 }
 export default connect(mapState, mapDispatch)(AppContainer);
