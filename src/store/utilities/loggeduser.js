@@ -34,7 +34,7 @@ export const logInThunk = (user) => async (dispatch) => {
         dispatch(logIn(user));
     })
     .catch(err => {
-        dispatch(eroor{})
+        dispatch(error(err));
     })
 }
 export const logOutThunk = () => (dispatch) => {
@@ -47,6 +47,8 @@ export default (state = {}, action) => {
         case LOG_IN:
             return action.payload;
         case LOG_OUT:
+            return action.payload;
+        case ERROR:
             return action.payload;
         default:
             return state;
