@@ -17,22 +17,25 @@ const logOut = () => {
     }
 }
 
+const error = (err) => {
+    return {
+        type: ERROR,
+        payload: err
+    }
+}
 // Thunks go here!
-export const logInThunk = (user) => (dispatch) => {
-    // axios.get(`GOING TO BACKEND TO SEARCH FOR THIS USER THROUGH ${user.username}&&${user.password}`)
-    // .then(res => {
-    //   if(res.data){
-    //     console.log(res)
-    //     dispatch(fetchCampuses(res.data));
-    //   }
-    //   else{
-    //     dispatch(logIn()); // IF USER DOES NOT EXIST, FIGURE OUT WHAT TO DO:
-    //   }
-    // })
-    // .catch(err => {
-    //   console.log(err);
-    // })
-    dispatch(logIn(user));
+export const logInThunk = (user) => async (dispatch) => {
+    // axios.get(`localhost:1234/api/login`)
+    await axios.put(`localhost:1234/api/login`, {
+        username : user.username,
+        password : user.password
+    })
+    .then(res => {
+        dispatch(logIn(user));
+    })
+    .catch(err => {
+        dispatch(eroor{})
+    })
 }
 export const logOutThunk = () => (dispatch) => {
     dispatch(logOut());
