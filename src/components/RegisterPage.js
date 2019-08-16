@@ -10,7 +10,7 @@ class Register extends Component {
         lastName: '',
         password: '',
         username: '',
-        phonenumber: NaN,
+        phoneNumber: NaN,
         email: '',
       }
     }
@@ -35,7 +35,7 @@ class Register extends Component {
       this.setState({username: event.target.value})
     }
     handleChangePhone = (event) => {
-      this.setState({phonenumber: event.target.value})
+      this.setState({phoneNumber: event.target.value})
     }
     handleChangeEmail = (event) => {
       this.setState({email: event.target.value})
@@ -47,9 +47,10 @@ class Register extends Component {
         "lastName": this.state.lastName,
         "password": this.state.password,
         "username": this.state.username,
-        "phonenumber": this.state.phonenumber,
+        "phoneNumber": this.state.phoneNumber,
         "email": this.state.email,
-      }  
+      } 
+      this.props.registerUser(newUser);
     }
     render() {
     return (
@@ -81,7 +82,10 @@ class Register extends Component {
                 <label htmlFor="Email">Email: </label>
                 <input type="text" name="email" onChange={this.handleChangeEmail} />
               </div>
+              {this.props.registerError ? this.props.registerError.data : ""}
+              {this.props.registerSuccess ? this.props.registerSuccess : ""}
               <button>Register</button>
+
             </form>
         </div>
     )

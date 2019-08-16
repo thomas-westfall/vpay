@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
-import {fetchUsersThunk} from "./store/utilities/users";
+import {fetchUsersThunk, registerUserThunk} from "./store/utilities/users";
 import {logInThunk, logOutThunk} from "./store/utilities/loggeduser";
-
 import {fetchReceiptDataThunk} from "./store/utilities/receiptdata"
 
 //PAGE IMPORTS
@@ -41,7 +40,7 @@ class AppContainer extends Component {
 
     const HomeComponent = () => (<HomePage logOut={this.logOut} loggeduser={this.props.loggeduser} fetchReceiptData={this.props.fetchReceiptData} data={this.props.receiptdata}/>);
     const LoginComponent = () => (<LoginPage logIn={this.logIn} isLoggedIn={this.props.isLoggedIn} error={this.props.error}/>);
-    const RegisterComponent = () => (<RegisterPage users={this.props.users}/>);
+    const RegisterComponent = () => (<RegisterPage users={this.props.users} registerUser={this.props.registerUser} registerError={this.props.registerError} registerSuccess={this.props.registerSuccess}/>);
     const AssignOrdersComponent = () => (<AssignOrders data={this.props.receiptdata}/>);
     // const AllCampusesComponent = () => (<AllCampuses students={this.props.students} campuses={this.props.campuses} removeCampus={this.removeCampus} addCampus={this.addCampus} grabCampus={this.grabCampus}/>);
     return (
@@ -70,13 +69,15 @@ const mapState = (state) => {
     loggeduser: state.loggeduser,
     error: state.loggeduser.response,
     isLoggedIn: !!state.loggeduser.username,
-    receiptdata: state.receiptdata
-
+    receiptdata: state.receiptdata,
+    registerSuccess: state.users.success,
+    registerError: state.users.response,
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
+    registerUser: (user) => dispatch(registerUserThunk(user)),
     fetchAllUsers: () => dispatch(fetchUsersThunk()),
     logIn: (user) => dispatch(logInThunk(user)),
     logOut: () => dispatch(logOutThunk()),
