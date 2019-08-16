@@ -53,7 +53,7 @@ class Register extends Component {
     }
     render() {
     return (
-        <div className="Register">
+        <div >
           <h1>REGISTER PAGE</h1>
             <Link to="/">Back</Link>
             <form onSubmit={this.handleSubmit} className="form">

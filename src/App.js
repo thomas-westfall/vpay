@@ -40,7 +40,7 @@ class AppContainer extends Component {
     const { isLoggedIn } = this.props;
 
     const HomeComponent = () => (<HomePage logOut={this.logOut} loggeduser={this.props.loggeduser} fetchReceiptData={this.props.fetchReceiptData} data={this.props.receiptdata}/>);
-    const LoginComponent = () => (<LoginPage logIn={this.logIn} isLoggedIn={this.props.isLoggedIn}/>);
+    const LoginComponent = () => (<LoginPage logIn={this.logIn} isLoggedIn={this.props.isLoggedIn} error={this.props.error}/>);
     const RegisterComponent = () => (<RegisterPage users={this.props.users}/>);
     const AssignOrdersComponent = () => (<AssignOrders data={this.props.receiptdata}/>);
     // const AllCampusesComponent = () => (<AllCampuses students={this.props.students} campuses={this.props.campuses} removeCampus={this.removeCampus} addCampus={this.addCampus} grabCampus={this.grabCampus}/>);
@@ -68,6 +68,7 @@ const mapState = (state) => {
   return {
     users: state.users,
     loggeduser: state.loggeduser,
+    error: state.loggeduser.response,
     isLoggedIn: !!state.loggeduser.username,
     receiptdata: state.receiptdata
 
