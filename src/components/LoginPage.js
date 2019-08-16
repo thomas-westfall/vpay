@@ -1,60 +1,66 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+import './LoginPage.css'
 
 class LoginPage extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        password: '',
-        username: '',
-      }
+  constructor(props) {
+    super(props);
+    this.state = {
+      password: '',
+      username: '',
     }
-    handleChangePassword = (event) => {
-      this.setState({password: event.target.value})
+  }
+  handleChangePassword = (event) => {
+    this.setState({ password: event.target.value })
+  }
+  handleChangeUsername = (event) => {
+    this.setState({ username: event.target.value })
+  }
+  handleSubmit = (submit) => {
+    submit.preventDefault()
+    const userToLog = {
+      "username": this.state.username,
+      "password": this.state.password,
     }
-    handleChangeUsername = (event) => {
-      this.setState({username: event.target.value})
+    this.props.logIn(userToLog)
+  }
+  showPass() {
+    var x = document.getElementById("password");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
     }
-    handleSubmit = (submit) => {
-      submit.preventDefault()
-      const userToLog = {
-        "username": this.state.username,
-        "password": this.state.password,
-      }
-      this.props.logIn(userToLog)
-    }
-    render() {
+  }
+  render() {
     return (
-        <div className="HomePage">
-          <h1>LOGIN PAGE</h1>
+      <div className="LogInPage">
+        <form onSubmit={this.handleSubmit} className="form">
+          <table className='LogInTable'>
+            <thead>
+              <tr><td colspan={2}><h1 className="LogInTitle">Welcome</h1></td></tr>
+            </thead>
             {this.props.isLoggedIn ? 
-            <div>
-              <p>Successfully Logged in!</p>
-              <Link to ="/home">Go to Home</Link>
-            </div>
+            <tbody>
+              <tr><td>Successfully Logged in!</td></tr>
+              <tr><td><Link to ="/home">Go to Home</Link></td></tr>
+            </tbody>
             :
-            <div>
-            <Link to="/register">Register</Link>
-              <div>
-                <form onSubmit={this.handleSubmit} className="form">
-                  <div>
-                    <label htmlFor="Username">Username: </label>
-                    <input type="text" className="Username" onChange={this.handleChangeUsername} />
-                  </div>
-                  <div>
-                    <label htmlFor="Password">Password: </label>
-                    <input type="password" className="Password" id="password" onChange={this.handleChangePassword}></input><input type="checkbox" onClick={this.showPass}></input>
-                  </div>
-                  <button>Login</button>
-                </form>
-              </div>
-            </div>
+            <tbody >
+              <tr><td className="TextField">Username:</td><td><input type="text" className="Username" onChange={this.handleChangeUsername} /></td></tr>
+              <tr><td className="TextField">Password:</td><td><input type="password" className="Password" id="password" onChange={this.handleChangePassword}></input></td></tr>
+              <tr><td colspan={2} className="showPassword"><input type="checkbox" className="showPassCheck"id='show-password' onClick={this.showPass}></input><label for='show-password'>Show Password</label></td></tr>
+              <tr><td colspan={2} className="ErrorDisplay">{this.props.error ? this.props.error.data : ""}</td></tr>
+              <tr><td colspan={2}><button className="LoginButton">Login</button></td></tr>
+              <tr><td colspan={2} className="RegisterLink">Don't have an account? <Link to="/register">Register</Link></td></tr>
+            </tbody>
             }
-
-        </div>
+          </table>
+        </form>
+      </div>
     )
   }
-  }
-    
+}
+
 export default LoginPage;

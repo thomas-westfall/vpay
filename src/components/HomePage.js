@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import './HomePage.css'
+import './HomePage.css';
 import axios from 'axios';
+
 
 class HomePage extends Component {
     constructor(props) {
