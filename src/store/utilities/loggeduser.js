@@ -26,7 +26,6 @@ const error = (err) => {
 }
 // Thunks go here!
 export const logInThunk = (user) => async (dispatch) => {
-
     await axios.put(`https://vpay-heroku.herokuapp.com/api/users/login`, {
         username : user.username,
         password : user.password
