@@ -6,6 +6,34 @@
   padding: 5px;
   font-size: 35px;
 }
+.logOutButton {
+  margin-left: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  font-size: 13px;
+  text-decoration: none;
+  color: white;
+  padding: 5px 5px;
+  border: 1px solid rgb(238, 63, 63);;
+  border-bottom: 4px solid rgba(0,0,0,0.21);
+  border-radius: 4px;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+  color: white;
+  background: rgb(238, 63, 63);
+  width: 10%;
+}
+.logOutButton:hover{
+  color:white;
+  text-decoration: none;
+  background: rgb(197, 54, 54);
+  transition: 0.3s;
+}
+.logOutButton:active {
+  text-decoration: none;
+  box-shadow: 0 0 #1d4100; 
+  background-color: rgb(161, 48, 48)
+}
 .files input {
     outline: 2px dashed #92b0b3;
     outline-offset: -10px;
