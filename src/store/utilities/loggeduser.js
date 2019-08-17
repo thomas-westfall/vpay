@@ -26,20 +26,20 @@ const error = (err) => {
 }
 // Thunks go here!
 export const logInThunk = (user) => async (dispatch) => {
-    await axios.put(`https://vpay-heroku.herokuapp.com/api/users/login`, {
-        username : user.username,
-        password : user.password
-    })
-    .then(res => {
-        console.log(res);
-        dispatch(logIn(res.data));
-    })
-    .catch(err => {
-        console.log(err.response,"SOWEKNOW")
-        dispatch(error(err));
+    // await axios.put(`https://vpay-heroku.herokuapp.com/api/users/login`, {
+    //     username : user.username,
+    //     password : user.password
+    // })
+    // .then(res => {
+    //     console.log(res);
+    //     dispatch(logIn(res.data));
+    // })
+    // .catch(err => {
+    //     console.log(err.response,"SOWEKNOW")
+    //     dispatch(error(err));
         
-    })
-    // dispatch(logIn(user));
+    // })
+    dispatch(logIn({username : "aa"}));
 }
 export const logOutThunk = () => (dispatch) => {
     dispatch(logOut());

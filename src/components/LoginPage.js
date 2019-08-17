@@ -50,10 +50,10 @@ class LoginPage extends Component {
             <tbody >
               <tr><td className="TextField">Username:</td><td><input type="text" className="Username" onChange={this.handleChangeUsername} /></td></tr>
               <tr><td className="TextField">Password:</td><td><input type="password" className="Password" id="password" onChange={this.handleChangePassword}></input></td></tr>
-              <tr><td colspan={2} className="showPassword"><input type="checkbox" className="showPassCheck"id='show-password' onClick={this.showPass}></input><label for='show-password'>Show Password</label></td></tr>
-              <tr><td colspan={2} className="ErrorDisplay">{this.props.error ? this.props.error.data : ""}</td></tr>
-              <tr><td colspan={2}><button className="LoginButton">Login</button></td></tr>
-              <tr><td colspan={2} className="RegisterLink">Don't have an account? <Link to="/register">Register</Link></td></tr>
+              <tr><td colSpan={2} className="showPassword"><input type="checkbox" className="showPassCheck"id='show-password' onClick={this.showPass}></input><label for='show-password'>Show Password</label></td></tr>
+              <tr><td colSpan={2} className="ErrorDisplay">{this.props.error ? this.props.error.data : ""}</td></tr>
+              <tr><td colSpan={2}><button className="LoginButton">Login</button></td></tr>
+              <tr><td colSpan={2} className="RegisterLink">Don't have an account? <Link to="/register">Register</Link></td></tr>
             </tbody>
             }
           </table>
