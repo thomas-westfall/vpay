@@ -1,4 +1,4 @@
-.LogInPage{
+.registerPage{
     background-color: white;
     display: flex;
     justify-content: center;
@@ -6,16 +6,16 @@
     height: 100vh;
     
 }
-.ErrorDisplay{
+.errorMessage{
     color: #D63030;
     text-align: center;
 }
-.LogInTable{
+.registerTable{
     align-content: center;
     background-color: #F8F8F8;
     width: 400px;
     border-radius: 15px;
-    height: 250px;
+    height: 450px;
     transition: 0.3s;
     box-shadow: 0 4px 8px 0 rgba(104, 189, 34, 0.507);
     text-align: center;
@@ -24,19 +24,15 @@
     display: flex;
     justify-content: center;
 }
-.LogInTable:hover{
-    box-shadow: 0 5px 8px 0 rgba(104, 189, 34, 0.788);
+.registerTable:hover{
+    box-shadow: 0 5px 8px 0 rgba(104, 189, 34, 0.829);
 }
-.LogInTitle{
+.registerTitle{
     padding-top: 10px;
     color: #68BD22;
     text-align: center;
 }
-.RegisterLink{
-    font-size: 11px;
-    text-align: center;
-}
-.LoginInput{
+.registerInput{
     font-size: 16px;
     text-align: center;
     color: black;
@@ -44,7 +40,7 @@
 .TextField{
     text-align: right;
 }
-.LoginButton{
+.registerButton{
     font-weight: bold;
     vertical-align: top;
     text-align: center;
@@ -59,11 +55,14 @@
     margin: auto;
     color: white;
     background: #68BD22;
-    margin-bottom: 5px;
 }
-.LoginButton:hover{
+.registerButton:hover{
     background: #55AD39;
     transition: 0.3s;
+}
+.registerButton:active {
+    box-shadow: 0 0 #1d4100; 
+    background-color: #347300;
 }
 .showPassword{
     font-size: 12px;
@@ -71,7 +70,31 @@
 .showPassCheck{
     margin-right: 5px;
 }
-.LoginButton:active {
+.cancelButton{
+    text-decoration: none;
+    font-weight: bold;
+    vertical-align: top;
+    text-align: center;
+    font-size: 13px;
+    text-decoration: none;
+    color: white;
+    padding: 5px 60px;
+    border: 1px solid #68BD22;
+    border-bottom: 4px solid rgba(0,0,0,0.21);
+    border-radius: 4px;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+    margin: auto;
+    color: white;
+    background: rgb(238, 63, 63);
+}
+.cancelButton:hover{
+    color:white;
+    text-decoration: none;
+    background: rgb(197, 54, 54);
+    transition: 0.3s;
+}
+.cancelButton:active {
+    text-decoration: none;
     box-shadow: 0 0 #1d4100; 
-    background-color: #347300;
+    background-color: rgb(161, 48, 48)
 }

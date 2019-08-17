@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import './RegisterPage.css';
 
 class Register extends Component {
     constructor(props) {
@@ -54,8 +55,8 @@ class Register extends Component {
     }
     render() {
     return (
-        <div>
-                  <form onSubmit={this.handleSubmit} className="form">
+        <div className='registerPage'>
+          <form onSubmit={this.handleSubmit} className="form">
           <table className='registerTable'>
             <thead>
               <tr><td colSpan={2}><h1 className="registerTitle">Sign Up</h1></td></tr>
@@ -68,8 +69,10 @@ class Register extends Component {
               <tr><td className="TextField">Last Name:</td><td><input type="text" className="lastName"  onChange={this.handleChangeLastName}></input></td></tr>
               <tr><td className="TextField">Phone Number:</td><td><input type="number" className="phoneNumber" onChange={this.handleChangePhone} /></td></tr>
               <tr><td className="TextField">Email:</td><td><input type="text" className="email"  onChange={this.handleChangeEmail}></input></td></tr>
-              <tr><td>{this.props.registerError ? this.props.registerError.data : ""}{this.props.registerSuccess ? this.props.registerSuccess : ""}</td></tr>
-              <tr><td colSpan={2}><button className="RegisterButton">Login</button></td></tr>
+              <tr>{this.props.registerSuccess ? <td colSpan={2} className="successMessage">{this.props.registerSuccess}</td> : ""}{this.props.registerError ? <td colSpan={2} className ="errorMessage">{this.props.registerError.data}</td> : ""}</tr>
+              <tr><td colSpan={2}><button className="registerButton">Register</button></td></tr>
+              <tr><td colSpan={2}><Link className="cancelButton"to ="/">Cancel</Link></td></tr>
+              <tr></tr>
             </tbody>
           </table>
         </form>
