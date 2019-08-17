@@ -41,7 +41,7 @@ class AssignOrders extends Component {
       if(this.props.data.amounts){
         let neworders = [];
         await this.props.data.amounts.map((order)=> {
-          neworders.push({name : order.text, category: "wip", bgcolor: "orange"})
+          neworders.push({name : order.text, category: "allorders", bgcolor: "orange"})
           this.setState(
             { orders : neworders }
           )
@@ -50,7 +50,7 @@ class AssignOrders extends Component {
       }
     }
     render() {         
-      var tasks = { wip: [], complete: [], klklk : [] }  
+      var tasks = { allorders: [], complete: [], klklk : [] }  
       console.log(this.state.orders, "CUEeEEEEEEE");        
       this.state.orders.map((t) => { 
         console.log(this.state.orders, "CURRENTLY ON ", t);
@@ -84,11 +84,12 @@ class AssignOrders extends Component {
 
     //     </div>
   <div className="container-drag">
-    <h2 className="header">DRAG & DROP DEMO</h2>
+    <h2 className="header">Rearrange Orders</h2>
+    <Link to="/home">Cancel</Link>
     <table>
       <tr>
         <td>
-        <div className="wip" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>{this.onDrop(e, "wip")}}> <span className="task-header">WIP</span> {tasks.wip}</div>
+        <div className="allorders" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>{this.onDrop(e, "allorders")}}> <span className="task-header">All Orders</span> {tasks.allorders}</div>
         </td>
         <td>
         <div className="droppable" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, "complete")}> <span className="task-header">COMPLETED</span> {tasks.complete}  </div>  

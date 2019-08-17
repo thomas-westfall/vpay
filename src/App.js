@@ -12,6 +12,7 @@ import HomePage from './components/HomePage';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import AssignOrders from './components/AssignOrders';
+import AccessDenied from './components/AccessDenied';
 
 
 
@@ -42,6 +43,7 @@ class AppContainer extends Component {
     const LoginComponent = () => (<LoginPage logIn={this.logIn} isLoggedIn={this.props.isLoggedIn} error={this.props.error}/>);
     const RegisterComponent = () => (<RegisterPage users={this.props.users} registerUser={this.props.registerUser} registerError={this.props.registerError} registerSuccess={this.props.registerSuccess}/>);
     const AssignOrdersComponent = () => (<AssignOrders data={this.props.receiptdata}/>);
+    const DeniedComponent = () => (<AccessDenied />)
     // const AllCampusesComponent = () => (<AllCampuses students={this.props.students} campuses={this.props.campuses} removeCampus={this.removeCampus} addCampus={this.addCampus} grabCampus={this.grabCampus}/>);
     return (
       <Router>
@@ -55,7 +57,7 @@ class AppContainer extends Component {
             <Route exact path="/orders" render={AssignOrdersComponent} />
           </Switch>
           )}
-          <Route component={LoginComponent} />
+          <Route component={DeniedComponent} />
           {/* <Route exact path="/allcampuses" render={AllCampusesComponent}/> */}
         </Switch>
       </Router>
