@@ -1,0 +1,43 @@
+.allTables {
+    display: flex;
+    justify-content: center;
+}
+.allorders {
+    color: black;
+}
+.droppable {
+    background-color: #F6F6F6;
+    height: 250px;
+    margin: 15px;
+    width: 250px;
+    border-radius: 6px;
+    transition: 0.3s;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.295);
+}
+.droppable:hover {
+    transition: 0.3s;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.541);
+}
+.groupName {
+    margin-top: 10px;
+    font-size: 23px;
+    text-align: center;
+    padding: 5px;
+    color: white;
+    background-color: #55AD39;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.644);
+        
+}
+.draggable{
+    background-color: rgba(129, 167, 118, 0.247);
+    transition: 0.3s;
+    margin: 5px;
+}
+.draggable:hover{
+    transition: 0.3s;
+    background-color: rgba(108, 207, 81, 0.397);
+}
+.draggable:active{
+    transition: 0.3s;
+    background-color: rgba(55, 255, 0, 0.404);
+}
