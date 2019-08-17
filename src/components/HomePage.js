@@ -24,25 +24,25 @@ class HomePage extends Component {
     render() {
     return (
       <div className="HomePage">
-        <h1>HOME PAGE</h1>
-        <Link to="/" onClick={()=>this.props.logOut()}>Log out</Link>
-        <div class="container">
-            <div class="row">
+        <h1 className="topBar">Welcome back to vPay, {this.props.loggeduser.firstName} {this.props.loggeduser.lastName}</h1>
+        <Link className="logOutButton" to="/" onClick={()=>this.props.logOut()}>Log out</Link>
+        <div className="container">
+            <div className="row">
   
-            <div class="col-md-6">
+            <div className="col-md-6">
                 <form method="post" action="#" id="#">
-                <div class="form-group files">
+                <div className="form-group files">
                   <label>Upload Your File </label>
-                  <input type="file" class="form-control" name="file"  onChange={this.onChangeHandler} multiple=""></input>
+                  <input type="file" className="form-control" name="file"  onChange={this.onChangeHandler} multiple=""></input>
                 </div>
               </form>
-              <button type="button" class="btn btn-success btn-block" onClick={()=>this.props.fetchReceiptData(this.state.selectedFile)}>Upload</button> 
+              <button type="button" className="btn btn-success btn-block" onClick={()=>this.props.fetchReceiptData(this.state.selectedFile)}>Upload</button> 
             </div>
 
             {this.props.data.amounts ?
           <div>
             <br></br>
-            <Link class="btn btn-success btn-block" to="/orders">Go Orders</Link>
+            <Link className="btn btn-success btn-block" to="/orders">Go Orders</Link>
           </div>
             : ''}
           </div>

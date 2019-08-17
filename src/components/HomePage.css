@@ -1,3 +1,11 @@
+.topBar{
+  text-align: center;
+  margin-top: 10px;
+  background-color: #55AD39;
+  color: white;
+  padding: 5px;
+  font-size: 35px;
+}
 .files input {
     outline: 2px dashed #92b0b3;
     outline-offset: -10px;
