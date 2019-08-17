@@ -26,9 +26,9 @@ class HomePage extends Component {
       <div className="HomePage">
         <h1 className="topBar">Welcome back to vPay, {this.props.loggeduser.firstName} {this.props.loggeduser.lastName}</h1>
         <Link className="logOutButton" to="/" onClick={()=>this.props.logOut()}>Log out</Link>
+        
         <div className="container">
             <div className="row">
-  
             <div className="col-md-6">
                 <form method="post" action="#" id="#">
                 <div className="form-group files">
@@ -36,17 +36,13 @@ class HomePage extends Component {
                   <input type="file" className="form-control" name="file"  onChange={this.onChangeHandler} multiple=""></input>
                 </div>
               </form>
-              <button type="button" className="btn btn-success btn-block" onClick={()=>this.props.fetchReceiptData(this.state.selectedFile)}>Upload</button> 
+              <div><button type="button" className="uploadButton" onClick={()=>this.props.fetchReceiptData(this.state.selectedFile)}>Upload</button>{this.props.data.amounts ?
+            <Link  to="/orders"><button className="toOrdersButtonS" >Proceed</button></Link>
+            : <button className="toOrdersButtonB">No Orders</button>}</div>
             </div>
-
-            {this.props.data.amounts ?
-          <div>
-            <br></br>
-            <Link className="btn btn-success btn-block" to="/orders">Go Orders</Link>
-          </div>
-            : ''}
           </div>
         </div>
+
     </div>
     )
   }
