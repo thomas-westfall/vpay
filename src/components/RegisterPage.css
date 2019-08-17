@@ -10,6 +10,10 @@
     color: #D63030;
     text-align: center;
 }
+.successMessage{
+    color: #68BD22;
+    text-align: center;
+}
 .registerTable{
     align-content: center;
     background-color: #F8F8F8;
