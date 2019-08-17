@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import './AssignOrders.css'
 
 class AssignOrders extends Component { 
     // state = {
@@ -41,7 +42,7 @@ class AssignOrders extends Component {
       if(this.props.data.amounts){
         let neworders = [];
         await this.props.data.amounts.map((order)=> {
-          neworders.push({name : order.text, category: "allorders", bgcolor: "orange"})
+          neworders.push({name : order.text, category: "allorders"})
           this.setState(
             { orders : neworders }
           )
@@ -50,11 +51,11 @@ class AssignOrders extends Component {
       }
     }
     render() {         
-      var tasks = { allorders: [], complete: [], klklk : [] }  
+      var tasks = { allorders: [], trash: [], userorder : [] }  
       console.log(this.state.orders, "CUEeEEEEEEE");        
       this.state.orders.map((t) => { 
         console.log(this.state.orders, "CURRENTLY ON ", t);
-        tasks[t.category].push(<div key={t.name} onDragStart={(e)=>this.onDragStart(e, t.name)} draggable className="draggable" style={{backgroundColor: t.bgcolor}}> {t.name} </div>); 
+        tasks[t.category].push(<div key={t.name} onDragStart={(e)=>this.onDragStart(e, t.name)} draggable className="draggable"> {t.name} </div>); 
       });
     return (
     //     <div className="HomePage">
@@ -86,19 +87,44 @@ class AssignOrders extends Component {
   <div className="container-drag">
     <h2 className="header">Rearrange Orders</h2>
     <Link to="/home">Cancel</Link>
-    <table>
-      <tr>
-        <td>
-        <div className="allorders" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>{this.onDrop(e, "allorders")}}> <span className="task-header">All Orders</span> {tasks.allorders}</div>
-        </td>
-        <td>
-        <div className="droppable" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, "complete")}> <span className="task-header">COMPLETED</span> {tasks.complete}  </div>  
-        </td>
-        <td>
-        <div className="droppable" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, "klklk")}> <span className="task-header">KLKLK</span> {tasks.klklk}  </div>  
-        </td>
-      </tr>
-      </table>            
+    <div className="allTables">
+      <table className="droppable" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, "allorders")}>
+        <thead>
+          <h1 className="groupName">All Orders</h1>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div> {tasks.allorders}  </div>  
+            </td>
+          </tr>
+        </tbody>
+      </table> 
+      <table className="droppable" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, "trash")}>
+        <thead>
+          <h1 className="groupName">Trash</h1>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div> {tasks.trash}  </div>  
+            </td>
+          </tr>
+        </tbody>
+      </table> 
+      <table className="droppable" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, "userorder")}>
+        <thead>
+          <h1 className="groupName">User Order</h1>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div> {tasks.userorder}  </div>  
+            </td>
+          </tr>
+        </tbody>
+      </table>           
+    </div> 
   </div>
   );
   }
