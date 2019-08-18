@@ -1,5 +1,8 @@
 .registerPage{
-    background-color: #f2f2f2;
+    background-image: url('./images/vpaybg_v1.jpg');
+    background-size: cover;
+    background-position: center center;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
