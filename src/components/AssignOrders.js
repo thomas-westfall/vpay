@@ -15,7 +15,9 @@ class AssignOrders extends Component {
       super(props);
       this.state = {
         orders: [],
-        groups: []
+        groups: [],
+        people: [], //username at top of card
+        cool:  <h1 className="groupName">Trash</h1>
     }
       
     }
@@ -49,6 +51,11 @@ class AssignOrders extends Component {
         });
         console.log(this.state.orders, "OWOWOWOWOWOWOWO")
       }
+    }
+
+
+    onclick(event){
+
     }
     render() {         
       var tasks = { allorders: [], trash: [], userorder : [] }  
