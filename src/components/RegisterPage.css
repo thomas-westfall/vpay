@@ -1,5 +1,5 @@
 .registerPage{
-    background-color: white;
+    background-color: #f2f2f2;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,7 +16,7 @@
 }
 .registerTable{
     align-content: center;
-    background-color: #F8F8F8;
+    background-color: #ffffff;
     width: 400px;
     border-radius: 15px;
     height: 450px;
