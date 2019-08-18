@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import './LoginPage.css'
+import './LoginPage.css';
 
 class LoginPage extends Component {
   constructor(props) {
@@ -33,7 +33,16 @@ class LoginPage extends Component {
       x.type = "password";
     }
   }
+  
   render() {
+    let imgUrl = 'images/berlin.jpg'
+    let styles = {
+        root: {
+            backgroundImage: 'url(' + imgUrl + ')',
+            backgroundSize: 'cover',
+            overflow: 'hidden',
+        },
+    }
     return (
       <div className="LogInPage">
         <form onSubmit={this.handleSubmit} className="form">
