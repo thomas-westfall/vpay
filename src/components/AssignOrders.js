@@ -18,16 +18,12 @@ class AssignOrders extends Component {
       this.state = {
         orders: [],
         groups: {
-          groupOne: {
-            name : "1111",
+          allorders: {
+            name : "All Orders",
             theirOrders: [] 
           }, 
-          groupTwo: {
-            name : "2222",
-            theirOrders: [] 
-          }, 
-          groupThree: {
-            name : "333",
+          trash: {
+            name : "Trash",
             theirOrders: [] 
           }
         },
@@ -58,6 +54,15 @@ class AssignOrders extends Component {
         });    
     }
     async componentDidMount(){
+      var newGroup = this.state.groups;
+      newGroup[this.props.loggeduser.username] = {
+        name : this.props.loggeduser.username+"'s Orders",
+        id : this.props.loggeduser.id,
+        theirOrders : []
+      }
+      this.setState({
+        groups : newGroup,
+      })
       if(this.props.data.amounts){
         let neworders = [];
         await this.props.data.amounts.map((order)=> {
@@ -76,7 +81,13 @@ class AssignOrders extends Component {
 
     .then(res => {
         console.log(res.data, "HERERERE");
+        let newGroup = this.state.groups;
+        newGroup[res.data.username] = {
+          name : res.data.username+"'s Orders",
+          theirOrders : []
+        }
         this.setState({
+          groups : newGroup,
           currentuser: res.data
         })
     })
@@ -124,7 +135,7 @@ class AssignOrders extends Component {
       }
       )} */}
       {Object.keys(this.state.groups).map((keyName, i) => {
-        console.log("INDEX: ",i, " GROUP NAME: ",this.state.groups[keyName], "WHATEVER KEY NAME IS: ",keyName, " NAME?: ",);
+        console.log("INDEX: ",i, " GROUP NAME: ",this.state.groups[keyName], "WHATEVER KEY NAME IS: ",keyName);
       }
       )}
     </div>
