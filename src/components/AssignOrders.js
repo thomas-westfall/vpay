@@ -17,7 +17,16 @@ class AssignOrders extends Component {
       super(props);
       this.state = {
         orders: [],
-        groups: [],
+        groups: {
+          allorders: {
+            name : "All Orders",
+            theirOrders: [] 
+          }, 
+          trash: {
+            name : "Trash",
+            theirOrders: [] 
+          }
+        },
         people: [], //username at top of card
         peopletable:  <div className="people">People</div>,
         currentuser: {},
@@ -45,6 +54,15 @@ class AssignOrders extends Component {
         });    
     }
     async componentDidMount(){
+      var newGroup = this.state.groups;
+      newGroup[this.props.loggeduser.username] = {
+        name : this.props.loggeduser.username+"'s Orders",
+        id : this.props.loggeduser.id,
+        theirOrders : []
+      }
+      this.setState({
+        groups : newGroup,
+      })
       if(this.props.data.amounts){
         let neworders = [];
         await this.props.data.amounts.map((order)=> {
@@ -62,8 +80,14 @@ class AssignOrders extends Component {
       await axios.get(`https://vpay-heroku.herokuapp.com/api/users/${this.state.username}`)
 
     .then(res => {
-        console.log(res);
+        console.log(res.data, "HERERERE");
+        let newGroup = this.state.groups;
+        newGroup[res.data.username] = {
+          name : res.data.username+"'s Orders",
+          theirOrders : []
+        }
         this.setState({
+          groups : newGroup,
           currentuser: res.data
         })
     })
@@ -83,12 +107,15 @@ class AssignOrders extends Component {
       console.log("adduser called! nice!")
     }
 
-    render() {         
-      var tasks = { allorders: [], trash: [], userorder : [] }  
-      //console.log(this.state.orders, "CUEeEEEEEEE");        
+    render() {
+      Object.keys(this.state.groups).map((keyName, i) => {
+        var emptyOrders = []
+        this.state.groups[keyName].theirOrders = emptyOrders
+      }
+      )
+                   
       this.state.orders.map((t) => { 
-        //console.log(this.state.orders, "CURRENTLY ON ", t);
-        tasks[t.category].push(<div key={t.name} onDragStart={(e)=>this.onDragStart(e, t.name)} draggable className="draggable"> {t.name} </div>); 
+        this.state.groups[t.category].theirOrders.push(<div key={t.name} onDragStart={(e)=>this.onDragStart(e, t.name)} draggable className="draggable"> {t.name} </div>); 
       });
     return (
 
@@ -105,45 +132,42 @@ class AssignOrders extends Component {
         </div>
 
 
-
+    <div>
+      {/* {Object.keys(tasks).map((keyName, i) => {
+        console.log("KEY: ",i, " Object: ",tasks[keyName]);
+      }
+      )} */}
+    </div>
     <div className="allTables">
-      <table className="droppable" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, "allorders")}>
-        <thead>
-          <h1 className="groupName">All Orders</h1>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <div> {tasks.allorders}  </div>  
-            </td>
-          </tr>
-        </tbody>
-      </table> 
-      <table className="droppable" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, "trash")}>
-        <thead>
-          <h1 className="groupName">Trash</h1>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <div> {tasks.trash}  </div>  
-            </td>
-          </tr>
-        </tbody>
-      </table> 
-      <table className="droppable" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, "userorder")}>
-        <thead>
-          <h1 className="groupName">User Order</h1>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <div> {tasks.userorder}  </div>  
-            </td>
-          </tr>
-        </tbody>
-      </table>           
-    </div> 
+    {Object.keys(this.state.groups).map((keyName, i) => (
+      <div>
+        {/* {console.log("INDEX: ",i, " GROUP NAME: ",this.state.groups[keyName], "WHATEVER KEY NAME IS: ",keyName)} */}
+            <table className="droppable" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, keyName)}>
+            <thead>
+              <tr><td><h1 className="groupName">{this.state.groups[keyName].name}</h1></td></tr>
+            </thead>
+            <tbody>
+              <tr></tr>
+              {this.state.groups[keyName].theirOrders ?
+              this.state.groups[keyName].theirOrders.map((eachOrder) => (
+                <tr>
+                  <td>
+                    {eachOrder}
+                  </td>
+                </tr>
+                )
+              )
+              :
+              ""
+              }
+            </tbody>
+          </table> 
+        </div>
+      )
+      )}         
+    </div>
+    <div>
+    </div>
   </div>
   );
   }
