@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
-import { Alert } from 'reactstrap';
-import { UncontrolledAlert } from 'reactstrap';
+// import { Alert } from 'reactstrap';
+// import { UncontrolledAlert } from 'reactstrap';
 import './AssignOrders.css'
 
 class AssignOrders extends Component { 
@@ -127,7 +127,7 @@ class AssignOrders extends Component {
       }
       )
       this.state.orders.map((t) => { 
-        if(this.state.groups[t.category].totalCost != undefined){
+        if(this.state.groups[t.category].totalCost !== undefined){
           this.state.groups[t.category].totalCost += t.cost;
           console.log(typeof this.state.groups[t.category].totalCost, "AWOIDHAWOIDHAOIWDH")
         }
@@ -178,7 +178,7 @@ class AssignOrders extends Component {
               ""
               }
               {console.log(this.state.groups[keyName].totalCost," TOTAL COST SHOULD COME")}
-              {this.state.groups[keyName].totalCost != undefined ? (
+              {this.state.groups[keyName].totalCost !== undefined ? (
                 <tr className ="totalBar">
                   <td>
                     Total: ${this.state.groups[keyName].totalCost.toFixed(2)}

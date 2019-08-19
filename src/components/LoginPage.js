@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import './LoginPage.css';
 
 class LoginPage extends Component {
@@ -35,14 +34,14 @@ class LoginPage extends Component {
   }
   
   render() {
-    let imgUrl = 'images/berlin.jpg'
-    let styles = {
-        root: {
-            backgroundImage: 'url(' + imgUrl + ')',
-            backgroundSize: 'cover',
-            overflow: 'hidden',
-        },
-    }
+    // let imgUrl = 'images/berlin.jpg'
+    // let styles = {
+    //     root: {
+    //         backgroundImage: 'url(' + imgUrl + ')',
+    //         backgroundSize: 'cover',
+    //         overflow: 'hidden',
+    //     },
+    // }
     return (
       <div className="LogInPage">
         <form onSubmit={this.handleSubmit} className="form">

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
-import {fetchUsersThunk, registerUserThunk} from "./store/utilities/users";
+import {registerUserThunk} from "./store/utilities/users";
 import {logInThunk, logOutThunk} from "./store/utilities/loggeduser";
 import {fetchReceiptDataThunk, resetReceiptDataThunk} from "./store/utilities/receiptdata"
 
@@ -23,9 +23,6 @@ class AppContainer extends Component {
     }
   }
 
-  componentDidMount() {
-    this.props.fetchAllUsers();
-  }
   logIn =(user)=> {
     this.props.logIn(user);
   }
@@ -80,7 +77,6 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     registerUser: (user) => dispatch(registerUserThunk(user)),
-    fetchAllUsers: () => dispatch(fetchUsersThunk()),
     logIn: (user) => dispatch(logInThunk(user)),
     logOut: () => dispatch(logOutThunk()),
     fetchReceiptData: (filename) => dispatch(fetchReceiptDataThunk(filename)),
