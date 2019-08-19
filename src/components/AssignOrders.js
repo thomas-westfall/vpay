@@ -121,7 +121,7 @@ class AssignOrders extends Component {
       Object.keys(this.state.groups).map((keyName, i) => {
         var emptyOrders = []
         this.state.groups[keyName].theirOrders = emptyOrders;
-        if(this.state.groups[keyName].totalCost != undefined){
+        if(this.state.groups[keyName].totalCost !== undefined){
           this.state.groups[keyName].totalCost = 0;
         }
       }
