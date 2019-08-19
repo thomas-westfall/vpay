@@ -84,6 +84,7 @@ class AssignOrders extends Component {
         let newGroup = this.state.groups;
         newGroup[res.data.username] = {
           name : res.data.username+"'s Orders",
+          id : res.data.id,
           theirOrders : []
         }
         this.setState({
