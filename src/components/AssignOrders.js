@@ -54,6 +54,19 @@ class AssignOrders extends Component {
           orders         
         });    
     }
+
+    parse(text, freq, cost){
+      console.log(text, "NICE!", freq)
+      let neworders = this.state.orders;
+      let step = 0;
+      while(step < freq){
+      neworders.push({name : text, category: "allorders", cost : cost})
+      step++;
+      }
+      this.setState(
+        { orders : neworders }
+      )
+    }
     async componentDidMount(){
       var newGroup = this.state.groups;
       newGroup[this.props.loggeduser.username] = {
@@ -67,12 +80,23 @@ class AssignOrders extends Component {
       })
       if(this.props.data.amounts){
         let neworders = [];
+        
         await this.props.data.amounts.map((order)=> {
           console.log(order)
-          neworders.push({name : order.text, category: "allorders", cost : order.data})
-          this.setState(
-            { orders : neworders }
-          )
+          if(order.text[0] <= '9' && order.text[0]>= '0'){
+            let step = 1;
+            while(order.text[step] <= '9' && order.text[step] >= '0'){
+              step++;
+            }
+            let freq = order.text.substring(0,step);
+            console.log(freq, "NEAT!");
+            let freqint = parseInt(freq, 10);
+            this.parse(order.text.substring(step,order.text.length-1), freqint, order.data);
+          }
+
+          else{
+            this.parse(order.text, 1, order.data);
+          }
         });
         //console.log(this.state.orders, "OWOWOWOWOWOWOWO")
       }
