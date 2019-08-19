@@ -28,6 +28,14 @@
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.644);
         
 }
+.totalBar {
+    margin-top: 10px;
+    font-size: 15px;
+    text-align: center;
+    color: #55AD39;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.315);
+        
+}
 .draggable{
     background-color: rgba(129, 167, 118, 0.247);
     transition: 0.3s;
