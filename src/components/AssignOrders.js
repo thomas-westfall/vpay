@@ -134,10 +134,6 @@ class AssignOrders extends Component {
         console.log("KEY: ",i, " Object: ",tasks[keyName]);
       }
       )} */}
-      {Object.keys(this.state.groups).map((keyName, i) => {
-        console.log("INDEX: ",i, " GROUP NAME: ",this.state.groups[keyName], "WHATEVER KEY NAME IS: ",keyName);
-      }
-      )}
     </div>
     <div className="allTables">
       <table className="droppable" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, "allorders")}>
@@ -176,7 +172,27 @@ class AssignOrders extends Component {
           </tr>
         </tbody>
       </table>           
-    </div> 
+    </div>
+    <div>
+    {Object.keys(this.state.groups).map((keyName, i) => (
+      <div>
+        {console.log("INDEX: ",i, " GROUP NAME: ",this.state.groups[keyName], "WHATEVER KEY NAME IS: ",keyName)}
+            <table className="droppable" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, keyName)}>
+            <thead>
+              <tr><td><h1 className="groupName">{this.state.groups[keyName].name}</h1></td></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div> {this.state.groups[keyName].theirOrders}  </div>  
+                </td>
+              </tr>
+            </tbody>
+          </table> 
+        </div>
+      )
+      )}
+    </div>
   </div>
   );
   }
