@@ -59,7 +59,8 @@ class AssignOrders extends Component {
       newGroup[this.props.loggeduser.username] = {
         name : this.props.loggeduser.username+"'s Orders",
         id : this.props.loggeduser.id,
-        theirOrders : []
+        theirOrders : [],
+        totalCost : 0
       }
       this.setState({
         groups : newGroup,
@@ -67,7 +68,8 @@ class AssignOrders extends Component {
       if(this.props.data.amounts){
         let neworders = [];
         await this.props.data.amounts.map((order)=> {
-          neworders.push({name : order.text, category: "allorders"})
+          console.log(order)
+          neworders.push({name : order.text, category: "allorders", cost : order.data})
           this.setState(
             { orders : neworders }
           )
@@ -86,7 +88,8 @@ class AssignOrders extends Component {
         newGroup[res.data.username] = {
           name : res.data.username+"'s Orders",
           id : res.data.id,
-          theirOrders : []
+          theirOrders : [],
+          totalCost : 0
         }
         this.setState({
           groups : newGroup,
@@ -117,12 +120,18 @@ class AssignOrders extends Component {
     render() {
       Object.keys(this.state.groups).map((keyName, i) => {
         var emptyOrders = []
-        this.state.groups[keyName].theirOrders = emptyOrders
+        this.state.groups[keyName].theirOrders = emptyOrders;
+        if(this.state.groups[keyName].totalCost != undefined){
+          this.state.groups[keyName].totalCost = 0;
+        }
       }
       )
-                   
       this.state.orders.map((t) => { 
-        this.state.groups[t.category].theirOrders.push(<div key={t.name} onDragStart={(e)=>this.onDragStart(e, t.name)} draggable className="draggable"> {t.name} </div>); 
+        if(this.state.groups[t.category].totalCost != undefined){
+          this.state.groups[t.category].totalCost += t.cost;
+          console.log(typeof this.state.groups[t.category].totalCost, "AWOIDHAWOIDHAOIWDH")
+        }
+        this.state.groups[t.category].theirOrders.push(<div key={t.name} onDragStart={(e)=>this.onDragStart(e, t.name)} draggable className="draggable"> {t.name} Costs: {t.cost} </div>); 
       });
     return (
 
@@ -164,6 +173,18 @@ class AssignOrders extends Component {
                   </td>
                 </tr>
                 )
+              )
+              :
+              ""
+              }
+              {console.log(this.state.groups[keyName].totalCost," TOTAL COST SHOULD COME")}
+              {this.state.groups[keyName].totalCost != undefined ? (
+                <tr className ="totalBar">
+                  <td>
+                    Total: ${this.state.groups[keyName].totalCost.toFixed(2)}
+                  </td>
+                </tr>
+                
               )
               :
               ""
