@@ -17,7 +17,20 @@ class AssignOrders extends Component {
       super(props);
       this.state = {
         orders: [],
-        groups: [],
+        groups: {
+          groupOne: {
+            name : "1111",
+            theirOrders: [] 
+          }, 
+          groupTwo: {
+            name : "2222",
+            theirOrders: [] 
+          }, 
+          groupThree: {
+            name : "333",
+            theirOrders: [] 
+          }
+        },
         people: [], //username at top of card
         peopletable:  <div className="people">People</div>,
         currentuser: {},
@@ -62,7 +75,7 @@ class AssignOrders extends Component {
       await axios.get(`https://vpay-heroku.herokuapp.com/api/users/${this.state.username}`)
 
     .then(res => {
-        console.log(res);
+        console.log(res.data, "HERERERE");
         this.setState({
           currentuser: res.data
         })
@@ -105,11 +118,20 @@ class AssignOrders extends Component {
         </div>
 
 
-
+    <div>
+      {/* {Object.keys(tasks).map((keyName, i) => {
+        console.log("KEY: ",i, " Object: ",tasks[keyName]);
+      }
+      )} */}
+      {Object.keys(this.state.groups).map((keyName, i) => {
+        console.log("INDEX: ",i, " GROUP NAME: ",this.state.groups[keyName], "WHATEVER KEY NAME IS: ",keyName, " NAME?: ",);
+      }
+      )}
+    </div>
     <div className="allTables">
       <table className="droppable" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, "allorders")}>
         <thead>
-          <h1 className="groupName">All Orders</h1>
+          <tr><td><h1 className="groupName">All Orders</h1></td></tr>
         </thead>
         <tbody>
           <tr>
@@ -121,7 +143,7 @@ class AssignOrders extends Component {
       </table> 
       <table className="droppable" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, "trash")}>
         <thead>
-          <h1 className="groupName">Trash</h1>
+          <tr><td><h1 className="groupName">Trash</h1></td></tr>
         </thead>
         <tbody>
           <tr>
@@ -133,7 +155,7 @@ class AssignOrders extends Component {
       </table> 
       <table className="droppable" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, "userorder")}>
         <thead>
-          <h1 className="groupName">User Order</h1>
+          <tr><td><h1 className="groupName">User Orders</h1></td></tr>
         </thead>
         <tbody>
           <tr>
