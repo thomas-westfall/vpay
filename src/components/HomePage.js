@@ -14,10 +14,7 @@ class HomePage extends Component {
     }
     
     componentDidMount(){
-      // this.setState({
-      //   data: undefined
-      // })
-      //this.props.data = undefined;
+      this.props.resetReceiptData();
     }
     onChangeHandler=event=>{
       this.setState({
