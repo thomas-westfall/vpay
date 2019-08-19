@@ -128,7 +128,7 @@ class AssignOrders extends Component {
 
   <div className="container-drag">
     <h2 className="header">Rearrange Orders</h2>
-    <Link to="/home">Cancel</Link>
+    <Link to="/home" onClick={()=>this.props.resetReceiptData()}>Cancel</Link>
 
     <div>
           <h2>Add user by username:</h2>

@@ -8,11 +8,17 @@ class HomePage extends Component {
     constructor(props) {
       super(props);
         this.state = {
-          selectedFile: null
+          selectedFile: null,
         }
      
     }
     
+    componentDidMount(){
+      // this.setState({
+      //   data: undefined
+      // })
+      //this.props.data = undefined;
+    }
     onChangeHandler=event=>{
       this.setState({
         selectedFile: event.target.files[0]

@@ -1,6 +1,7 @@
 import axios from 'axios';
 // ACTION TYPES;
 const FETCH_RECEIPT_DATA = "FETCH_RECEIPT_DATA";
+const RESET_RECEIPT_DATA = "RESET_RECEIPT_DATA";
 
 // ACTION CREATOR;
 const fetchReceiptData = (receiptdata) => {
@@ -8,6 +9,13 @@ const fetchReceiptData = (receiptdata) => {
         type: FETCH_RECEIPT_DATA,
         payload: receiptdata
     }
+}
+
+const resetReceiptData = () => {
+  return {
+    type: RESET_RECEIPT_DATA,
+    payload: {}
+  }
 }
 
 // Thunks go here!
@@ -28,10 +36,17 @@ export const fetchReceiptDataThunk = (selectedFile) => (dispatch) => {
   })
 }
 
+export const resetReceiptDataThunk = () => (dispatch) => {
+  let resolvedActionObject = resetReceiptData(); 
+  dispatch(resolvedActionObject);
+}
+
 // REDUCER FUNCTION;
 export default (state = {}, action) => {
     switch (action.type) {
         case FETCH_RECEIPT_DATA:
+            return action.payload;
+        case RESET_RECEIPT_DATA:
             return action.payload;
         default:
             return state;

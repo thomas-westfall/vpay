@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import {fetchUsersThunk, registerUserThunk} from "./store/utilities/users";
 import {logInThunk, logOutThunk} from "./store/utilities/loggeduser";
-import {fetchReceiptDataThunk} from "./store/utilities/receiptdata"
+import {fetchReceiptDataThunk, resetReceiptDataThunk} from "./store/utilities/receiptdata"
 
 //PAGE IMPORTS
 
@@ -39,10 +39,10 @@ class AppContainer extends Component {
   render() {
     const { isLoggedIn } = this.props;
 
-    const HomeComponent = () => (<HomePage logOut={this.logOut} loggeduser={this.props.loggeduser} fetchReceiptData={this.props.fetchReceiptData} data={this.props.receiptdata}/>);
+    const HomeComponent = () => (<HomePage logOut={this.logOut} loggeduser={this.props.loggeduser} fetchReceiptData={this.props.fetchReceiptData} resetReceiptData={this.props.resetReceiptData} data={this.props.receiptdata}/>);
     const LoginComponent = () => (<LoginPage logIn={this.logIn} isLoggedIn={this.props.isLoggedIn} error={this.props.error}/>);
     const RegisterComponent = () => (<RegisterPage users={this.props.users} registerUser={this.props.registerUser} registerError={this.props.registerError} registerSuccess={this.props.registerSuccess}/>);
-    const AssignOrdersComponent = () => (<AssignOrders loggeduser={this.props.loggeduser} data={this.props.receiptdata}/>);
+    const AssignOrdersComponent = () => (<AssignOrders loggeduser={this.props.loggeduser} resetReceiptData={this.props.resetReceiptData} data={this.props.receiptdata}/>);
     const DeniedComponent = () => (<AccessDenied />)
     // const AllCampusesComponent = () => (<AllCampuses students={this.props.students} campuses={this.props.campuses} removeCampus={this.removeCampus} addCampus={this.addCampus} grabCampus={this.grabCampus}/>);
     return (
@@ -83,7 +83,8 @@ const mapDispatch = (dispatch) => {
     fetchAllUsers: () => dispatch(fetchUsersThunk()),
     logIn: (user) => dispatch(logInThunk(user)),
     logOut: () => dispatch(logOutThunk()),
-    fetchReceiptData: (filename) => dispatch(fetchReceiptDataThunk(filename))
+    fetchReceiptData: (filename) => dispatch(fetchReceiptDataThunk(filename)),
+    resetReceiptData: () => dispatch(resetReceiptDataThunk())
   }
 }
 export default connect(mapState, mapDispatch)(AppContainer);
