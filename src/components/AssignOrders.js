@@ -30,7 +30,8 @@ class AssignOrders extends Component {
         people: [], //username at top of card
         peopletable:  <div className="people">People</div>,
         currentuser: {},
-        username: ""
+        username: "",
+        errortext: ""
     }
       
     }
@@ -88,12 +89,17 @@ class AssignOrders extends Component {
         }
         this.setState({
           groups : newGroup,
-          currentuser: res.data
+          currentuser: res.data,
+          errortext: ""
         })
     })
     .catch(err => {
-        console.log(err.response,"SOWEKNOW")
-        
+        if(err.response.status == 404){
+          this.setState({
+            errortext: "User not found! Did you spell it correctly?"
+          })
+          
+        }
     })
     }
 
@@ -129,6 +135,7 @@ class AssignOrders extends Component {
           <input type="text" className="Username" onChange={this.handleChangeUsername} />
 
         <button onClick={this.handleSubmit}>Add</button>
+        <div>{this.state.errortext}</div>
         </div>
 
 
