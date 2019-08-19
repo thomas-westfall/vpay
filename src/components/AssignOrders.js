@@ -129,6 +129,7 @@ class AssignOrders extends Component {
       this.state.orders.map((t) => { 
         if(this.state.groups[t.category].totalCost != undefined){
           this.state.groups[t.category].totalCost += t.cost;
+          console.log(typeof this.state.groups[t.category].totalCost, "AWOIDHAWOIDHAOIWDH")
         }
         this.state.groups[t.category].theirOrders.push(<div key={t.name} onDragStart={(e)=>this.onDragStart(e, t.name)} draggable className="draggable"> {t.name} Costs: {t.cost} </div>); 
       });
@@ -180,7 +181,7 @@ class AssignOrders extends Component {
               {this.state.groups[keyName].totalCost != undefined ? (
                 <tr className ="totalBar">
                   <td>
-                    Total: {this.state.groups[keyName].totalCost}
+                    Total: ${this.state.groups[keyName].totalCost.toFixed(2)}
                   </td>
                 </tr>
                 
