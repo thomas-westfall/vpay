@@ -27,9 +27,7 @@ class AssignOrders extends Component {
             theirOrders: [] 
           }
         },
-        people: [], //username at top of card
-        peopletable:  <div className="people">People</div>,
-        currentuser: {},
+        totalReceiptCost: 0,
         username: "",
         errortext: ""
     }
@@ -68,6 +66,9 @@ class AssignOrders extends Component {
       )
     }
     async componentDidMount(){
+      this.setState({
+        totalReceiptCost: this.props.data.totalAmount.data
+      })
       var newGroup = this.state.groups;
       newGroup[this.props.loggeduser.username] = {
         name : this.props.loggeduser.username+"'s Orders",
@@ -131,7 +132,13 @@ class AssignOrders extends Component {
     })
     }
 
-
+    handleFinalize = (event) => {
+      const newReceipt = {
+        "userId": this.state.firstName,
+        "lastName": this.state.lastName,
+        "password": this.state.password,
+      }
+    }
     handleChangeUsername = (event) => {
       this.setState({username: event.target.value})
     }
@@ -158,7 +165,6 @@ class AssignOrders extends Component {
         this.state.groups[t.category].theirOrders.push(<div key={t.name} onDragStart={(e)=>this.onDragStart(e, t.name)} draggable className="draggable"> {t.name} Costs: {t.cost} </div>); 
       });
     return (
-
   <div className="container-drag">
     <h2 className="header">Rearrange Orders</h2>
     <Link to="/home">Cancel</Link>
@@ -220,6 +226,7 @@ class AssignOrders extends Component {
       )}         
     </div>
     <div>
+      <button onClick={this.handleFinalize}>Finalize</button>  Total Cost: {this.state.totalReceiptCost}
     </div>
   </div>
   );
