@@ -147,6 +147,7 @@ class AssignOrders extends Component {
               <tr><td><h1 className="groupName">{this.state.groups[keyName].name}</h1></td></tr>
             </thead>
             <tbody>
+              <tr></tr>
               {this.state.groups[keyName].theirOrders ?
               this.state.groups[keyName].theirOrders.map((eachOrder) => (
                 <tr>
