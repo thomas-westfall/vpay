@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import './HomePage.css';
+import AllReceipts from './AllReceipts'
 import OrdersOwedContainer from './OrdersOwedContainer';
 
 class HomePage extends Component {
@@ -21,7 +22,7 @@ class HomePage extends Component {
       })
       console.log(event.target.files[0])
   
-  }
+    }
 
     render() {
     return (
@@ -46,6 +47,9 @@ class HomePage extends Component {
                   </div>
                 </form>
               </div>
+           <div className="receiptHistory">
+              <AllReceipts loggeduser={this.props.loggeduser}/>
+            </div>
             
           </div>
           
@@ -54,17 +58,10 @@ class HomePage extends Component {
           </div>
 
         </div>
-
                 <button type="button" className="btn btn-success" onClick={()=>this.props.fetchReceiptData(this.state.selectedFile)}>Upload</button>
             
                 {this.props.data.amounts ? <Link  to="/orders"><button className="btn btn-primary">Proceed</button></Link> : <button className="btn btn-secondary">No Orders</button>}
-              
-
-
-        
-        
-
-
+             
         <div className="row">
           <OrdersOwedContainer loggeduser={this.props.loggeduser} />
         </div>
