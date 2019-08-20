@@ -1,11 +1,18 @@
-.topBar{
-  text-align: center;
-  margin-top: 10px;
+.navbar {
   background-color: #55AD39;
+  justify-content: space-between;
   color: white;
-  padding: 5px;
-  font-size: 35px;
 }
+
+.container-fluid {
+  padding: 0;
+}
+
+.row {
+  justify-content: center;
+  padding: 1%;
+}
+
 .logOutButton {
   margin-left: 10px;
   text-decoration: none;
@@ -23,6 +30,7 @@
   background: rgb(238, 63, 63);
   width: 10%;
 }
+
 .logOutButton:hover{
   color:white;
   text-decoration: none;
@@ -34,6 +42,7 @@
   box-shadow: 0 0 #1d4100; 
   background-color: rgb(161, 48, 48)
 }
+
 .files input {
     outline: 2px dashed #92b0b3;
     outline-offset: -10px;

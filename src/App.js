@@ -7,14 +7,11 @@ import {logInThunk, logOutThunk} from "./store/utilities/loggeduser";
 import {fetchReceiptDataThunk, resetReceiptDataThunk} from "./store/utilities/receiptdata"
 
 //PAGE IMPORTS
-
 import HomePage from './components/HomePage';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import AssignOrders from './components/AssignOrders';
 import AccessDenied from './components/AccessDenied';
-
-
 
 class AppContainer extends Component {
   constructor() {
