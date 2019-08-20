@@ -62,11 +62,11 @@ class AssignOrders extends Component {
     while (step < freq) {
       console.log("THE FREQUENCY IS: ",freq," THE STEP IS: ",step)
       neworders.push({ name: text, category: "allorders", cost: cost, orderid: this.state.numberOrders }) 
-      this.state.numberOrders = this.state.numberOrders + 1;
+      this.state.numberOrders =  this.state.numberOrders + 1;
       step = step +1;
       console.log("THE FREQUENCY IS: ",freq," THE STEP BECAME: ",step,"WITH numberOrders at:",this.state.numberOrders)
     }
-    this.state.orders = neworders
+    this.setState(neworders)
   }
 
   async componentDidMount() {
