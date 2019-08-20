@@ -55,21 +55,18 @@ class AssignOrders extends Component {
     });
   }
 
-  async parse(text, freq, cost) {
-    console.log(text, "NICE!", freq)
+  parse(text, freq, cost) {
+    console.log(text, "The order has a frequency of", freq)
     let step = 0;
+    let neworders = this.state.orders;
     while (step < freq) {
-      console.log("THIS IS RUNNING NUMBER OF ORDERS IS: ", this.state.numberOrders)
-      let neworders = { name: text, category: "allorders", cost: cost, orderid: this.state.numberOrders }
-      await this.setState({
-        numberOrders: this.state.numberOrders + 1,
-      })
-      console.log(this.state.numberOrders, "THIS IS NUMBER ORDERS")
-      step++;
-      await this.setState(
-        { orders: [...this.state.orders, neworders] }
-      )
+      console.log("THE FREQUENCY IS: ",freq," THE STEP IS: ",step)
+      neworders.push({ name: text, category: "allorders", cost: cost, orderid: this.state.numberOrders }) 
+      this.state.numberOrders = this.state.numberOrders + 1;
+      step = step +1;
+      console.log("THE FREQUENCY IS: ",freq," THE STEP BECAME: ",step,"WITH numberOrders at:",this.state.numberOrders)
     }
+    this.state.orders = neworders
   }
 
   async componentDidMount() {
