@@ -32,6 +32,8 @@ class AssignOrders extends Component {
       username: "",
       errortext: "",
       numberOrders: 0,
+      tipPercentChange: 0,
+      tipPercent: 0
     }
 
   }
@@ -66,7 +68,7 @@ class AssignOrders extends Component {
       neworders.push({ name: text, category: "allorders", cost: newcost, orderid: this.state.numberOrders }) 
       this.state.numberOrders =  this.state.numberOrders + 1;
       step = step +1;
-      console.log("THE FREQUENCY IS: ",freq," THE STEP BECAME: ",step,"WITH numberOrders at:",this.state.numberOrders)
+      console.log("THE FREQUENCY IS: ",freq," THE STEP BECAME: ",step)
     }
     this.setState(neworders)
   }
@@ -136,22 +138,72 @@ class AssignOrders extends Component {
       })
   }
 
-  handleFinalize = (event) => {
-    const newReceipt = {
-      "userId": this.state.firstName,
-      "lastName": this.state.lastName,
-      "password": this.state.password,
-    }
+  handleFinalize = async (event) => {
+    await axios.post(`https://vpay-heroku.herokuapp.com/api/receipts`, {
+      userId : this.props.loggeduser.id,
+      totalPrice : parseInt(((((this.state.totalReceiptCost-this.state.totalReceiptTax)*(this.state.tipPercent/100))+(this.state.totalReceiptCost)).toFixed(2))),
+      tipPercent: parseInt(this.state.tipPercent)
+    })
+    .then (res => {
+        console.log(res);
+        let newReceiptId = res.data;
+        Object.keys(this.state.groups).map((keyName, i) => {
+          if(this.state.groups[keyName].id === this.props.loggeduser.id) {
+            this.state.groups[keyName].theirOrders.map( async (eachOrder) => {
+              console.log(eachOrder, "THIS IS THE INFO ABOUT EACH ORDER AND EACH CHILDREN OF 3",eachOrder.props.children[3])
+               await axios.post(`https://vpay-heroku.herokuapp.com/api/orders`, {
+                userId : this.state.groups[keyName].id,
+                receiptId : newReceiptId,
+                paid : true,
+                itemName : eachOrder.props.id,
+                price : ((eachOrder.props.children[3]*(this.state.tipPercent/100))+eachOrder.props.children[3]+(eachOrder.props.children[3]*(this.state.totalReceiptTax/(this.state.totalReceiptCost-this.state.totalReceiptTax))))
+              })
+              .then(response => {
+                console.log(response, "WENT THROUGH SUCCESFULLLLLLLY")
+                }
+              )
+              .catch(error => {
+                console.log(error.response)
+              })
+            })
+          }
+          else if((this.state.groups[keyName].id)){
+            this.state.groups[keyName].theirOrders.map( async (eachOrder) => (
+              await axios.post(`https://vpay-heroku.herokuapp.com/api/orders`, {
+                userId : this.state.groups[keyName].id,
+                receiptId : newReceiptId,
+                paid : false,
+                itemName : eachOrder.props.id,
+                price : ((eachOrder.props.children[3]*(this.state.tipPercent/100))+eachOrder.props.children[3]+(eachOrder.props.children[3]*(this.state.totalReceiptTax/(this.state.totalReceiptCost-this.state.totalReceiptTax))))
+              })
+              .then(response => {
+                console.log(response)
+                }
+              )
+              .catch(error => {
+                console.log(error.response)
+              })
+              ))
+          }
+        }
+            
+        )
+    })
+    .catch(err => {
+        console.log(err.response)   
+    })
   }
+
   handleChangeUsername = (event) => {
     this.setState({ username: event.target.value })
   }
-
-
-  addUser = (event) => {
-    console.log("adduser called! nice!")
+  handleChangeTip = (event) => {
+    this.setState({ tipPercentChange: event.target.value })
   }
-
+  handleTip = (event) => {
+    event.preventDefault()
+    this.setState({ tipPercent : this.state.tipPercentChange})
+  }
   render() {
     Object.keys(this.state.groups).map((keyName, i) => {
       var emptyOrders = []
@@ -167,13 +219,13 @@ class AssignOrders extends Component {
         this.state.groups[t.category].totalCost += t.cost;
         //console.log(typeof this.state.groups[t.category].totalCost, "AWOIDHAWOIDHAOIWDH")
       }
-      this.state.groups[t.category].theirOrders.push(<div key={t.orderid} onDragStart={(e) => this.onDragStart(e, t.orderid)} draggable className="draggable"> {t.name} Costs: {t.cost} ORDER ID: {t.orderid}</div>);
+      this.state.groups[t.category].theirOrders.push(<div key={t.orderid} id={t.name} onDragStart={(e) => this.onDragStart(e, t.orderid)} draggable className="draggable"> {t.name} Costs: {t.cost} ORDER ID: {t.orderid}</div>);
     });
     return (
       <div className="container-drag">
         <h2 className="header">Rearrange Orders</h2>
         <Link to="/home">Cancel</Link>
-
+      {console.log(parseFloat(((((this.state.totalReceiptCost-this.state.totalReceiptTax)*(this.state.tipPercent/100))+(this.state.totalReceiptCost)).toFixed(2))), "THIS SHOULD BE TOTAL + TIP")}
         <div>
           <h2>Add user by username:</h2>
           <label htmlFor="Username">Username: </label>
@@ -182,13 +234,12 @@ class AssignOrders extends Component {
           <button onClick={this.handleSubmit}>Add</button>
           <div>{this.state.errortext}</div>
         </div>
-
-
         <div>
-          {/* {Object.keys(tasks).map((keyName, i) => {
-        console.log("KEY: ",i, " Object: ",tasks[keyName]);
-      }
-      )} */}
+          <label htmlFor="Username">Tip Percent: </label>
+          <input type="text" className="Username" onChange={this.handleChangeTip} />
+
+          <button onClick={this.handleTip}>Set</button> Current Tip Percent: {this.state.tipPercent}%
+          <div>{this.state.errortext}</div>
         </div>
         <div className="allTables">
           {Object.keys(this.state.groups).map((keyName, i) => (
@@ -217,9 +268,10 @@ class AssignOrders extends Component {
                     <tr className="totalBar">
                       <td>
                         Total: ${(this.state.groups[keyName].totalCost+((this.state.groups[keyName].totalCost.toFixed(2)/(this.state.totalReceiptCost-this.state.totalReceiptTax))*(this.state.totalReceiptTax))).toFixed(2)} (Tax: ${((this.state.groups[keyName].totalCost.toFixed(2)/(this.state.totalReceiptCost-this.state.totalReceiptTax))*(this.state.totalReceiptTax)).toFixed(2)})
+                        <br></br>
+                        Total Tip: ${(this.state.groups[keyName].totalCost*(this.state.tipPercent/100)).toFixed(2)}
                       </td>
                     </tr>
-
                   )
                     :
                     ""
@@ -231,7 +283,7 @@ class AssignOrders extends Component {
           )}
         </div>
         <div>
-          <button onClick={this.handleFinalize}>Finalize</button>  Total Cost: {this.state.totalReceiptCost}
+          <button onClick={this.handleFinalize}>Finalize</button>  Total Cost: {this.state.totalReceiptCost}, {(this.state.totalReceiptTax/(this.state.totalReceiptCost-this.state.totalReceiptTax)).toFixed(2)}
         </div>
       </div>
     );
