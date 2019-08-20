@@ -1,3 +1,13 @@
+.itemName {
+    text-align: left;
+}
+.itemCost {
+    color: rgb(33, 141, 0);
+    text-align: right;
+}
+.itemRow {
+    width: 100%;
+}
 .allTables {
     display: flex;
     justify-content: center;
