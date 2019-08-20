@@ -28,9 +28,10 @@ class AssignOrders extends Component {
         }
       },
       totalReceiptCost: 0,
+      totalReceiptTax: 0,
       username: "",
       errortext: "",
-      numberOrders: 0
+      numberOrders: 0,
     }
 
   }
@@ -57,11 +58,12 @@ class AssignOrders extends Component {
 
   parse(text, freq, cost) {
     console.log(text, "The order has a frequency of", freq)
+    let newcost = cost/freq;
     let step = 0;
     let neworders = this.state.orders;
     while (step < freq) {
       console.log("THE FREQUENCY IS: ",freq," THE STEP IS: ",step)
-      neworders.push({ name: text, category: "allorders", cost: cost, orderid: this.state.numberOrders }) 
+      neworders.push({ name: text, category: "allorders", cost: newcost, orderid: this.state.numberOrders }) 
       this.state.numberOrders =  this.state.numberOrders + 1;
       step = step +1;
       console.log("THE FREQUENCY IS: ",freq," THE STEP BECAME: ",step,"WITH numberOrders at:",this.state.numberOrders)
@@ -71,7 +73,8 @@ class AssignOrders extends Component {
 
   async componentDidMount() {
     this.setState({
-      totalReceiptCost: this.props.data.totalAmount.data
+      totalReceiptCost: this.props.data.totalAmount.data,
+      totalReceiptTax: this.props.data.taxAmount.data    
     })
     var newGroup = this.state.groups;
     newGroup[this.props.loggeduser.username] = {
@@ -84,8 +87,6 @@ class AssignOrders extends Component {
       groups: newGroup,
     })
     if (this.props.data.amounts) {
-      let neworders = [];
-
       await this.props.data.amounts.map((order) => {
         console.log(order)
         if (order.text[0] <= '9' && order.text[0] >= '0') {
@@ -103,7 +104,6 @@ class AssignOrders extends Component {
           this.parse(order.text, 1, order.data);
         }
       });
-      //console.log(this.state.orders, "OWOWOWOWOWOWOWO")
     }
   }
 
@@ -216,7 +216,7 @@ class AssignOrders extends Component {
                   {this.state.groups[keyName].totalCost !== undefined ? (
                     <tr className="totalBar">
                       <td>
-                        Total: ${this.state.groups[keyName].totalCost.toFixed(2)}
+                        Total: ${(this.state.groups[keyName].totalCost+((this.state.groups[keyName].totalCost.toFixed(2)/(this.state.totalReceiptCost-this.state.totalReceiptTax))*(this.state.totalReceiptTax))).toFixed(2)} (Tax: ${((this.state.groups[keyName].totalCost.toFixed(2)/(this.state.totalReceiptCost-this.state.totalReceiptTax))*(this.state.totalReceiptTax)).toFixed(2)})
                       </td>
                     </tr>
 
