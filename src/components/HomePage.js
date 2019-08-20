@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import './HomePage.css';
+import OrdersOwedContainer from './OrdersOwedContainer';
 
 class HomePage extends Component {
     constructor(props) {
@@ -42,6 +43,9 @@ class HomePage extends Component {
             : <button className="toOrdersButtonB">No Orders</button>}</div>
             </div>
           </div>
+
+          <OrdersOwedContainer loggeduser={this.props.loggeduser} />
+          
         </div>
 
     </div>
