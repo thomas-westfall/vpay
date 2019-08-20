@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import './HomePage.css';
+import axios from 'axios';
+
+// const paypal = require('paypal-rest-sdk');
+// var express = require('express')
+// var app = express()
+
+// paypal.configure({
+//   'mode': 'sandbox',
+//   'client_id': 'AYc_WD_FqZRhsF9vpUmXank8pwsAMS9Xjz3y89LeJ3kXQ_f5jumCjCIKnvYafaGZ0QOHYVs9GeY-M7cF',
+//   'client_secret': 'EMH6VI34GAwYTfH1ad5wiAU1Wf2_oZBWNYaSuqBy0IMA_tM9Xo8aSbK4mgETbHE1Pg8GLV4PACE5b35m'
+// })
 
 class HomePage extends Component {
     constructor(props) {
@@ -44,6 +55,12 @@ class HomePage extends Component {
           </div>
         </div>
 
+    <div>
+      <form action="/pay" method="post">
+        <input type="submit" value="Pay"></input>
+      </form>
+
+    </div>
     </div>
     )
   }
