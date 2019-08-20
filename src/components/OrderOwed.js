@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './OrderOwed.css';
+import PayButton from './PayButton'
 
 class OrderOwed extends Component {
     constructor(props) {
@@ -48,6 +49,7 @@ class OrderOwed extends Component {
             <div className="row">
                 <div class="col"><button type="button" class="btn btn-primary">Pay now?</button></div>
             </div>
+        <PayButton />
            
         </div>
     )
