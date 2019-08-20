@@ -26,13 +26,16 @@ class AllReceipts extends Component{
                 return (
                     <div className="receipt" key={receipt.id}>
                         <div className="receiptContent">
-                            <span className="receiptId">Receipt No: {receipt.id}</span>
-                            <div className="totalPrice">Total:
-                                <div>{receipt.totalPrice}</div>
-                            </div>
-                            <div className="tip">Tip:
-                                <div>{receipt.tipPercent}</div>
-                            </div>
+                            <p>
+                                <span className="receiptId">Receipt No: {receipt.id}</span>
+                                <div className="totalPrice">Total:
+                                    <div>{receipt.totalPrice}</div>
+                                </div>
+                                <div className="tip">Tip:
+                                    <div>{receipt.tipPercent}</div>
+                                </div>
+                            </p>
+
 
                         </div>
                     </div>
