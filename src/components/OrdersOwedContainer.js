@@ -11,7 +11,7 @@ class OrdersOwedContainer extends Component {
         );
 
     return (
-        <div className="orders-owed-container">
+        <div className="container orders-owed-container">
             {orders}
         </div>
     )

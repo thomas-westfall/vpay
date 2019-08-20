@@ -6,14 +6,19 @@
 
 .container-fluid {
   padding: 0;
+  border-style: none;
 }
 
 .row {
   justify-content: center;
-  padding: 1%;
+  padding: 2%;
 }
 
-.logOutButton {
+.col {
+  padding: 2%;
+}
+
+/* .logOutButton {
   margin-left: 10px;
   text-decoration: none;
   font-weight: bold;
@@ -29,9 +34,9 @@
   color: white;
   background: rgb(238, 63, 63);
   width: 10%;
-}
+} */
 
-.logOutButton:hover{
+/* .logOutButton:hover{
   color:white;
   text-decoration: none;
   background: rgb(197, 54, 54);
@@ -41,6 +46,10 @@
   text-decoration: none;
   box-shadow: 0 0 #1d4100; 
   background-color: rgb(161, 48, 48)
+} */
+
+.upload-form {
+  width: 100%;
 }
 
 .files input {
