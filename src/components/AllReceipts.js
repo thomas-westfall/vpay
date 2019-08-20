@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
-
+import loggeduser from '../store/utilities/loggeduser';
 
 
 class AllReceipts extends Component{
@@ -10,15 +10,15 @@ class AllReceipts extends Component{
     }
 
     componentDidMount(){
-        axios.get('https://vpay-heroku.herokuapp.com/api/receipts')
+        axios.get('https://vpay-heroku.herokuapp.com/api/receipts' + '/' + this.props.loggeduser.id)
             .then(res => {
                 console.log(res)
                 this.setState ({
                     receipts: res.data
                 })
-
             })
     }
+
     render(){
         const {receipts} = this.state;
         const receiptList = receipts.length ? (
@@ -51,18 +51,10 @@ class AllReceipts extends Component{
                     <div classNam="orders">
                         {receiptList}
                     </div>
-                <div className="totalPrice"> TOTAL PRICE:
-                </div>
             </div>
         </div>
         );
     }
 }
-
-    // const orders= axios.get("https://vpay-heroku.herokuapp.com/api/orders").then(res => {
-    // this.setState({orders: res.data});
-    // });
-
-    // }
 
 export default AllReceipts;
