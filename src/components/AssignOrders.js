@@ -150,13 +150,18 @@ class AssignOrders extends Component {
         Object.keys(this.state.groups).map((keyName, i) => {
           if(this.state.groups[keyName].id === this.props.loggeduser.id) {
             this.state.groups[keyName].theirOrders.map( async (eachOrder) => {
-              console.log(eachOrder, "THIS IS THE INFO ABOUT EACH ORDER AND EACH CHILDREN OF 3",eachOrder.props.children[3])
+              console.log(   "userId",this.state.groups[keyName].id,
+                "receiptId",newReceiptId,
+                "paid", true,
+                "itemName", eachOrder.props.id,
+                "price ", ((eachOrder.props.cost*(this.state.tipPercent/100))+eachOrder.props.cost+(eachOrder.props.cost*(this.state.totalReceiptTax/(this.state.totalReceiptCost-this.state.totalReceiptTax)
+                ))))
                await axios.post(`https://vpay-heroku.herokuapp.com/api/orders`, {
                 userId : this.state.groups[keyName].id,
                 receiptId : newReceiptId,
                 paid : true,
                 itemName : eachOrder.props.id,
-                price : ((eachOrder.props.children[3]*(this.state.tipPercent/100))+eachOrder.props.children[3]+(eachOrder.props.children[3]*(this.state.totalReceiptTax/(this.state.totalReceiptCost-this.state.totalReceiptTax))))
+                price : parseFloat(((eachOrder.props.cost*(this.state.tipPercent/100))+eachOrder.props.cost+(eachOrder.props.cost*(this.state.totalReceiptTax/(this.state.totalReceiptCost-this.state.totalReceiptTax)))).toFixed(2))
               })
               .then(response => {
                 console.log(response, "WENT THROUGH SUCCESFULLLLLLLY")
@@ -174,7 +179,7 @@ class AssignOrders extends Component {
                 receiptId : newReceiptId,
                 paid : false,
                 itemName : eachOrder.props.id,
-                price : ((eachOrder.props.children[3]*(this.state.tipPercent/100))+eachOrder.props.children[3]+(eachOrder.props.children[3]*(this.state.totalReceiptTax/(this.state.totalReceiptCost-this.state.totalReceiptTax))))
+                price : parseFloat(((eachOrder.props.cost*(this.state.tipPercent/100))+eachOrder.props.cost+(eachOrder.props.cost*(this.state.totalReceiptTax/(this.state.totalReceiptCost-this.state.totalReceiptTax)))).toFixed(2))
               })
               .then(response => {
                 console.log(response)
@@ -219,7 +224,7 @@ class AssignOrders extends Component {
         this.state.groups[t.category].totalCost += t.cost;
         //console.log(typeof this.state.groups[t.category].totalCost, "AWOIDHAWOIDHAOIWDH")
       }
-      this.state.groups[t.category].theirOrders.push(<div key={t.orderid} id={t.name} onDragStart={(e) => this.onDragStart(e, t.orderid)} draggable className="draggable"> {t.name} Costs: {t.cost} ORDER ID: {t.orderid}</div>);
+      this.state.groups[t.category].theirOrders.push(<div key={t.orderid} id={t.name} cost={t.cost} onDragStart={(e) => this.onDragStart(e, t.orderid)} draggable className="draggable"> {t.name} Costs: {t.cost} ORDER ID: {t.orderid}</div>);
     });
     return (
       <div className="container-drag">
