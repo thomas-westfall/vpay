@@ -241,10 +241,9 @@ class AssignOrders extends Component {
         </div>
         <div>
           <label htmlFor="Username">Tip Percent: </label>
-          <input type="text" className="Username" onChange={this.handleChangeTip} />
+          <input type="number" className="Username" onChange={this.handleChangeTip} />
 
           <button onClick={this.handleTip}>Set</button> Current Tip Percent: {this.state.tipPercent}%
-          <div>{this.state.errortext}</div>
         </div>
         <div className="allTables">
           {Object.keys(this.state.groups).map((keyName, i) => (
