@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './HomePage.css';
+import './OrderOwed.css';
 
 class OrderOwed extends Component {
     constructor(props) {
@@ -15,14 +15,13 @@ class OrderOwed extends Component {
     //     selectedFile: event.target.files[0]
     //   })
     //   console.log(event.target.files[0])
-  
     // }
 
     render() {
         const order = this.props.order;
         console.log(order);
     return (
-        <div className="OrderOwed-container">
+        <div className="order-owed-container">
             <h1>Order number {this.props.id} </h1>
             <ul>
                 <li>
@@ -36,6 +35,7 @@ class OrderOwed extends Component {
                 </li>
                 <li>
                     paid: {order.paid}
+
                     <button>Paid?</button>
                 </li>
                 <li>

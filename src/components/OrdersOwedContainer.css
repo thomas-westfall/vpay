@@ -1,0 +1,6 @@
+.orders-owed-container {
+    display: grid;
+    justify-content: center;
+    border-style: solid;
+    border-color: black;
+}

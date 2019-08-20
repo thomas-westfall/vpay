@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
-// import './OrdersOwed.css';
+import './OrdersOwedContainer.css';
 import OrderOwed from './OrderOwed'
 
 class OrdersOwedContainer extends Component {
-    constructor(props) {
-      super(props);
-        // this.state = {
-        // //   selectedFile: null,
-        // }
-    }
-
     render() {
         const orders = this.props.loggeduser.orders.map(
             (order, key) => {
@@ -18,7 +11,7 @@ class OrdersOwedContainer extends Component {
         );
 
     return (
-        <div className="OrdersOwedContainer">
+        <div className="orders-owed-container">
             {orders}
         </div>
     )
