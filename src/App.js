@@ -13,7 +13,7 @@ import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import AssignOrders from './components/AssignOrders';
 import AccessDenied from './components/AccessDenied';
-
+import Success from './components/Success';
 // var express = require('express')
 // var app = express()
 
@@ -41,6 +41,7 @@ class AppContainer extends Component {
     const LoginComponent = () => (<LoginPage logIn={this.logIn} isLoggedIn={this.props.isLoggedIn} error={this.props.error}/>);
     const RegisterComponent = () => (<RegisterPage users={this.props.users} registerUser={this.props.registerUser} registerError={this.props.registerError} registerSuccess={this.props.registerSuccess}/>);
     const AssignOrdersComponent = () => (<AssignOrders loggeduser={this.props.loggeduser} resetReceiptData={this.props.resetReceiptData} data={this.props.receiptdata}/>);
+    const SuccessComponent = () => (<Success loggeduser={this.props.loggeduser} resetReceiptData={this.props.resetReceiptData} data={this.props.receiptdata}/>);
     const DeniedComponent = () => (<AccessDenied />)
     // const AllCampusesComponent = () => (<AllCampuses students={this.props.students} campuses={this.props.campuses} removeCampus={this.removeCampus} addCampus={this.addCampus} grabCampus={this.grabCampus}/>);
     return (
@@ -49,10 +50,12 @@ class AppContainer extends Component {
           <Route exact path="/" render={LoginComponent} />
           <Route exact path="/login" render={LoginComponent} />
           <Route exact path="/register" render={RegisterComponent} />
+          {/* <Route exact path="/success" render={SuccessComponent} /> */}
           {isLoggedIn && (
           <Switch>
             <Route exact path="/home" render={HomeComponent} />
             <Route exact path="/orders" render={AssignOrdersComponent} />
+            
           </Switch>
           )}
           <Route component={DeniedComponent} />

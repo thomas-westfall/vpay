@@ -22,7 +22,7 @@ app.post('/pay', function (req, res) {
             "payment_method": "paypal"
         },
         "redirect_urls": {
-            "return_url": "http://localhost:3000/login",
+            "return_url": "http://localhost:3000/success",
             "cancel_url": "http://localhost:3000"
         },
         "transactions": [{
@@ -48,13 +48,41 @@ app.post('/pay', function (req, res) {
         if (error) {
             throw error;
         } else {
-            console.log("Create Payment Response");
-            console.log(payment);
-            res.send("test");
+            for(let i = 0; i < payment.links.length;i++){
+                if(payment.links[i].rel === 'approval_url'){
+                    res.redirect(payment.links[i].href)
+                }
+            }
         }
     });
  
 });
+
+app.get('/success', (req,res) => {
+    console.log("NICE!")
+    const payerId = req.query.PayerID;
+    const paymentId = req.query.paymentId;
+
+    const execute_payment_json = {
+        "payer_id": payerId,
+        "transactions": [{
+            "amount": {
+                "currency": "USD",
+                "total": "1.00"
+            }
+        }]
+    };
+    paypal.payment.execute(paymentId, execute_payment_json, function (error, payment){
+        if (error) {
+            console.log(error.response);
+            throw error;
+        } else {
+            console.log("Get Payment Response");
+            console.log(JSON.stringify(payment));
+            res.send('Success');
+        }
+    })
+})
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
