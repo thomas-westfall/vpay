@@ -224,7 +224,16 @@ class AssignOrders extends Component {
         this.state.groups[t.category].totalCost += t.cost;
         //console.log(typeof this.state.groups[t.category].totalCost, "AWOIDHAWOIDHAOIWDH")
       }
-      this.state.groups[t.category].theirOrders.push(<div key={t.orderid} id={t.name} cost={t.cost} onDragStart={(e) => this.onDragStart(e, t.orderid)} draggable className="draggable"> {t.name} Costs: {t.cost} ORDER ID: {t.orderid}</div>);
+      this.state.groups[t.category].theirOrders.push(<div key={t.orderid} id={t.name} cost={t.cost} onDragStart={(e) => this.onDragStart(e, t.orderid)} draggable className="draggable"> 
+      <table className="itemRow">
+        <tbody >
+          <tr >
+            <td className="itemName">{t.name}</td>
+            <td className="itemCost">${t.cost}</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>);
     });
     return (
       <div className="container-drag">
