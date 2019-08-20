@@ -21,32 +21,33 @@ class OrderOwed extends Component {
         const order = this.props.order;
         console.log(order);
     return (
-        <div className="container">
-            <div className="row">
-                <h1 className="display-1">Order number {this.props.id}</h1>
+        <div className="card">
+            <div className="row row-title">
+                <h1>Order number {this.props.id}</h1>
             </div>
             <div className="row">
-                <div class="col">id: {order.id}</div>
-                <div class="col">itemName: {order.itemName}</div>
+                <div class="col col-title">ID</div>
+                <div class="col col-title">Item Name</div>
+                <div class="col col-title">Price</div>
             </div>
             <div className="row">
-                price: {order.price}
+                <div class="col">{order.id}</div>
+                <div class="col">{order.itemName}</div>
+                <div class="col">{order.price}</div>
             </div>
-
-
-            {/* <li>
-                    price: {order.price}
-                </li>
-                <li>
-                    paid: {order.paid.toString()}
-                </li>
-                <button type="button" class="btn btn-primary">Pay now?</button>
-                <li>
-                    receiptId: {order.receiptId}
-                </li>
-                <li>
-                    userId: {order.userId}
-                </li> */}
+            <div className="row">
+                <div class="col col-title">paid:</div>
+                <div class="col col-title">receiptId:</div>
+                <div class="col col-title">userId:</div>
+            </div>
+            <div className="row">
+                <div class="col">{order.paid.toString()}</div>
+                <div class="col">{order.receiptId}</div>
+                <div class="col">{order.userId}</div>
+            </div>
+            <div className="row">
+                <div class="col"><button type="button" class="btn btn-primary">Pay now?</button></div>
+            </div>
            
         </div>
     )
