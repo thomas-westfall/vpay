@@ -1,0 +1,14 @@
+.card {
+    /* width: 30rem; */
+    justify-self: center;
+    /* padding: 0; */
+}
+
+.col-title {
+    background-color: green;
+    /* padding: 0; */
+}
+
+.row-title {
+    background-color: yellow;
+}

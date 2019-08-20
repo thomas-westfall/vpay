@@ -13,7 +13,7 @@ class AccessDenied extends Component {
             </thead>
             <tbody >
               <tr><td colSpan={1} className="DeniedDisplay">You have attempted to access a page that you do not have access to. Please log in and try again, make an account it's free and easy, go register.</td></tr>
-              <tr><td colSpan={1} ><Link className="DeniedLink" to="/">Go to LogIn</Link></td></tr>
+              <tr><td colSpan={1} ><Link className="btn btn-danger" to="/">Go to LogIn</Link></td></tr>
             </tbody>
           </table>
         </form>
