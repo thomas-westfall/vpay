@@ -5,6 +5,7 @@ import './AllReceipts.css';
 import loggeduser from '../store/utilities/loggeduser';
 
 
+
 class AllReceipts extends Component {
     state = {
         receipts: [],
@@ -15,6 +16,7 @@ class AllReceipts extends Component {
     async componentDidMount() {
         await axios.get('https://vpay-heroku.herokuapp.com/api/receipts' + '/' + this.props.loggeduser.id)
             .then(res => {
+
                 this.setState({
                     receipts: res.data
                 })
@@ -36,11 +38,13 @@ class AllReceipts extends Component {
                 return (
                     <div className="receipt" key={receipt.id}>
                         <div className="receiptContent">
+
                             <p>
                                 <span className="receiptId"><u>Receipt No:</u> {receipt.id}</span>
                                 <div className="totalPrice"><u>Total:</u> {receipt.totalPrice}</div>
                                 <div className="tip"><u>Tip:</u> {receipt.tipPercent}</div>
                             </p>
+
                         </div>
                     </div>
                 )
@@ -81,6 +85,7 @@ class AllReceipts extends Component {
                 <div className="orders">
                     {this.state.view ? receiptList : orderList()}
                     <button type="button" className="showOrderButton" onClick={() => this.setState({ view: !this.state.view })}>Show Orders</button>
+
                 </div>
             </div>
         );
