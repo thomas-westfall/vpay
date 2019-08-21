@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import './AllReceipts.css';
 import loggeduser from '../store/utilities/loggeduser';
 
 
@@ -27,16 +28,12 @@ class AllReceipts extends Component{
                     <div className="receipt" key={receipt.id}>
                         <div className="receiptContent">
                             <p>
-                                <span className="receiptId">Receipt No: {receipt.id}</span>
-                                <div className="totalPrice">Total:
-                                    <div>{receipt.totalPrice}</div>
+                                <span className="receiptId"><u>Receipt No:</u> {receipt.id}</span>
+                                <div className="totalPrice"><u>Total:</u> {receipt.totalPrice}
                                 </div>
-                                <div className="tip">Tip:
-                                    <div>{receipt.tipPercent}</div>
+                                <div className="tip"><u>Tip:</u> {receipt.tipPercent}
                                 </div>
                             </p>
-
-
                         </div>
                     </div>
                 )
@@ -47,12 +44,13 @@ class AllReceipts extends Component{
 
         return (
             <div className='receiptHistory'>
-                <div className="receiptHistoryTitle"> RECEIPT HISTORY
-                    <div classNam="orders">
-                        {receiptList}
-                    </div>
+                <div className="receiptHistoryTitle">
+                    Receipt History
+                </div>
+                <div classNam="orders">
+                    {receiptList}
+                </div>
             </div>
-        </div>
         );
     }
 }
