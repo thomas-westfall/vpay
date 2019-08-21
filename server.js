@@ -21,7 +21,8 @@ var config_opts = {
 
 app.use(express.static(path.join(__dirname, 'build')));
 
-app.post('/pay', function (req, res) {
+app.post('/pay/:amount/:email', function (req, res) {
+    console.log(req.params)
     var create_payment_json = {
         "sender_batch_header": {
             "email_subject": "Vpay Payment",
@@ -31,12 +32,12 @@ app.post('/pay', function (req, res) {
             {
                 "recipient_type": "EMAIL",
                 "amount": {
-                    "value": ".99",
+                    "value": req.params.amount,
                     "currency": "USD"
                 },
                 "note": "Thank you for using Vpay!",
                 "sender_item_id": "123",
-                "receiver": "sb-uvsaw97577@personal.example.com"
+                "receiver": req.params.email
             }
         ]
     };
