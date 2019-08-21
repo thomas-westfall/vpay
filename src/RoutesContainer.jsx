@@ -5,11 +5,13 @@ import { connect } from "react-redux"
 import { me } from "./store/utilities/loggeduser";
 
 class RoutesContainer extends Component {
+
     componentDidMount() {
         this.props.loadInitialData();
     }
+
     render() {
-        return <RoutesView isLoggedIn={this.props.isLoggedIn}/>
+        return <RoutesView isLoggedIn={this.props.isLoggedIn} />
     }
 }
 

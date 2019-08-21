@@ -23,7 +23,7 @@ class AllReceipts extends Component{
                 return (
                     <div className="receipt" key={receipt.id}>
                         <div className="receiptContent">
-                            <p>
+                            
                                 <span className="receiptId">Receipt No: {receipt.id}</span>
                                 <div className="totalPrice">Total:
                                     <div>{receipt.totalPrice}</div>
@@ -31,7 +31,7 @@ class AllReceipts extends Component{
                                 <div className="tip">Tip:
                                     <div>{receipt.tipPercent}</div>
                                 </div>
-                            </p>
+                           
 
 
                         </div>
@@ -45,7 +45,7 @@ class AllReceipts extends Component{
         return (
             <div className='receiptHistory'>
                 <div className="receiptHistoryTitle"> RECEIPT HISTORY
-                    <div classNam="orders">
+                    <div className="orders">
                         {receiptList}
                     </div>
             </div>

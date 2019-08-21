@@ -51,7 +51,7 @@ class AssignOrders extends Component {
     let orders = this.state.orders.filter((order) => {
       console.log(order.orderid, id, "look");
 
-      if (order.orderid == id) {
+      if (parseInt(order.orderid) === parseInt(id)) {
         order.category = cat;
       }
       return order;

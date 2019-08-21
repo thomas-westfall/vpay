@@ -29,11 +29,11 @@ export const logInThunk = (user) => async (dispatch) => {
     try {
         console.log(user);
         res = await axios.post(`https://vpay-backend-auth.herokuapp.com/auth/login`, {
-            "username" : user.username,
-            "password" : user.password
-        },{withCredentials: true})
+            "username": user.username,
+            "password": user.password
+        }, { withCredentials: true })
 
-        
+
     }
     catch (authError) {
         return dispatch(error(authError));
@@ -52,11 +52,10 @@ export const logInThunk = (user) => async (dispatch) => {
 }
 
 export const me = () => async dispatch => {
-    console.log("in the ME function")
-    try{
-        const res = await axios.get(`https://vpay-backend-auth.herokuapp.com/auth/me`,{withCredentials: true});
-        console.log(res.data, "response from ME")
-        dispatch(logIn(res.data|| {}));
+    try {
+        console.log('auth')
+        const res = await axios.get(`https://vpay-backend-auth.herokuapp.com/auth/me`, { withCredentials: true });
+        dispatch(logIn(res.data || {}));
     }
     catch (err) {
         console.error(err);
@@ -64,7 +63,8 @@ export const me = () => async dispatch => {
 }
 export const logOutThunk = () => async (dispatch) => {
     try {
-        await axios.post('https://vpay-backend-auth.herokuapp.com/auth/logout',{},{withCredentials: true});
+
+        await axios.delete('https://vpay-backend-auth.herokuapp.com/auth/logout', { withCredentials: true });
         dispatch(logOut());
     }
     catch (err) {

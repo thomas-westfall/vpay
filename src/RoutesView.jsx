@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import {registerUserThunk} from "./store/utilities/users";
-import {logInThunk, logOutThunk} from "./store/utilities/loggeduser";
+import {logInThunk, logOutThunk, me} from "./store/utilities/loggeduser";
 import {fetchReceiptDataThunk, resetReceiptDataThunk} from "./store/utilities/receiptdata"
 
 //PAGE IMPORTS
@@ -14,26 +14,20 @@ import AssignOrders from './components/AssignOrders';
 import AccessDenied from './components/AccessDenied';
 
 class RoutesView extends Component {
-  constructor() {
-    super();
-    this.state = {
-    }
+
+  componentDidMount() {
+    this.props.me();
   }
-  logIn =(user)=> {
-    this.props.logIn(user);
-  }
-  logOut =()=> {
-    this.props.logOut();
-  }
+
   // addStudent = (student) => {
   //   this.props.addStudent(student);
   // }
 
   render() {
     const { isLoggedIn } = this.props;
-
-    const HomeComponent = () => (<HomePage logOut={this.logOut} loggeduser={this.props.loggeduser} fetchReceiptData={this.props.fetchReceiptData} resetReceiptData={this.props.resetReceiptData} data={this.props.receiptdata}/>);
-    const LoginComponent = () => (<LoginPage logIn={this.logIn} isLoggedIn={this.props.isLoggedIn} error={this.props.error}/>);
+    console.log('RENDERING')
+    const HomeComponent = () => (<HomePage me={this.props.me} logOut={this.props.logOut} loggeduser={this.props.loggeduser} fetchReceiptData={this.props.fetchReceiptData} resetReceiptData={this.props.resetReceiptData} data={this.props.receiptdata}/>);
+    const LoginComponent = () => (<LoginPage logIn={this.props.logIn} isLoggedIn={this.props.isLoggedIn} error={this.props.error}/>);
     const RegisterComponent = () => (<RegisterPage users={this.props.users} registerUser={this.props.registerUser} registerError={this.props.registerError} registerSuccess={this.props.registerSuccess}/>);
     const AssignOrdersComponent = () => (<AssignOrders loggeduser={this.props.loggeduser} resetReceiptData={this.props.resetReceiptData} data={this.props.receiptdata}/>);
     const DeniedComponent = () => (<AccessDenied />)
@@ -66,6 +60,7 @@ const mapState = (state) => {
     receiptdata: state.receiptdata,
     registerSuccess: state.users.success,
     registerError: state.users.response,
+    isLoggedIn: !!state.loggeduser.id
   }
 }
 
@@ -75,7 +70,8 @@ const mapDispatch = (dispatch) => {
     logIn: (user) => dispatch(logInThunk(user)),
     logOut: () => dispatch(logOutThunk()),
     fetchReceiptData: (filename) => dispatch(fetchReceiptDataThunk(filename)),
-    resetReceiptData: () => dispatch(resetReceiptDataThunk())
+    resetReceiptData: () => dispatch(resetReceiptDataThunk()),
+    me: () => dispatch(me())
   }
 }
 export default connect(mapState, mapDispatch)(RoutesView);
