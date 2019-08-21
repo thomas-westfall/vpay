@@ -20,7 +20,7 @@ const registerUser = (user) => {
 
 // Thunks go here!
 export const registerUserThunk = (user) => async (dispatch) => {
-    await axios.post(`https://vpay-heroku.herokuapp.com/api/users/`, {
+    await axios.post(`https://vpay-backend-auth.herokuapp.com/auth/signup`, {
         username : user.username,
         firstName : user.firstName,
         lastName : user.lastName,
