@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import axios from 'axios';
-import loggeduser from '../store/utilities/loggeduser';
-
 
 class AllReceipts extends Component{
     state={
@@ -10,7 +7,7 @@ class AllReceipts extends Component{
     }
 
     componentDidMount(){
-        axios.get('https://vpay-heroku.herokuapp.com/api/receipts' + '/' + this.props.loggeduser.id)
+        axios.get(`https://vpay-heroku.herokuapp.com/api/receipts/${this.props.loggeduser.id}`)
             .then(res => {
                 console.log(res)
                 this.setState ({

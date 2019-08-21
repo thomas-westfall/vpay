@@ -19,7 +19,6 @@ class RoutesView extends Component {
     this.state = {
     }
   }
-
   logIn =(user)=> {
     this.props.logIn(user);
   }

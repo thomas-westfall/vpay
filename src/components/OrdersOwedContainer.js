@@ -4,15 +4,18 @@ import OrderOwed from './OrderOwed'
 
 class OrdersOwedContainer extends Component {
     render() {
-        const orders = this.props.loggeduser.orders.map(
-            (order, key) => {
-                return <OrderOwed order = {order} id={key} />
-            }
-        );
-
+        let orders;
+        if (this.props.loggeduser.orders ){
+            orders = this.props.loggeduser.orders.map(
+                (order, key) => {
+                    return <OrderOwed order = {order} id={key} />
+                }
+            );
+    
+        }
     return (
         <div className="container orders-owed-container">
-            {orders}
+            {this.props.loggeduser.orders ? ({orders}) : ""}
         </div>
     )
   }

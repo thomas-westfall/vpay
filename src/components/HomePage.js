@@ -31,7 +31,7 @@ class HomePage extends Component {
         <nav className="navbar navbar-fixed-top">
           <p class="navbar-brand">vPay</p>
           <h1>Welcome back {this.props.loggeduser.firstName} {this.props.loggeduser.lastName}</h1>
-          <Link className="btn btn-danger" to="/" onClick={()=>this.props.logOut()}>Log out</Link>
+          <Link className="btn btn-danger" to='/' onClick={()=>this.props.logOut()}>Log out</Link>
         </nav>
 
         <div className="row">

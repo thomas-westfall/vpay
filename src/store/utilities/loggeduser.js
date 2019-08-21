@@ -27,15 +27,23 @@ const error = (err) => {
 export const logInThunk = (user) => async (dispatch) => {
     let res;
     try {
-        res = await axios.put(`https://vpay-backend-auth.herokuapp.com/auth/login`, {
-            username : user.username,
-            password : user.password
-        })
+        console.log(user);
+        res = await axios.post(`https://vpay-backend-auth.herokuapp.com/auth/login`, {
+            "username" : user.username,
+            "password" : user.password
+        },{withCredentials: true})
+
+        
     }
     catch (authError) {
         return dispatch(error(authError));
     }
+
     try {
+        // await console.log("LOOK HERE 2");
+        // const rek = await axios.get(`https://vpay-backend-auth.herokuapp.com/auth/me`);
+        // console.log(rek, "THIS IS WITHIN THE LOGIN, ME CALL");
+        // console.log(res.data);
         dispatch(logIn(res.data));
     }
     catch (dispatchOrHistoryErr) {
@@ -44,9 +52,11 @@ export const logInThunk = (user) => async (dispatch) => {
 }
 
 export const me = () => async dispatch => {
+    console.log("in the ME function")
     try{
-        const res = await axios.get(`https://vpay-backend-auth.herokuapp.com/auth/me`);
-        dispatch(logIn(res.data || {}));
+        const res = await axios.get(`https://vpay-backend-auth.herokuapp.com/auth/me`,{withCredentials: true});
+        console.log(res.data, "response from ME")
+        dispatch(logIn(res.data|| {}));
     }
     catch (err) {
         console.error(err);
@@ -54,7 +64,7 @@ export const me = () => async dispatch => {
 }
 export const logOutThunk = () => async (dispatch) => {
     try {
-        await axios.post('https://vpay-backend-auth.herokuapp.com/auth/logout');
+        await axios.post('https://vpay-backend-auth.herokuapp.com/auth/logout',{},{withCredentials: true});
         dispatch(logOut());
     }
     catch (err) {
