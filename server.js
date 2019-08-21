@@ -19,6 +19,7 @@ var config_opts = {
     'client_secret': 'EEMH6VI34GAwYTfH1ad5wiAU1Wf2_oZBWNYaSuqBy0IMA_tM9Xo8aSbK4mgETbHE1Pg8GLV4PACE5b35m'
 };
 
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.post('/pay/:amount/:email', function (req, res) {
