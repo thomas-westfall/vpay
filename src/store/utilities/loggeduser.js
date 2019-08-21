@@ -14,7 +14,6 @@ const logIn = (user) => {
 const logOut = () => {
     return {
         type: LOG_OUT,
-        payload: {}
     }
 }
 
@@ -26,7 +25,7 @@ const error = (err) => {
 }
 // Thunks go here!
 export const logInThunk = (user) => async (dispatch) => {
-    await axios.put(`https://vpay-heroku.herokuapp.com/api/users/login`, {
+    await axios.put(`https://vpay-backend-auth.herokuapp.com/auth/login`, {
         username : user.username,
         password : user.password
     })
@@ -51,8 +50,14 @@ export const me = () => async dispatch => {
         console.error(err);
     }
 }
-export const logOutThunk = () => (dispatch) => {
-    dispatch(logOut());
+export const logOutThunk = () => async (dispatch) => {
+    try {
+        await axios.post('https://vpay-backend-auth.herokuapp.com/auth/logout');
+        dispatch(logOut());
+    }
+    catch (err) {
+        console.error(err);
+    }
 }
 
 // REDUCER FUNCTION;
@@ -61,7 +66,7 @@ export default (state = {}, action) => {
         case LOG_IN:
             return action.payload;
         case LOG_OUT:
-            return action.payload;
+            return {};
         case ERROR:
             return action.payload;
         default:
