@@ -45,9 +45,13 @@ class AssignOrders extends Component {
     ev.dataTransfer.setData("id", id);
   }
   onDrop = (ev, cat) => {
+    
     let id = ev.dataTransfer.getData("id");
+    console.log(id, "look jjjjjj");
     let orders = this.state.orders.filter((order) => {
-      if (order.orderid == id) {
+      console.log(order.orderid, id, "look");
+
+      if (parseInt(order.orderid) === parseInt(id)) {
         order.category = cat;
       }
       return order;
@@ -129,7 +133,7 @@ class AssignOrders extends Component {
         })
       })
       .catch(err => {
-        if (err.response.status == 404) {
+        if (err.response.status === 404) {
           this.setState({
             errortext: "User not found! Did you spell it correctly?"
           })

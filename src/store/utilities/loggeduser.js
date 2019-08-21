@@ -14,7 +14,6 @@ const logIn = (user) => {
 const logOut = () => {
     return {
         type: LOG_OUT,
-        payload: {}
     }
 }
 
@@ -26,23 +25,51 @@ const error = (err) => {
 }
 // Thunks go here!
 export const logInThunk = (user) => async (dispatch) => {
-    await axios.put(`https://vpay-heroku.herokuapp.com/api/users/login`, {
-        username : user.username,
-        password : user.password
-    })
-    .then(res => {
-        console.log(res);
+    let res;
+    try {
+        console.log(user);
+        res = await axios.post(`https://vpay-backend-auth.herokuapp.com/auth/login`, {
+            "username": user.username,
+            "password": user.password
+        }, { withCredentials: true })
+
+
+    }
+    catch (authError) {
+        return dispatch(error(authError));
+    }
+
+    try {
+        // await console.log("LOOK HERE 2");
+        // const rek = await axios.get(`https://vpay-backend-auth.herokuapp.com/auth/me`);
+        // console.log(rek, "THIS IS WITHIN THE LOGIN, ME CALL");
+        // console.log(res.data);
         dispatch(logIn(res.data));
-    })
-    .catch(err => {
-        console.log(err.response,"SOWEKNOW")
-        dispatch(error(err));
-        
-    })
-    // dispatch(logIn({username : "aa"}));
+    }
+    catch (dispatchOrHistoryErr) {
+        console.error(dispatchOrHistoryErr)
+    }
 }
-export const logOutThunk = () => (dispatch) => {
-    dispatch(logOut());
+
+export const me = () => async dispatch => {
+    try {
+        console.log('auth')
+        const res = await axios.get(`https://vpay-backend-auth.herokuapp.com/auth/me`, { withCredentials: true });
+        dispatch(logIn(res.data || {}));
+    }
+    catch (err) {
+        console.error(err);
+    }
+}
+export const logOutThunk = () => async (dispatch) => {
+    try {
+
+        await axios.delete('https://vpay-backend-auth.herokuapp.com/auth/logout', { withCredentials: true });
+        dispatch(logOut());
+    }
+    catch (err) {
+        console.error(err);
+    }
 }
 
 // REDUCER FUNCTION;
@@ -51,7 +78,7 @@ export default (state = {}, action) => {
         case LOG_IN:
             return action.payload;
         case LOG_OUT:
-            return action.payload;
+            return {};
         case ERROR:
             return action.payload;
         default:

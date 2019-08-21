@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import axios from 'axios';
 import './AllReceipts.css';
 import loggeduser from '../store/utilities/loggeduser';
-
 
 class AllReceipts extends Component{
     state={
@@ -11,7 +9,7 @@ class AllReceipts extends Component{
     }
 
     componentDidMount(){
-        axios.get('https://vpay-heroku.herokuapp.com/api/receipts' + '/' + this.props.loggeduser.id)
+        axios.get(`https://vpay-heroku.herokuapp.com/api/receipts/${this.props.loggeduser.id}`)
             .then(res => {
                 console.log(res)
                 this.setState ({
@@ -27,13 +25,13 @@ class AllReceipts extends Component{
                 return (
                     <div className="receipt" key={receipt.id}>
                         <div className="receiptContent">
-                            <p>
-                                <span className="receiptId"><u>Receipt No:</u> {receipt.id}</span>
-                                <div className="totalPrice"><u>Total:</u> {receipt.totalPrice}
+                                <span className="receiptId">Receipt No: {receipt.id}</span>
+                                <div className="totalPrice">Total:
+                                    <div>{receipt.totalPrice}</div>
+
                                 </div>
                                 <div className="tip"><u>Tip:</u> {receipt.tipPercent}
                                 </div>
-                            </p>
                         </div>
                     </div>
                 )
@@ -44,12 +42,10 @@ class AllReceipts extends Component{
 
         return (
             <div className='receiptHistory'>
-                <div className="receiptHistoryTitle">
-                    Receipt History
-                </div>
-                <div classNam="orders">
-                    {receiptList}
-                </div>
+                <div className="receiptHistoryTitle"> RECEIPT HISTORY
+                    <div className="orders">
+                        {receiptList}
+                    </div>
             </div>
         );
     }
