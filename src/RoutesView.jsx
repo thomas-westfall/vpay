@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Redirect, BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import {registerUserThunk} from "./store/utilities/users";
 import {logInThunk, logOutThunk, me} from "./store/utilities/loggeduser";
@@ -35,6 +35,11 @@ class RoutesView extends Component {
     return (
       <Router>
         <Switch>
+          {isLoggedIn ? (
+            <Redirect to='/home' render={HomeComponent}></Redirect>)
+            :
+            ""
+          }
           <Route exact path="/" render={LoginComponent} />
           <Route exact path="/login" render={LoginComponent} />
           <Route exact path="/register" render={RegisterComponent} />
