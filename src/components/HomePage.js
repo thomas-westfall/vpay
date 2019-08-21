@@ -44,7 +44,6 @@ class HomePage extends Component {
 
         <div className="row">
           <div className="col">
-
             <div className="row">
               <h1>Upload file</h1>
             </div>
@@ -62,14 +61,29 @@ class HomePage extends Component {
           </div>
 
           <div className="col">
+            <center>
+            <button type="button" className="btn btn-success" onClick={()=>this.props.fetchReceiptData(this.state.selectedFile)}>Upload</button>
+              {this.props.data.amounts ? 
+              <Link  to="/orders">
+              <button className="btn btn-primary">Proceed</button></Link> : 
+              <button className="btn btn-secondary">No Orders</button>}
+            </center>
+            
+            </div>            
+          </div>
 
+
+
+
+          <div className="col">
+            <div className="row">
+              <div className="receiptHistory">
+                <AllReceipts loggeduser={this.props.loggeduser}/>
+              </div>
+            </div>
           </div>
 
         </div>
-        <button type="button" className="btn btn-success" onClick={() => this.props.fetchReceiptData(this.state.selectedFile)}>Upload</button>
-
-        {this.props.data.amounts ? <Link to="/orders"><button className="btn btn-primary">Proceed</button></Link> : <button className="btn btn-secondary">No Orders</button>}
-
         <div className="row">
           <OrdersOwedContainer loggeduser={() => this.props.loggeduser} />
         </div>

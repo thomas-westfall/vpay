@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import './AllReceipts.css';
+import loggeduser from '../store/utilities/loggeduser';
 
 class AllReceipts extends Component{
     state={
@@ -23,17 +25,13 @@ class AllReceipts extends Component{
                 return (
                     <div className="receipt" key={receipt.id}>
                         <div className="receiptContent">
-                            
                                 <span className="receiptId">Receipt No: {receipt.id}</span>
                                 <div className="totalPrice">Total:
                                     <div>{receipt.totalPrice}</div>
-                                </div>
-                                <div className="tip">Tip:
-                                    <div>{receipt.tipPercent}</div>
-                                </div>
-                           
 
-
+                                </div>
+                                <div className="tip"><u>Tip:</u> {receipt.tipPercent}
+                                </div>
                         </div>
                     </div>
                 )
@@ -49,7 +47,6 @@ class AllReceipts extends Component{
                         {receiptList}
                     </div>
             </div>
-        </div>
         );
     }
 }
