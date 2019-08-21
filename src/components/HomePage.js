@@ -18,6 +18,8 @@ class HomePage extends Component {
       super(props);
         this.state = {
           selectedFile: null,
+          amount: 100,
+          email: "sb-uvsaw97577@personal.example.com" //password: EQWNpvYw
         }
      
     }
@@ -56,6 +58,7 @@ class HomePage extends Component {
         </div>
 
     <div>
+      {console.log(this.props)}
       <form action={"/pay/" + this.state.amount + "/" + this.props.loggeduser.email} method="post">
         <input type="submit" value="Paydawdawd"></input>
       </form>
