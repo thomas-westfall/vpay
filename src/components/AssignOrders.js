@@ -115,7 +115,7 @@ class AssignOrders extends Component {
 
 
   handleSubmit = async (event) => {
-    await axios.get(`https://vpay-heroku.herokuapp.com/api/users/${this.state.username}`)
+    await axios.get(`https://vpay-backend-auth.herokuapp.com/api/users/${this.state.username}`)
 
       .then(res => {
         console.log(res.data, "HERERERE");
@@ -143,7 +143,7 @@ class AssignOrders extends Component {
   }
 
   handleFinalize = async (event) => {
-    await axios.post(`https://vpay-heroku.herokuapp.com/api/receipts`, {
+    await axios.post(`https://vpay-backend-auth.herokuapp.com/api/receipts`, {
       userId : this.props.loggeduser.id,
       totalPrice : parseInt(((((this.state.totalReceiptCost-this.state.totalReceiptTax)*(this.state.tipPercent/100))+(this.state.totalReceiptCost)).toFixed(2))),
       tipPercent: parseInt(this.state.tipPercent)
@@ -160,7 +160,7 @@ class AssignOrders extends Component {
                 "itemName", eachOrder.props.id,
                 "price ", ((eachOrder.props.cost*(this.state.tipPercent/100))+eachOrder.props.cost+(eachOrder.props.cost*(this.state.totalReceiptTax/(this.state.totalReceiptCost-this.state.totalReceiptTax)
                 ))))
-               await axios.post(`https://vpay-heroku.herokuapp.com/api/orders`, {
+               await axios.post(`https://vpay-backend-auth.herokuapp.com/api/orders`, {
                 userId : this.state.groups[keyName].id,
                 receiptId : newReceiptId,
                 paid : true,
@@ -178,7 +178,7 @@ class AssignOrders extends Component {
           }
           else if((this.state.groups[keyName].id)){
             this.state.groups[keyName].theirOrders.map( async (eachOrder) => (
-              await axios.post(`https://vpay-heroku.herokuapp.com/api/orders`, {
+              await axios.post(`https://vpay-backend-auth.herokuapp.com/api/orders`, {
                 userId : this.state.groups[keyName].id,
                 receiptId : newReceiptId,
                 paid : false,

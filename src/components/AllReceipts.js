@@ -9,7 +9,7 @@ class AllReceipts extends Component {
     }
 
     componentDidMount() {
-        axios.get(`https://vpay-heroku.herokuapp.com/api/receipts/${this.props.loggeduser.id}`)
+        axios.get(`https://vpay-backend-auth.herokuapp.com/api/receipts/${this.props.loggeduser.id}`)
             .then(res => {
                 console.log(res)
                 this.setState({
