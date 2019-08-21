@@ -4,21 +4,6 @@ import PayButton from './PayButton'
 import Checkout from './Checkout';
 
 class OrderOwed extends Component {
-    constructor(props) {
-      super(props);
-        this.state = {
-          selectedFile: null,
-        }
-     
-    }
-
-    // onChangeHandler=event=>{
-    //   this.setState({
-    //     selectedFile: event.target.files[0]
-    //   })
-    //   console.log(event.target.files[0])
-    // }
-
     render() {
         const order = this.props.order;
         console.log(order);

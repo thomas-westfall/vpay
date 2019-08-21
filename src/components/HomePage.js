@@ -85,7 +85,7 @@ class HomePage extends Component {
 
         </div>
         <div className="row">
-          <OrdersOwedContainer loggeduser={() => this.props.loggeduser} />
+          <OrdersOwedContainer loggeduser={this.props.loggeduser} />
         </div>
 
 

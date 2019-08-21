@@ -32,18 +32,13 @@ export const logInThunk = (user) => async (dispatch) => {
             "username": user.username,
             "password": user.password
         }, { withCredentials: true })
-
-
     }
     catch (authError) {
         return dispatch(error(authError));
     }
 
     try {
-        // await console.log("LOOK HERE 2");
-        // const rek = await axios.get(`https://vpay-backend-auth.herokuapp.com/auth/me`);
-        // console.log(rek, "THIS IS WITHIN THE LOGIN, ME CALL");
-        // console.log(res.data);
+        console.log(res.data, "THIS IS OUR INITIAL DATA");
         dispatch(logIn(res.data));
     }
     catch (dispatchOrHistoryErr) {
