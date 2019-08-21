@@ -54,9 +54,6 @@ class HomePage extends Component {
                 </div>
               </form>
             </div>
-            <div className="receiptHistory">
-              <AllReceipts loggeduser={this.props.loggeduser} />
-            </div>
 
           </div>
 
