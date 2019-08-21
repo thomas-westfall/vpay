@@ -35,11 +35,6 @@ class RoutesView extends Component {
     return (
       <Router>
         <Switch>
-          {isLoggedIn ? (
-            <Redirect to='/home' render={HomeComponent}></Redirect>)
-            :
-            ""
-          }
           <Route exact path="/" render={LoginComponent} />
           <Route exact path="/login" render={LoginComponent} />
           <Route exact path="/register" render={RegisterComponent} />
