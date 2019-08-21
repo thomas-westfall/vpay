@@ -50,7 +50,7 @@ class OrderOwed extends Component {
             <div className="row">
                 <div class="col"><button type="button" class="btn btn-primary">Pay now?</button></div>
             </div>
-        <PayButton />
+        <PayButton amount={order.price}/>
         <Checkout />
            
         </div>
