@@ -41,6 +41,16 @@ export const logInThunk = (user) => async (dispatch) => {
     })
     // dispatch(logIn({username : "aa"}));
 }
+
+export const me = () => async dispatch => {
+    try{
+        const res = await axios.get(`https://vpay-backend-auth.herokuapp.com/auth/me`);
+        dispatch(logIn(res.data || {}));
+    }
+    catch (err) {
+        console.error(err);
+    }
+}
 export const logOutThunk = () => (dispatch) => {
     dispatch(logOut());
 }
