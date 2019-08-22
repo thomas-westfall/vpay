@@ -72,7 +72,7 @@ class HomePage extends Component {
                   <div>
                     {console.log(this.props)}
                     <form action={"/pay/" + this.state.amount + "/" + this.state.email} method="post">
-                    <input type="submit" value="Paydawdawd"></input>
+                    <input type="submit" value="Cash out"></input>
                     </form>
                     </div>
                   </tr>
