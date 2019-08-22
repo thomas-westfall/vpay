@@ -37,13 +37,13 @@
 }
 .registerTable:hover{
     transition: 0.5s;
-    box-shadow: 0 5px 8px 0 rgba(104, 189, 34, 0.829);
+    box-shadow: 0 5px 8px 0 rgba(64, 216, 135, 0.473);
     width: 400px;
     height: 450px;
 }
 .registerTitle{
     padding-top: 10px;
-    color: #68BD22;
+    color: #3CC47C;
     text-align: center;
 }
 .registerInput{
@@ -62,21 +62,21 @@
     text-decoration: none;
     color: white;
     padding: 5px 60px;
-    border: 1px solid #68BD22;
+    border: 1px solid #3CC47C;
     border-bottom: 4px solid rgba(0,0,0,0.21);
     border-radius: 4px;
     text-shadow: 0 1px 0 rgba(0,0,0,0.15);
     margin: auto;
     color: white;
-    background: #68BD22;
+    background: #3CC47C;
 }
 .registerButton:hover{
-    background: #55AD39;
+    background: rgb(72, 219, 141);
     transition: 0.3s;
 }
 .registerButton:active {
     box-shadow: 0 0 #1d4100; 
-    background-color: #347300;
+    background-color: rgb(55, 155, 102);
 }
 .showPassword{
     font-size: 12px;
