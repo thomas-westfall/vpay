@@ -49,12 +49,12 @@ class AllReceipts extends Component {
             <table className="ReceiptTable">
                 <thead>
                     <tr>
-                        <td>View</td>
+                        <td></td>
                         <td>ID</td>
                         <td>Total</td>
                         <td>Tip Percent</td>
                         <td>Orders</td>
-                        <td>Delete</td>
+                        <td></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -62,7 +62,7 @@ class AllReceipts extends Component {
                     this.state.receipts.map((eachReceipt) => (
                         <tr key={eachReceipt.id}>
                           <td className="cView">
-                             <Link className="bView">View</Link>
+                          <button className="bView">View</button>
                           </td>
                           <td>
                             {eachReceipt.id}
