@@ -7,8 +7,9 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import users from "./utilities/users";
 import loggeduser from "./utilities/loggeduser"
 import receiptdata from "./utilities/receiptdata";
+import orders from './utilities/orders'
 
-const rootReducer = combineReducers({users, receiptdata, loggeduser});
+const rootReducer = combineReducers({users, receiptdata, loggeduser, orders});
 const logger = createLogger({ collapsed: true });
 const middleware = composeWithDevTools(applyMiddleware(thunkMiddleware, logger));
 const store = createStore(rootReducer, middleware);

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './HomePage.css';
-import AllReceipts from './AllReceipts'
+import AllReceipts from './AllReceipts';
+import AllOrders from './AllOrders';
 import OrdersOwedContainer from './OrdersOwedContainer';
 import { withRouter } from 'react-router-dom';
 import logo from './images/vpayLogov1.png';
@@ -39,7 +40,7 @@ class HomePage extends Component {
   }
 
   displayorder = (val) => {
-    this.setState({tlbox: val})
+    this.setState({ tlbox: val })
   }
 
   render() {
@@ -52,34 +53,50 @@ class HomePage extends Component {
         </nav>
 
         <div className="row">
-          <div className="colTL">
-            <div className="TopRow">
-              <table className="welcomeTable">
-                <tbody>
-                  <tr>
-                    <td className="welcomeTableText">
-                      <h1>Nice day for some food, {this.props.loggeduser.firstName}!</h1>
-                      Through this website, you'll be able to assign the orders that your friend/family/enemy made with YOUR money. Have them pay you back so you can call it even!
-                      You have ${this.props.loggeduser.balance} in your balance
-                    </td>
-                    <td>
-                    </td>
-                  </tr>
-                  <tr className="OrdersInfo">
-                  {this.state.tlbox}
-                  </tr>
-                  <tr>
-                  <div>
-                    {console.log(this.props)}
-                    <form action={"/pay/" + this.state.amount + "/" + this.state.email} method="post">
-                    <input type="submit" value="Cash out"></input>
-                    </form>
-                    </div>
-                  </tr>
-                </tbody>
-              </table>
+          {this.props.orders[0] ?
+            <div className="colTR">
+              <div className="TopRow">
+                <h1 className="headingLabel">Orders of Receipt {this.props.orders[0].receiptId}</h1>
+              </div>
+              <div className="TopRowTX">
+                <div className="receiptHistory">
+                  <AllOrders  orders={this.props.orders} />
+                </div>
+              </div>
             </div>
-          </div>
+
+
+            :
+            <div className="colTL">
+              <div className="TopRow">
+                <table className="welcomeTable">
+                  <tbody>
+                    <tr>
+                      <td className="welcomeTableText">
+                        <h1>Nice day for some food, {this.props.loggeduser.firstName}!</h1>
+                        Through this website, you'll be able to assign the orders that your friend/family/enemy made with YOUR money. Have them pay you back so you can call it even!
+                              You have ${this.props.loggeduser.balance} in your balance
+                            </td>
+                      <td>
+                      </td>
+                    </tr>
+                    <tr className="OrdersInfo">
+                      {this.state.tlbox}
+                    </tr>
+                    <tr>
+                      <div>
+                        {console.log(this.props)}
+                        <form action={"/pay/" + this.state.amount + "/" + this.state.email} method="post">
+                          <input type="submit" value="Paydawdawd"></input>
+                        </form>
+                      </div>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          }
+
 
           <div className="colTR">
             <div className="TopRow">
@@ -87,7 +104,7 @@ class HomePage extends Component {
             </div>
             <div className="TopRowTX">
               <div className="receiptHistory">
-                <AllReceipts displayorder={this.displayorder} loggeduser={this.props.loggeduser} />
+                <AllReceipts displayorder={this.displayorder} loggeduser={this.props.loggeduser} fetchOrdersData={this.props.fetchOrdersData} resetOrdersData={this.props.resetOrdersData} />
               </div>
             </div>
           </div>
