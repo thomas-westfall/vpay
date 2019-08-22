@@ -19,13 +19,14 @@
     width: 60%;
 }
 .LogInTable{
+    color: ;
     align-content: center;
     background-color: #ffff;
     width: 390px;
     border-radius: 15px;
     height: 240px;
     transition: 0.5s;
-    box-shadow: 0 4px 8px 0 rgba(104, 189, 34, 0.507);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.507);
     text-align: center;
 }
 .center {

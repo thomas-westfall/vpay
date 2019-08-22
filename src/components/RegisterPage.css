@@ -9,6 +9,10 @@
     height: 100vh;
     
 }
+.inputFieldR{
+    text-align: left;
+    width: 60%;
+}
 .errorMessage{
     color: #D63030;
     text-align: center;
@@ -20,11 +24,11 @@
 .registerTable{
     align-content: center;
     background-color: #ffffff;
-    width: 400px;
+    width: 390px;
     border-radius: 15px;
-    height: 450px;
-    transition: 0.3s;
-    box-shadow: 0 4px 8px 0 rgba(104, 189, 34, 0.507);
+    height: 440px;
+    transition: 0.5s;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.507);
     text-align: center;
 }
 .center {
@@ -32,7 +36,10 @@
     justify-content: center;
 }
 .registerTable:hover{
+    transition: 0.5s;
     box-shadow: 0 5px 8px 0 rgba(104, 189, 34, 0.829);
+    width: 400px;
+    height: 450px;
 }
 .registerTitle{
     padding-top: 10px;
