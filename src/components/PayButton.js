@@ -2,13 +2,31 @@
 
 import React from 'react';
 import PaypalExpressBtn from 'react-paypal-express-checkout';
- 
+import axios from 'axios';
+
 export default class PayButton extends React.Component {
     render() {
         const onSuccess = (payment) => {
             // Congratulation, it came here means everything's fine!
             		console.log("The payment was succeeded!", payment);
-            		// You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
+                    // You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
+                    axios({
+                        method: 'put',
+                        url: 'https://vpay-backend-auth.herokuapp.com/api/users/balance',
+                        data: {
+                          username: this.props.username,
+                          balance: this.props.balance + this.props.amount
+                        }
+                      });
+                      axios({
+                        method: 'put',
+                        url: 'https://vpay-backend-auth.herokuapp.com/api/orders/'+this.props.id,
+                        data: {
+                          username: this.props.username,
+                          paid: true
+                        }
+                      });
+
         }
  
         const onCancel = (data) => {

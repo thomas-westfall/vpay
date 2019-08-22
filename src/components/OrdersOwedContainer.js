@@ -9,10 +9,13 @@ class OrdersOwedContainer extends Component {
     }
     componentDidMount() {
         this.setState({
-            orders: this.props.loggeduser.orders
+            orders: this.props.loggeduser.orders,
+            username: this.props.loggeduser.username,
+            balance: this.props.loggeduser.balance
         })
     }
     render() {
+        console.log(this.state.orders)
         return (
             <table className="ReceiptTable">
                 <thead>
@@ -44,7 +47,7 @@ class OrdersOwedContainer extends Component {
                                     {order.paid ?
                                         "Paid!"
                                         :
-                                        <PayButton amount={order.price} />
+                                        <PayButton id={order.id} username={this.state.username} balance={this.state.balance} amount={order.price} />
                                     }
                                 </td>
                             </tr>
