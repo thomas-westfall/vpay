@@ -4,7 +4,8 @@ import { Redirect, BrowserRouter as Router, Route, Switch } from "react-router-d
 import { connect } from "react-redux";
 import {registerUserThunk} from "./store/utilities/users";
 import {logInThunk, logOutThunk, me} from "./store/utilities/loggeduser";
-import {fetchReceiptDataThunk, resetReceiptDataThunk} from "./store/utilities/receiptdata"
+import {fetchReceiptDataThunk, resetReceiptDataThunk} from "./store/utilities/receiptdata";
+import {fetchOrdersDataThunk, resetOrdersDataThunk} from "./store/utilities/orders";
 
 //PAGE IMPORTS
 import HomePage from './components/HomePage';
@@ -26,7 +27,7 @@ class RoutesView extends Component {
   render() {
     const { isLoggedIn } = this.props;
     console.log('RENDERING')
-    const HomeComponent = () => (<HomePage me={this.props.me} logOut={this.props.logOut} loggeduser={this.props.loggeduser} fetchReceiptData={this.props.fetchReceiptData} resetReceiptData={this.props.resetReceiptData} data={this.props.receiptdata}/>);
+    const HomeComponent = () => (<HomePage orders={this.props.orders} me={this.props.me} logOut={this.props.logOut} loggeduser={this.props.loggeduser} fetchReceiptData={this.props.fetchReceiptData} resetReceiptData={this.props.resetReceiptData} fetchOrdersData={this.props.fetchOrdersData} resetOrdersData={this.props.resetOrdersData} data={this.props.receiptdata}/>);
     const LoginComponent = () => (<LoginPage logIn={this.props.logIn} isLoggedIn={this.props.isLoggedIn} error={this.props.error}/>);
     const RegisterComponent = () => (<RegisterPage users={this.props.users} registerUser={this.props.registerUser} registerError={this.props.registerError} registerSuccess={this.props.registerSuccess}/>);
     const AssignOrdersComponent = () => (<AssignOrders loggeduser={this.props.loggeduser} resetReceiptData={this.props.resetReceiptData} data={this.props.receiptdata}/>);
@@ -60,7 +61,8 @@ const mapState = (state) => {
     receiptdata: state.receiptdata,
     registerSuccess: state.users.success,
     registerError: state.users.response,
-    isLoggedIn: !!state.loggeduser.id
+    isLoggedIn: !!state.loggeduser.id,
+    orders: state.orders
   }
 }
 
@@ -71,7 +73,9 @@ const mapDispatch = (dispatch) => {
     logOut: () => dispatch(logOutThunk()),
     fetchReceiptData: (filename) => dispatch(fetchReceiptDataThunk(filename)),
     resetReceiptData: () => dispatch(resetReceiptDataThunk()),
-    me: () => dispatch(me())
+    me: () => dispatch(me()),
+    fetchOrdersData: (orders) => dispatch(fetchOrdersDataThunk(orders)),
+    resetOrdersData: () => dispatch(resetOrdersDataThunk())
   }
 }
 export default connect(mapState, mapDispatch)(RoutesView);

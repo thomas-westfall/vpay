@@ -34,7 +34,7 @@
     transition: 0.3s;
 }
 .cView:hover {
-    background-color: #3AA024;
+    background-color: rgba(60, 145, 103, 0.651);
     transition: 0.3s;
 }
 .bView, .bView:hover, .bView:active{
@@ -52,7 +52,7 @@
     transition: 0.3s;
 }
 .cDel:hover {
-    background-color: rgb(230, 52, 52);
+    background-color: rgba(192, 52, 52, 0.747);
     transition: 0.3s;
 }
 .bDel, .bDel:hover, .bDel:active{
@@ -81,5 +81,5 @@
 }
 .ReceiptTable tbody tr {
     outline: thin solid;
-    outline-color: rgb(92, 92, 92);
+    outline-color: rgba(121, 121, 121, 0.158);
 }

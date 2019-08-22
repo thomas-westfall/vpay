@@ -16,30 +16,30 @@ class AllReceipts extends Component {
         })
     }
 
-    viewreceipt = (eachReceipt) =>{
-        console.log("DAWDAWD")
-        document.getElementsByClassName("welcomeTableText")[0].innerHTML = "";
-        var allOrders = []
+    // viewreceipt = (eachReceipt) =>{
+    //     console.log("DAWDAWD")
+    //     document.getElementsByClassName("welcomeTableText")[0].innerHTML = "";
+    //     var allOrders = []
 
-                            eachReceipt.orders.map(item => {
-                            allOrders.push(
-                                <div id={item.id} className="order" key={item.id}>
-                                    <div className="orderContent">
-                                        <p>
-                                            <span className="orderId"><u>Order No:</u> {item.id}</span>
-                                            <div className="orderName"><u>Order Name:</u> {item.itemName}</div>
-                                            <div className="orderPrice"><u>Price:</u> {item.price}</div>
-                                        </p>
-                                    </div>
-                                </div>
-                            )
+    //                         eachReceipt.orders.map(item => {
+    //                         allOrders.push(
+    //                             <div id={item.id} className="order" key={item.id}>
+    //                                 <div className="orderContent">
+    //                                     <p>
+    //                                         <span className="orderId"><u>Order No:</u> {item.id}</span>
+    //                                         <div className="orderName"><u>Order Name:</u> {item.itemName}</div>
+    //                                         <div className="orderPrice"><u>Price:</u> {item.price}</div>
+    //                                     </p>
+    //                                 </div>
+    //                             </div>
+    //                         )
 
 
 
-                            })
+    //                         })
                         
-        return allOrders
-    }
+    //     return allOrders
+    // }
 
     render() {
         return (
@@ -59,7 +59,7 @@ class AllReceipts extends Component {
                     this.state.receipts.map((eachReceipt) => (
                         <tr key={eachReceipt.id}>
                           <td className="cView">
-                          <button onClick={() => this.props.displayorder(this.viewreceipt(eachReceipt))} className="bView">View</button>
+                          <button onClick={() => this.props.fetchOrdersData(eachReceipt.orders)} className="bView">View</button>
                           </td>
                           <td>
                             {eachReceipt.id}
@@ -74,7 +74,7 @@ class AllReceipts extends Component {
                               {eachReceipt.orders.length} Orders
                           </td>
                           <td className="cDel">
-                             <button className="bDel">Delete</button>
+                             <button className="bDel" onClick={() => this.props.resetOrdersData()}>Hide</button>
                           </td>
                           {console.log(eachReceipt, "each one")}
                         </tr>
