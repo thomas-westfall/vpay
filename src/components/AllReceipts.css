@@ -30,7 +30,7 @@
   color:#fff;
 }
 .cView {
-    background-color: white;
+    background-color: rgba(115, 224, 170, 0.308);
     transition: 0.3s;
 }
 .cView:hover {
@@ -49,6 +49,10 @@
     text-align: center;
     white-space: nowrap;
     font: 400 13.3333px Arial;
+    transition: 0.3s;
+}
+.cDel {
+    background-color: rgba(235, 104, 104, 0.336);
     transition: 0.3s;
 }
 .cDel:hover {
