@@ -14,13 +14,17 @@
     color: #D63030;
     text-align: center;
 }
+.inputField{
+    text-align: left;
+    width: 60%;
+}
 .LogInTable{
     align-content: center;
     background-color: #ffff;
-    width: 400px;
+    width: 390px;
     border-radius: 15px;
-    height: 250px;
-    transition: 0.3s;
+    height: 240px;
+    transition: 0.5s;
     box-shadow: 0 4px 8px 0 rgba(104, 189, 34, 0.507);
     text-align: center;
 }
@@ -29,12 +33,17 @@
     justify-content: center;
 }
 .LogInTable:hover{
-    box-shadow: 0 5px 8px 0 rgba(104, 189, 34, 0.788);
+    font-size: 16px;
+    transition: 0.5s;
+    width: 400px;
+    height: 250px;
+    box-shadow: 0px 10px 25px 0 rgba(104, 189, 34, 0.788);
 }
 .LogInTitle{
     padding-top: 10px;
     color: #68BD22;
     text-align: center;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.418);
 }
 .RegisterLink{
     font-size: 11px;

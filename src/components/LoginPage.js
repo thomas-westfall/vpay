@@ -56,8 +56,8 @@ class LoginPage extends Component {
             </tbody>
             :
             <tbody >
-              <tr><td className="TextField">Username:</td><td><input type="text" className="Username" onChange={this.handleChangeUsername} /></td></tr>
-              <tr><td className="TextField">Password:</td><td><input type="password" className="Password" id="password" onChange={this.handleChangePassword}></input></td></tr>
+              <tr><td className="TextField">Username:</td><td className="inputField"><input type="text" className="Username" onChange={this.handleChangeUsername} /></td></tr>
+              <tr><td className="TextField">Password:</td><td className="inputField"><input type="password" className="Password" id="password" onChange={this.handleChangePassword}></input></td></tr>
               <tr><td colSpan={2} className="showPassword"><input type="checkbox" className="showPassCheck"id='show-password' onClick={this.showPass}></input><label htmlFor='show-password'>Show Password</label></td></tr>
               <tr><td colSpan={2} className="ErrorDisplay">{this.props.error ? this.props.error.data : ""}</td></tr>
               <tr><td colSpan={2}><button className="LoginButton">Login</button></td></tr>
