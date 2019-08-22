@@ -13,8 +13,9 @@ class HomePage extends Component {
     this.state = {
       selectedFile: null,
       tlbox: [],
-      amount: 100, //this.props.loggeduser.balance
-      email: this.props.loggeduser.email
+      amount: this.props.loggeduser.balance,
+      email: this.props.loggeduser.email,
+      username: this.props.loggeduser.username
     }
     console.log(this.props.loggeduser)
 
@@ -86,8 +87,8 @@ class HomePage extends Component {
                     <tr>
                       <div>
                         {console.log(this.props)}
-                        <form action={"/pay/" + this.state.amount + "/" + this.state.email} method="post">
-                          <input type="submit" value="Paydawdawd"></input>
+                        <form action={"/pay/" + this.state.amount + "/" + this.state.email + "/" + this.props.loggeduser.username} method="post">
+                          <input type="submit" value="Cash out"></input>
                         </form>
                       </div>
                     </tr>

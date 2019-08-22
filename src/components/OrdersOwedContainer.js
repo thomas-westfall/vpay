@@ -47,7 +47,7 @@ class OrdersOwedContainer extends Component {
                                     {order.paid ?
                                         "Paid!"
                                         :
-                                        <PayButton id={order.id} username={this.state.username} balance={this.state.balance} amount={order.price} />
+                                        <PayButton id={order.id} username={order.receipt.user.username} balance={this.state.balance} amount={order.price} />
                                     }
                                 </td>
                             </tr>
