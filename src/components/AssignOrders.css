@@ -1,4 +1,4 @@
-.itemName {
+/* .itemName {
     text-align: left;
 }
 .itemCost {
@@ -10,11 +10,11 @@
 }
 .allTables {
     display: flex;
-    justify-content: center;
 }
 .allorders {
     color: black;
 }
+*/
 .droppable {
     background-color: #F6F6F6;
     height: 100px;
@@ -28,15 +28,53 @@
     transition: 0.3s;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.541);
 }
-.groupName {
-    margin-top: 10px;
-    font-size: 23px;
+/*
+
+.leftBlock{
+    background-color: #3CC47C;
+    
+}
+*/
+.receiptHead{
+    background-color: rgb(43, 170, 103);
+}
+
+.topPageTable{
+    width: 100%;
     text-align: center;
-    padding: 5px;
-    color: white;
-    background-color: #55AD39;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.644);
-        
+    color: #ffff;
+}
+
+.headText{
+    height: 45px;
+    font-weight: bold;
+}
+/*
+.leftBot{
+    height: 100vh;
+}
+*/
+.firstField{
+    padding-top: 50px;
+    text-align: center;
+} 
+
+.mainPage{
+    background-color: #f2f2f2;
+    height: 100vh;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+.rightButtons{
+    justify-content: flex-end;
+}
+.botLeftCon{
+    height: 84vh;
+}
+.botLeftFunc{
+    background-color: #3CC47C;
+    width: 10%;
 }
 .totalBar {
     margin-top: 10px;
@@ -44,8 +82,18 @@
     text-align: center;
     color: #55AD39;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.315);
+}
+.groupName {
+    margin-top: 10px;
+    font-size: 23px;
+    text-align: center;
+    padding: 5px;
+    color: white;
+    background-color: #3CC47C;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.644);
         
 }
+
 .draggable{
     background-color: rgba(129, 167, 118, 0.247);
     transition: 0.3s;

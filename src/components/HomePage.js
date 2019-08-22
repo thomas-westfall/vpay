@@ -119,15 +119,16 @@ class HomePage extends Component {
                 <div className="form-group files">
                   <input type="file" className="form-control" name="file" onChange={this.onChangeHandler} multiple="" />
                 </div>
-              </form>
-            </div>
-            <center>
+                <center>
               <button type="button" className="uploadButton" onClick={() => this.props.fetchReceiptData(this.state.selectedFile)}>Upload</button>
               {this.props.data.amounts ?
                 <Link to="/orders">
                   <button className="toOrdersButtonS">Proceed</button></Link> :
                 <button className="toOrdersButtonB">No Orders</button>}
             </center>
+              </form>
+            </div>
+
           </div>
           <div className="colBR">
             <div className="TopRow">
