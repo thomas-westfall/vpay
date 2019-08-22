@@ -3,7 +3,9 @@
   justify-content: space-between;
   color: white;
 }
-
+.logoImg{
+  height: 60px;
+}
 .container-fluid {
   background-image: url('./images/vpaybg_v1.jpg');
   background-size: cover;
