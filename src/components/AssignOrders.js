@@ -45,7 +45,7 @@ class AssignOrders extends Component {
     ev.dataTransfer.setData("id", id);
   }
   onDrop = (ev, cat) => {
-    
+
     let id = ev.dataTransfer.getData("id");
     console.log(id, "look jjjjjj");
     let orders = this.state.orders.filter((order) => {
@@ -64,24 +64,24 @@ class AssignOrders extends Component {
 
   parse(text, freq, cost) {
     console.log(text, "The order has a frequency of", freq)
-    let newcost = cost/freq;
+    let newcost = cost / freq;
     let step = 0;
     let neworders = this.state.orders;
     while (step < freq) {
-      console.log("THE FREQUENCY IS: ",freq," THE STEP IS: ",step)
-      neworders.push({ name: text, category: "allorders", cost: newcost, orderid: this.state.numberOrders }) 
-      this.state.numberOrders =  this.state.numberOrders + 1;
-      step = step +1;
-      console.log("THE FREQUENCY IS: ",freq," THE STEP BECAME: ",step)
+      console.log("THE FREQUENCY IS: ", freq, " THE STEP IS: ", step)
+      neworders.push({ name: text, category: "allorders", cost: newcost, orderid: this.state.numberOrders })
+      this.state.numberOrders = this.state.numberOrders + 1;
+      step = step + 1;
+      console.log("THE FREQUENCY IS: ", freq, " THE STEP BECAME: ", step)
     }
     this.setState(neworders)
   }
 
   async componentDidMount() {
-    if(this.props.data.totalAmount){
+    if (this.props.data.totalAmount) {
       this.setState({
         totalReceiptCost: this.props.data.totalAmount.data,
-        totalReceiptTax: this.props.data.taxAmount.data    
+        totalReceiptTax: this.props.data.taxAmount.data
       })
     }
     var newGroup = this.state.groups;
@@ -146,63 +146,63 @@ class AssignOrders extends Component {
 
   handleFinalize = async (event) => {
     await axios.post(`https://vpay-backend-auth.herokuapp.com/api/receipts`, {
-      userId : this.props.loggeduser.id,
-      totalPrice : parseInt(((((this.state.totalReceiptCost-this.state.totalReceiptTax)*(this.state.tipPercent/100))+(this.state.totalReceiptCost)).toFixed(2))),
+      userId: this.props.loggeduser.id,
+      totalPrice: parseInt(((((this.state.totalReceiptCost - this.state.totalReceiptTax) * (this.state.tipPercent / 100)) + (this.state.totalReceiptCost)).toFixed(2))),
       tipPercent: parseInt(this.state.tipPercent)
     })
-    .then (res => {
+      .then(res => {
         console.log(res);
         let newReceiptId = res.data;
         Object.keys(this.state.groups).map((keyName, i) => {
-          if(this.state.groups[keyName].id === this.props.loggeduser.id) {
-            this.state.groups[keyName].theirOrders.map( async (eachOrder) => {
-              console.log(   "userId",this.state.groups[keyName].id,
-                "receiptId",newReceiptId,
+          if (this.state.groups[keyName].id === this.props.loggeduser.id) {
+            this.state.groups[keyName].theirOrders.map(async (eachOrder) => {
+              console.log("userId", this.state.groups[keyName].id,
+                "receiptId", newReceiptId,
                 "paid", true,
                 "itemName", eachOrder.props.id,
-                "price ", ((eachOrder.props.cost*(this.state.tipPercent/100))+eachOrder.props.cost+(eachOrder.props.cost*(this.state.totalReceiptTax/(this.state.totalReceiptCost-this.state.totalReceiptTax)
+                "price ", ((eachOrder.props.cost * (this.state.tipPercent / 100)) + eachOrder.props.cost + (eachOrder.props.cost * (this.state.totalReceiptTax / (this.state.totalReceiptCost - this.state.totalReceiptTax)
                 ))))
-               await axios.post(`https://vpay-backend-auth.herokuapp.com/api/orders`, {
-                userId : this.state.groups[keyName].id,
-                receiptId : newReceiptId,
-                paid : true,
-                itemName : eachOrder.props.id,
-                price : parseFloat(((eachOrder.props.cost*(this.state.tipPercent/100))+eachOrder.props.cost+(eachOrder.props.cost*(this.state.totalReceiptTax/(this.state.totalReceiptCost-this.state.totalReceiptTax)))).toFixed(2))
+              await axios.post(`https://vpay-backend-auth.herokuapp.com/api/orders`, {
+                userId: this.state.groups[keyName].id,
+                receiptId: newReceiptId,
+                paid: true,
+                itemName: eachOrder.props.id,
+                price: parseFloat(((eachOrder.props.cost * (this.state.tipPercent / 100)) + eachOrder.props.cost + (eachOrder.props.cost * (this.state.totalReceiptTax / (this.state.totalReceiptCost - this.state.totalReceiptTax)))).toFixed(2))
               })
-              .then(response => {
-                console.log(response, "WENT THROUGH SUCCESFULLLLLLLY")
+                .then(response => {
+                  console.log(response, "WENT THROUGH SUCCESFULLLLLLLY")
                 }
-              )
-              .catch(error => {
-                console.log(error.response)
-              })
+                )
+                .catch(error => {
+                  console.log(error.response)
+                })
             })
           }
-          else if((this.state.groups[keyName].id)){
-            this.state.groups[keyName].theirOrders.map( async (eachOrder) => (
+          else if ((this.state.groups[keyName].id)) {
+            this.state.groups[keyName].theirOrders.map(async (eachOrder) => (
               await axios.post(`https://vpay-backend-auth.herokuapp.com/api/orders`, {
-                userId : this.state.groups[keyName].id,
-                receiptId : newReceiptId,
-                paid : false,
-                itemName : eachOrder.props.id,
-                price : parseFloat(((eachOrder.props.cost*(this.state.tipPercent/100))+eachOrder.props.cost+(eachOrder.props.cost*(this.state.totalReceiptTax/(this.state.totalReceiptCost-this.state.totalReceiptTax)))).toFixed(2))
+                userId: this.state.groups[keyName].id,
+                receiptId: newReceiptId,
+                paid: false,
+                itemName: eachOrder.props.id,
+                price: parseFloat(((eachOrder.props.cost * (this.state.tipPercent / 100)) + eachOrder.props.cost + (eachOrder.props.cost * (this.state.totalReceiptTax / (this.state.totalReceiptCost - this.state.totalReceiptTax)))).toFixed(2))
               })
-              .then(response => {
-                console.log(response)
+                .then(response => {
+                  console.log(response)
                 }
-              )
-              .catch(error => {
-                console.log(error.response)
-              })
-              ))
+                )
+                .catch(error => {
+                  console.log(error.response)
+                })
+            ))
           }
         }
-            
+
         )
-    })
-    .catch(err => {
-        console.log(err.response)   
-    })
+      })
+      .catch(err => {
+        console.log(err.response)
+      })
   }
 
   handleChangeUsername = (event) => {
@@ -213,7 +213,7 @@ class AssignOrders extends Component {
   }
   handleTip = (event) => {
     event.preventDefault()
-    this.setState({ tipPercent : this.state.tipPercentChange})
+    this.setState({ tipPercent: this.state.tipPercentChange })
   }
   render() {
     Object.keys(this.state.groups).map((keyName, i) => {
@@ -230,84 +230,181 @@ class AssignOrders extends Component {
         this.state.groups[t.category].totalCost += t.cost;
         //console.log(typeof this.state.groups[t.category].totalCost, "AWOIDHAWOIDHAOIWDH")
       }
-      this.state.groups[t.category].theirOrders.push(<div key={t.orderid} id={t.name} cost={t.cost} onDragStart={(e) => this.onDragStart(e, t.orderid)} draggable className="draggable"> 
-      <table className="itemRow">
-        <tbody >
-          <tr >
-            <td className="itemName">{t.name}</td>
-            <td className="itemCost">${t.cost}</td>
-          </tr>
-        </tbody>
-      </table>
+      this.state.groups[t.category].theirOrders.push(<div key={t.orderid} id={t.name} cost={t.cost} onDragStart={(e) => this.onDragStart(e, t.orderid)} draggable className="draggable">
+        <table className="itemRow">
+          <tbody >
+            <tr >
+              <td className="itemName">{t.name}</td>
+              <td className="itemCost">${t.cost}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>);
     });
     return (
-      <div className="container-drag">
+      // <div className="container-drag">
+      //   <nav className="navbar navbar-fixed-top">
+      //     <h1 className="header">Rearrange Your Orders</h1>
+      // <button  className="finalize" onClick={this.handleFinalize}>Finalize</button> 
+      // <Link className="btn btn-danger" to="/home">Cancel</Link>
+      //   </nav>
+      // <table className="topPageTable">
+      //   <thead >
+      //     <tr className="receiptHead">
+      //       <td className="headText">Total Cost: {this.state.totalReceiptCost} +(${this.state.totalReceiptCost*((this.state.tipPercent)/100)} Tips)</td>
+      //       <td className="headText">Current Tip Percent: {this.state.tipPercent}% </td>
+      //     </tr>
+      //   </thead>
+      //   </table>
+      //     <table>
+      //     <tbody>
+      //       <tr>
+      //         <td className="leftBlock">
+      // <tr >
+      //   <td className="firstField"><label htmlFor="Username">Add User: </label></td><td className="firstField"><input type="text" className="Username" onChange={this.handleChangeUsername} /></td><td className="firstField"><button onClick={this.handleSubmit}>Add</button></td>
+      // </tr>
+      // <tr>
+      //     <td colSpan={3}>{this.state.errortext}</td>
+      // </tr>
+      // <tr>
+      //   <td className="firstField"><label htmlFor="Username">Tip Percent: </label></td><td className="firstField"><input type="number" className="Username" onChange={this.handleChangeTip} /></td><td className="firstField"><button onClick={this.handleTip}>Set</button> </td>
+      // </tr>
+      //           <tr>
+      //             <td className="leftBot"></td>
+      //           </tr>
+
+      //         </td>
+      //         <td>
+      //         <div className="allTables">
+      //           {Object.keys(this.state.groups).map((keyName, i) => (
+      //             <div>
+      //               {/* {console.log("INDEX: ",i, " GROUP NAME: ",this.state.groups[keyName], "WHATEVER KEY NAME IS: ",keyName)} */}
+      //               <table className="droppable" onDragOver={(e) => this.onDragOver(e)} onDrop={(e) => this.onDrop(e, keyName)}>
+      //                 <thead>
+      //                   <tr><td><h1 className="groupName">{this.state.groups[keyName].name}</h1></td></tr>
+      //                 </thead>
+      //                 <tbody>
+      //                   <tr></tr>
+      //                   {this.state.groups[keyName].theirOrders ?
+      //                     this.state.groups[keyName].theirOrders.map((eachOrder) => (
+      //                       <tr>
+      //                         <td>
+      //                           {eachOrder}
+      //                         </td>
+      //                       </tr>
+      //                     )
+      //                     )
+      //                     :
+      //                     ""
+      //                   }
+      //                   {/* {console.log(this.state.groups[keyName].totalCost," TOTAL COST SHOULD COME")} */}
+      //                   {this.state.groups[keyName].totalCost !== undefined ? (
+      //                     <tr className="totalBar">
+      //                       <td>
+      //                         Total: ${(this.state.groups[keyName].totalCost + ((this.state.groups[keyName].totalCost.toFixed(2) / (this.state.totalReceiptCost - this.state.totalReceiptTax)) * (this.state.totalReceiptTax))).toFixed(2)} (Tax: ${((this.state.groups[keyName].totalCost.toFixed(2) / (this.state.totalReceiptCost - this.state.totalReceiptTax)) * (this.state.totalReceiptTax)).toFixed(2)})
+      //                 <br></br>
+      //                         Total Tip: ${(this.state.groups[keyName].totalCost * (this.state.tipPercent / 100)).toFixed(2)}
+      //                       </td>
+      //                     </tr>
+      //                   )
+      //                     :
+      //                     ""
+      //                   }
+      //                 </tbody>
+      //               </table>
+      //             </div>
+      //           )
+      //           )}
+      //         </div>
+      //       </td>
+      //     </tr>
+      //   </tbody>
+      // </table>
+
+
+      //   <div>
+      //   </div>
+      // </div>
+      <div className="mainPage ">
         <nav className="navbar navbar-fixed-top">
-        <h1 className="header">Rearrange Your Orders</h1>
-          <Link className="btn btn-danger" to="/home">Cancel</Link>
+          <h1 className="header">Rearrange Your Orders</h1>
+
+          <div className="ml-auto">
+            <button className="finalize" onClick={this.handleFinalize}>Finalize</button>
+            <Link className="btn btn-danger" to="/home">Cancel</Link>
+          </div>
         </nav>
 
-      {console.log(parseFloat(((((this.state.totalReceiptCost-this.state.totalReceiptTax)*(this.state.tipPercent/100))+(this.state.totalReceiptCost)).toFixed(2))), "THIS SHOULD BE TOTAL + TIP")}
         <div>
-          <h2>Add user by username:</h2>
-          <label htmlFor="Username">Username: </label>
-          <input type="text" className="Username" onChange={this.handleChangeUsername} />
-
-          <button onClick={this.handleSubmit}>Add</button>
-          <div>{this.state.errortext}</div>
+          <table className="topPageTable">
+            <thead >
+              <tr className="receiptHead">
+                <td className="headText">Total Cost: {this.state.totalReceiptCost} +(${this.state.totalReceiptCost * ((this.state.tipPercent) / 100)} Tips)</td>
+                <td className="headText">Current Tip Percent: {this.state.tipPercent}% </td>
+              </tr>
+            </thead>
+          </table>
         </div>
-        <div>
-          <label htmlFor="Username">Tip Percent: </label>
-          <input type="number" className="Username" onChange={this.handleChangeTip} />
 
-          <button onClick={this.handleTip}>Set</button> Current Tip Percent: {this.state.tipPercent}%
-        </div>
-        <div className="allTables">
-          {Object.keys(this.state.groups).map((keyName, i) => (
-            <div>
-              {/* {console.log("INDEX: ",i, " GROUP NAME: ",this.state.groups[keyName], "WHATEVER KEY NAME IS: ",keyName)} */}
-              <table className="droppable" onDragOver={(e) => this.onDragOver(e)} onDrop={(e) => this.onDrop(e, keyName)}>
-                <thead>
-                  <tr><td><h1 className="groupName">{this.state.groups[keyName].name}</h1></td></tr>
-                </thead>
-                <tbody>
-                  <tr></tr>
-                  {this.state.groups[keyName].theirOrders ?
-                    this.state.groups[keyName].theirOrders.map((eachOrder) => (
-                      <tr>
-                        <td>
-                          {eachOrder}
-                        </td>
-                      </tr>
-                    )
-                    )
-                    :
-                    ""
-                  }
-                  {/* {console.log(this.state.groups[keyName].totalCost," TOTAL COST SHOULD COME")} */}
-                  {this.state.groups[keyName].totalCost !== undefined ? (
-                    <tr className="totalBar">
-                      <td>
-                        Total: ${(this.state.groups[keyName].totalCost+((this.state.groups[keyName].totalCost.toFixed(2)/(this.state.totalReceiptCost-this.state.totalReceiptTax))*(this.state.totalReceiptTax))).toFixed(2)} (Tax: ${((this.state.groups[keyName].totalCost.toFixed(2)/(this.state.totalReceiptCost-this.state.totalReceiptTax))*(this.state.totalReceiptTax)).toFixed(2)})
+        <div className="botLeftCon d-flex flex-row">
+          <div className="botLeftFunc d-flex flex-fill flex-column">
+              <div className="align-self-center">
+              <tr>
+                <td className="firstField"><label htmlFor="Username">Add User: </label></td><td className="firstField"><input type="text" className="Username" onChange={this.handleChangeUsername} /></td><td className="firstField"><button onClick={this.handleSubmit}>Add</button></td>
+              </tr>
+              <tr>
+                <td colSpan={3}>{this.state.errortext}</td>
+              </tr>
+              <tr>
+                <td className="firstField"><label htmlFor="Username">Tip Percent: </label></td><td className="firstField"><input type="number" className="Username" onChange={this.handleChangeTip} /></td><td className="firstField"><button onClick={this.handleTip}>Set</button> </td>
+              </tr>
+              </div>
+
+          </div>
+          <div className="d-flex flex-fill flex-column">
+            <div className="allTables flex-row d-flex">
+              {Object.keys(this.state.groups).map((keyName, i) => (
+                <div>
+                  <table className="droppable" onDragOver={(e) => this.onDragOver(e)} onDrop={(e) => this.onDrop(e, keyName)}>
+                    <thead>
+                      <tr><td><h1 className="groupName">{this.state.groups[keyName].name}</h1></td></tr>
+                    </thead>
+                    <tbody>
+                      <tr></tr>
+                      {this.state.groups[keyName].theirOrders ?
+                        this.state.groups[keyName].theirOrders.map((eachOrder) => (
+                          <tr>
+                            <td>
+                              {eachOrder}
+                            </td>
+                          </tr>
+                        )
+                        )
+                        :
+                        ""
+                      }
+                      {/* {console.log(this.state.groups[keyName].totalCost," TOTAL COST SHOULD COME")} */}
+                      {this.state.groups[keyName].totalCost !== undefined ? (
+                        <tr className="totalBar">
+                          <td>
+                            Total: ${(this.state.groups[keyName].totalCost + ((this.state.groups[keyName].totalCost.toFixed(2) / (this.state.totalReceiptCost - this.state.totalReceiptTax)) * (this.state.totalReceiptTax))).toFixed(2)} (Tax: ${((this.state.groups[keyName].totalCost.toFixed(2) / (this.state.totalReceiptCost - this.state.totalReceiptTax)) * (this.state.totalReceiptTax)).toFixed(2)})
                         <br></br>
-                        Total Tip: ${(this.state.groups[keyName].totalCost*(this.state.tipPercent/100)).toFixed(2)}
-                      </td>
-                    </tr>
-                  )
-                    :
-                    ""
-                  }
-                </tbody>
-              </table>
+                            Total Tip: ${(this.state.groups[keyName].totalCost * (this.state.tipPercent / 100)).toFixed(2)}
+                          </td>
+                        </tr>
+                      )
+                        :
+                        ""
+                      }
+                    </tbody>
+                  </table>
+                </div>
+              )
+              )}
             </div>
-          )
-          )}
+          </div>
         </div>
-        <div>
-          <button onClick={this.handleFinalize}>Finalize</button>  Total Cost: {this.state.totalReceiptCost}, {(this.state.totalReceiptTax/(this.state.totalReceiptCost-this.state.totalReceiptTax)).toFixed(2)}
-        </div>
-      </div>
+      </div >
     );
   }
 }

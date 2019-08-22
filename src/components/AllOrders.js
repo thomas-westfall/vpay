@@ -43,7 +43,7 @@ class AllOrders extends Component {
                               {eachOrder.paid ? "Yes" : "No"}
                           </td>
                           <td>
-                              {eachOrder.userId}
+                              {eachOrder.user.username}
                           </td>
                           {console.log(eachOrder, "each one")}
                         </tr>

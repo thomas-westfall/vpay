@@ -18,7 +18,7 @@ const resetOrdersData = () => {
 
 // Thunks go here!
 export const fetchOrdersDataThunk = (orders) => async (dispatch) => {
-    console.log(orders, "AWOIDHCOIWAHCOIWHC")
+    console.log(orders, "AWOIDHCOIWAHCOIWHC ")
     dispatch(fetchOrdersData(orders));
 }
 
