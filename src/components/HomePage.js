@@ -56,11 +56,12 @@ class HomePage extends Component {
                     <td className="welcomeTableText">
                       <h1>Nice day for some food, {this.props.loggeduser.firstName}!</h1>
                       Through this website, you'll be able to assign the orders that your friend/family/enemy made with YOUR money. Have them pay you back so you can call it even!
+                      You have ${this.props.loggeduser.balance} in your balance
                     </td>
                     <td>
                     </td>
                   </tr>
-                  <tr>
+                  <tr className="OrdersInfo">
                   {this.state.tlbox}
                   </tr>
                 </tbody>

@@ -21,6 +21,10 @@
   text-align: center;
   padding: 1.5%;
 }
+.OrdersInfo{
+  background-color: #fff;
+  border-radius: 9px;
+}
 .TopRowT {
   justify-content: center;
   padding: 1.5%;
@@ -184,6 +188,14 @@
   width: 50%;
   color: white;
   border-radius: 10px;
+  font-size: 13px;
+  margin-left: -20px;
+}
+.welcomeTableText h1{
+  background-color: #3CC47C;
+  color: white;
+  border-radius: 10px;
+  font-size: 18px;
 }
 .toOrdersButtonS{
   color: #fff;
