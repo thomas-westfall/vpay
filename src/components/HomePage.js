@@ -44,31 +44,34 @@ class HomePage extends Component {
 
         <div className="row">
           <div className="col">
-            <div className="row">
+            <div className="TopRow">
               <h1>Upload file</h1>
             </div>
-            <div className="row">
+            <div className="TopRowT">
               <form method="post" action="#" id="#" className="upload-form">
                 <div className="form-group files">
                   <input type="file" className="form-control" name="file" onChange={this.onChangeHandler} multiple="" />
                 </div>
               </form>
             </div>
-            {/* <div className="receiptHistory">
-              <AllReceipts loggeduser={this.props.loggeduser} />
-            </div> */}
-
+            <center>
+              <button type="button" className="uploadButton" onClick={() => this.props.fetchReceiptData(this.state.selectedFile)}>Upload</button>
+              {this.props.data.amounts ?
+                <Link to="/orders">
+                  <button className="toOrdersButtonS">Proceed</button></Link> :
+                <button className="toOrdersButtonB">No Orders</button>}
+            </center>
           </div>
 
           <div className="col">
-            <center>
-              <button type="button" className="btn btn-success" onClick={() => this.props.fetchReceiptData(this.state.selectedFile)}>Upload</button>
-              {this.props.data.amounts ?
-                <Link to="/orders">
-                  <button className="btn btn-primary">Proceed</button></Link> :
-                <button className="btn btn-secondary">No Orders</button>}
-            </center>
-
+            <div className="TopRow">
+            <h1>Receipt History</h1>
+              </div>
+              <div className="TopRowTX">
+              <div className="receiptHistory">
+                <AllReceipts loggeduser={this.props.loggeduser} />
+              </div>
+            </div>
           </div>
         </div>
 
@@ -76,11 +79,7 @@ class HomePage extends Component {
         <div>
 
           <div className="col">
-            <div className="row">
-              <div className="receiptHistory">
-                <AllReceipts loggeduser={this.props.loggeduser} />
-              </div>
-            </div>
+
           </div>
 
         </div>
