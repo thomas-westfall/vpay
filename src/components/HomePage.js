@@ -70,7 +70,7 @@ class HomePage extends Component {
 
           <div className="colTR">
             <div className="TopRow">
-              <h1>Receipt History</h1>
+              <h1 className="headingLabel">Receipt History</h1>
             </div>
             <div className="TopRowTX">
               <div className="receiptHistory">
@@ -82,7 +82,7 @@ class HomePage extends Component {
         <div className="row">
           <div className="colBL">
             <div className="TopRow">
-              <h1>Upload A Receipt</h1>
+              <h1 className="headingLabel" >Upload A Receipt</h1>
             </div>
             <div className="TopRowT">
               <form method="post" action="#" id="#" className="upload-form">
@@ -101,7 +101,7 @@ class HomePage extends Component {
           </div>
           <div className="colBR">
             <div className="TopRow">
-              <h1>Order History</h1>
+              <h1 className="headingLabel">Order History</h1>
             </div>
             <div className="TopRowTX">
               <div className="receiptHistory">

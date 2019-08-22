@@ -32,10 +32,11 @@
   height: 214px;
   background-color: white;
   border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.486);
 }
 .row {
   justify-content: center;
-  padding: 1%;
+  width: 100%;
 }
 
 .col {
@@ -121,6 +122,16 @@
   text-transform: capitalize;
   text-align: center;
 }
+.headingLabel{
+  background-color: white;
+  color: #3CC47C;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.486);
+  padding-bottom: 5px;
+  padding-top: 5px;
+  margin-top: 20px;
+  margin-bottom: -10px;
+}
 .uploadButton{
   color: #fff;
   background-color: #28a745;
@@ -152,6 +163,7 @@
 .colTR{
   width: 47%;
   margin-left: 1%;
+
 }
 .colBL{
   width: 47%;
@@ -163,10 +175,15 @@
 }
 .welcomeTable {
   width: 100%;
+  margin-left: 10%;
+  margin-top: 5%;
+  
 }
 .welcomeTableText {
+  background-color: #3CC47C;
   width: 50%;
   color: white;
+  border-radius: 10px;
 }
 .toOrdersButtonS{
   color: #fff;
