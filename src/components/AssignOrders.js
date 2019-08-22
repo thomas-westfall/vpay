@@ -78,10 +78,12 @@ class AssignOrders extends Component {
   }
 
   async componentDidMount() {
-    this.setState({
-      totalReceiptCost: this.props.data.totalAmount.data,
-      totalReceiptTax: this.props.data.taxAmount.data    
-    })
+    if(this.props.data.totalAmount){
+      this.setState({
+        totalReceiptCost: this.props.data.totalAmount.data,
+        totalReceiptTax: this.props.data.taxAmount.data    
+      })
+    }
     var newGroup = this.state.groups;
     newGroup[this.props.loggeduser.username] = {
       name: this.props.loggeduser.username + "'s Orders",
@@ -241,8 +243,11 @@ class AssignOrders extends Component {
     });
     return (
       <div className="container-drag">
-        <h2 className="header">Rearrange Orders</h2>
-        <Link to="/home">Cancel</Link>
+        <nav className="navbar navbar-fixed-top">
+        <h1 className="header">Rearrange Your Orders</h1>
+          <Link className="btn btn-danger" to="/home">Cancel</Link>
+        </nav>
+
       {console.log(parseFloat(((((this.state.totalReceiptCost-this.state.totalReceiptTax)*(this.state.tipPercent/100))+(this.state.totalReceiptCost)).toFixed(2))), "THIS SHOULD BE TOTAL + TIP")}
         <div>
           <h2>Add user by username:</h2>

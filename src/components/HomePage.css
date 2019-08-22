@@ -1,5 +1,5 @@
 .navbar {
-  background-color: #55AD39;
+  background-color: #3CC47C;
   justify-content: space-between;
   color: white;
 }
@@ -22,9 +22,10 @@
   padding: 1.5%;
 }
 .TopRowTX {
+  margin-top: 1.5%;
   justify-content: center;
   padding: 1.5%;
-  height: 220px;
+  height: 214px;
   background-color: white;
   border-radius: 8px;
 }

@@ -36,7 +36,7 @@ class OrderOwed extends Component {
                 <div class="col"><button type="button" class="btn btn-primary">Pay now?</button></div>
             </div>
         <PayButton amount={order.price}/>
-        <Checkout />
+        
            
         </div>
     )
