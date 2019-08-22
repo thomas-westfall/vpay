@@ -15,6 +15,7 @@ class HomePage extends Component {
       amount: 100, //this.props.loggeduser.balance
       email: this.props.loggeduser.email
     }
+    console.log(this.props.loggeduser)
 
   }
 
@@ -69,7 +70,7 @@ class HomePage extends Component {
                   <tr>
                   <div>
                     {console.log(this.props)}
-                    <form action={"/pay/" + this.state.amount + "/" + this.props.loggeduser.email} method="post">
+                    <form action={"/pay/" + this.state.amount + "/" + this.state.email} method="post">
                     <input type="submit" value="Paydawdawd"></input>
                     </form>
                     </div>
