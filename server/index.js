@@ -6,6 +6,7 @@ const path = require('path');
 const app = express();
 const pino = require('express-pino-logger')();
 const paypal_sdk = require('paypal-rest-sdk');
+const axios = require('axios');
 
 paypal_sdk.configure({
   'mode': 'sandbox',
@@ -20,10 +21,10 @@ var config_opts = {
 };
 
 app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, '../build')));
 app.use(pino);
 
-app.post('/pay/:amount/:email', function (req, res) {
+app.post('/pay/:amount/:email/:username', function (req, res) {
     console.log(req.params)
     var create_payment_json = {
         "sender_batch_header": {
@@ -46,10 +47,22 @@ app.post('/pay/:amount/:email', function (req, res) {
 
     paypal_sdk.payout.create(create_payment_json,config_opts, function (err, data) {
         if (err) console.log(err);
+        else{
+            axios({
+                method: 'put',
+                url: 'https://vpay-backend-auth.herokuapp.com/api/users/balance',
+                data: {
+                  username: req.params.username,
+                  balance: 0
+                }
+              });
+        }
         console.log("Create Payment Response");
         console.log(data);
     });
-
+    //res.sendFile(path.join(__dirname, '../build/', 'index.html'));
+    //res.send(200);
+    res.end();
 });
 
 app.get('/', function (req, res) {

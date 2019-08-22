@@ -6,11 +6,11 @@ import axios from 'axios';
 
 export default class PayButton extends React.Component {
     render() {
-        const onSuccess = (payment) => {
+        const onSuccess = async (payment) => {
             // Congratulation, it came here means everything's fine!
             		console.log("The payment was succeeded!", payment);
                     // You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
-                    axios({
+                    await axios({
                         method: 'put',
                         url: 'https://vpay-backend-auth.herokuapp.com/api/users/balance',
                         data: {
@@ -18,7 +18,7 @@ export default class PayButton extends React.Component {
                           balance: this.props.balance + this.props.amount
                         }
                       });
-                      axios({
+                      await axios({
                         method: 'put',
                         url: 'https://vpay-backend-auth.herokuapp.com/api/orders/'+this.props.id,
                         data: {
@@ -26,7 +26,7 @@ export default class PayButton extends React.Component {
                           paid: true
                         }
                       });
-
+                      
         }
  
         const onCancel = (data) => {
