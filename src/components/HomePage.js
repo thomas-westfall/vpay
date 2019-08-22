@@ -12,12 +12,15 @@ class HomePage extends Component {
     this.state = {
       selectedFile: null,
       tlbox: [],
+      amount: 100, //this.props.loggeduser.balance
+      email: this.props.loggeduser.email
     }
 
   }
 
   componentDidMount() {
     this.props.resetReceiptData();
+    //console.log(this.props.loggeduser.email)
   }
   onChangeHandler = event => {
     this.setState({
@@ -62,6 +65,14 @@ class HomePage extends Component {
                   </tr>
                   <tr>
                   {this.state.tlbox}
+                  </tr>
+                  <tr>
+                  <div>
+                    {console.log(this.props)}
+                    <form action={"/pay/" + this.state.amount + "/" + this.props.loggeduser.email} method="post">
+                    <input type="submit" value="Paydawdawd"></input>
+                    </form>
+                    </div>
                   </tr>
                 </tbody>
               </table>
