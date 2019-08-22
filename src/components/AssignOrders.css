@@ -8,9 +8,7 @@
 .itemRow {
     width: 100%;
 }
-.allTables {
-    display: flex;
-}
+
 .allorders {
     color: black;
 }
@@ -57,6 +55,8 @@
 .firstField{
     padding-top: 50px;
     text-align: center;
+    color: white;
+    font-weight: bold;
 } 
 
 .mainPage{
@@ -74,7 +74,7 @@
 }
 .botLeftFunc{
     background-color: #3CC47C;
-    width: 10%;
+    width: 450px;
 }
 .totalBar {
     margin-top: 10px;
@@ -106,4 +106,8 @@
 .draggable:active{
     transition: 0.3s;
     background-color: rgba(55, 255, 0, 0.404);
+}
+.allTables {
+    display: flex;
+    flex-wrap: wrap;
 }
