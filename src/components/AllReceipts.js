@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import './AllReceipts.css';
-import { Link } from 'react-router-dom';
-import loggeduser from '../store/utilities/loggeduser';
 
 class AllReceipts extends Component {
-    state = {
-        receipts: []
+    constructor(props) {
+        super(props);
+        this.state = {
+            receipts: [],
+            allorders: []
+        }
     }
 
     componentDidMount() {
@@ -14,37 +16,32 @@ class AllReceipts extends Component {
         })
     }
 
+    viewreceipt = (eachReceipt) =>{
+        console.log("DAWDAWD")
+        document.getElementsByClassName("welcomeTableText")[0].innerHTML = "";
+        var allOrders = []
+
+                            eachReceipt.orders.map(item => {
+                            allOrders.push(
+                                <div id={item.id} className="order" key={item.id}>
+                                    <div className="orderContent">
+                                        <p>
+                                            <span className="orderId"><u>Order No:</u> {item.id}</span>
+                                            <div className="orderName"><u>Order Name:</u> {item.itemName}</div>
+                                            <div className="orderPrice"><u>Price:</u> {item.price}</div>
+                                        </p>
+                                    </div>
+                                </div>
+                            )
+
+
+
+                            })
+                        
+        return allOrders
+    }
+
     render() {
-        // const { receipts } = this.state;
-        // const receiptList = receipts.length ? (
-        //     receipts.map(receipt => {
-        //         return (
-        //             <div className="receipt" key={receipt.id}>
-        //                 <div className="receiptContent">
-        //                     <span className="receiptId">Receipt No: {receipt.id}</span>
-        //                     <div className="totalPrice">Total:
-        //                             <div>{receipt.totalPrice}</div>
-
-        //                     </div>
-        //                     <div className="tip"><u>Tip:</u> {receipt.tipPercent}
-        //                     </div>
-        //                 </div>
-        //             </div>
-        //         )
-        //     })
-        // ) : (
-        //         <div className="noReceipts"> No receipts yet</div>
-        //     )
-
-        // return (
-        //     <div className='receiptHistory'>
-        //         <div className="receiptHistoryTitle"> RECEIPT HISTORY
-        //             <div className="orders">
-        //                 {receiptList}
-        //             </div>
-        //         </div>
-        //     </div>
-        // );
         return (
             <table className="ReceiptTable">
                 <thead>
@@ -62,7 +59,7 @@ class AllReceipts extends Component {
                     this.state.receipts.map((eachReceipt) => (
                         <tr key={eachReceipt.id}>
                           <td className="cView">
-                          <button className="bView">View</button>
+                          <button onClick={() => this.props.displayorder(this.viewreceipt(eachReceipt))} className="bView">View</button>
                           </td>
                           <td>
                             {eachReceipt.id}
