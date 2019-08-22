@@ -7,6 +7,7 @@ const app = express();
 const pino = require('express-pino-logger')();
 const paypal_sdk = require('paypal-rest-sdk');
 const axios = require('axios');
+const cors = require('cors');
 
 paypal_sdk.configure({
   'mode': 'sandbox',
@@ -20,6 +21,7 @@ var config_opts = {
     'client_secret': 'EEMH6VI34GAwYTfH1ad5wiAU1Wf2_oZBWNYaSuqBy0IMA_tM9Xo8aSbK4mgETbHE1Pg8GLV4PACE5b35m'
 };
 
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '../build')));
 app.use(pino);
