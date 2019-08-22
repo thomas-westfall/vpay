@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import './RegisterPage.css';
 
 class Register extends Component {
@@ -40,7 +40,7 @@ class Register extends Component {
     handleChangeEmail = (event) => {
       this.setState({email: event.target.value})
     }
-    handleSubmit = (submit) => {
+    handleSubmit = async (submit) => {
       submit.preventDefault()
       const newUser = {
         "firstName": this.state.firstName,
@@ -50,7 +50,11 @@ class Register extends Component {
         "phoneNumber": this.state.phoneNumber,
         "email": this.state.email,
       } 
-      this.props.registerUser(newUser);
+      await this.props.registerUser(newUser);
+      
+      if(this.props.registerSuccess === "User Successfully Registered!") {
+        this.props.history.push("/login");
+      }
     }
     render() {
     return (
@@ -80,4 +84,4 @@ class Register extends Component {
   }
   }
     
-export default Register;
+export default withRouter(Register);
