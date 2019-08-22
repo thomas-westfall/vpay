@@ -39,7 +39,6 @@ class HomePage extends Component {
 
         <nav className="navbar navbar-fixed-top">
           <img className="logoImg" src={logo} alt="logo"/>
-          <h1>Welcome back {this.props.loggeduser.firstName} {this.props.loggeduser.lastName}</h1>
           <Link className="btn btn-danger" to='/' onClick={this.logout}>Log out</Link>
         </nav>
 
