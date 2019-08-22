@@ -11,6 +11,7 @@ class HomePage extends Component {
     super(props);
     this.state = {
       selectedFile: null,
+      tlbox: [],
     }
 
   }
@@ -31,6 +32,10 @@ class HomePage extends Component {
     this.props.logOut();
     this.props.me();
     this.props.history.push('/')
+  }
+
+  displayorder = (val) => {
+    this.setState({tlbox: val})
   }
 
   render() {
@@ -55,6 +60,9 @@ class HomePage extends Component {
                     <td>
                     </td>
                   </tr>
+                  <tr>
+                  {this.state.tlbox}
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -66,7 +74,7 @@ class HomePage extends Component {
             </div>
             <div className="TopRowTX">
               <div className="receiptHistory">
-                <AllReceipts loggeduser={this.props.loggeduser} />
+                <AllReceipts displayorder={this.displayorder} loggeduser={this.props.loggeduser} />
               </div>
             </div>
           </div>
