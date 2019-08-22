@@ -1,20 +1,84 @@
-.receipt{
-    display: flex;
-    flex-direction: column;
+.ReceiptTable{
+    width: 100%;
+    height: 150px;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.ReceiptTable tbody{
+  background-color: white;
+  display:block;
+  width: 100%;
+  overflow: auto;
+  height: 157px;
+}
+
+.ReceiptTable thead tr {
+    
+   display: block;
+   height: 35px;
+   justify-content: center;
+}
+.ReceiptTable thead tr td{
     text-align: center;
-    font-size: 20px;
-    color: rgba(255, 255, 255, 0.728);
-    font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", sans-serif;
-}
+ }
 
-.receiptContent{
-    border: 2px solid;
-    background-color:  #55AD39;
+.ReceiptTable thead {
+    border-radius: 50px;
+  background: rgba(88, 88, 88, 0.603);
+  color:#fff;
 }
-
-.receiptHistoryTitle{
-    font-size: 30px;
+.cView {
+    background-color: white;
+    transition: 0.3s;
+}
+.cView:hover {
+    background-color: #3AA024;
+    transition: 0.3s;
+}
+.bView, .bView:hover, .bView:active{
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
     font-weight: bold;
-    text-decoration: underline;
-    padding: 0px 0px 40px 0px;
+    width: 100%;
+    border: 1px solid transparent;
+    padding: .250rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    font: 400 13.3333px Arial;
+    transition: 0.3s;
+}
+.cDel:hover {
+    background-color: rgb(230, 52, 52);
+    transition: 0.3s;
+}
+.bDel, .bDel:hover, .bDel:active{
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    font-weight: bold;
+    width: 100%;
+    border: 1px solid transparent;
+    padding: .250rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    font: 400 13.3333px Arial;
+    transition: 0.3s;
+}
+
+
+.ReceiptTable th, .ReceiptTable td {
+  padding: 5px;
+  text-align: left;
+  width: 200px;
+}
+.ReceiptTable tbody tr td {
+    text-align: center;
+}
+.ReceiptTable tbody tr {
+    outline: thin solid;
+    outline-color: rgb(92, 92, 92);
 }

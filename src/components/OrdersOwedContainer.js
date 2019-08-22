@@ -1,26 +1,64 @@
 import React, { Component } from 'react';
 import './OrdersOwedContainer.css';
-import OrderOwed from './OrderOwed'
+import OrderOwed from './OrderOwed';
+import PayButton from './PayButton';
 
 class OrdersOwedContainer extends Component {
+    state = {
+        orders: []
+    }
+    componentDidMount() {
+        this.setState({
+            orders: this.props.loggeduser.orders
+        })
+    }
     render() {
-        let orders;
-        // console.log(this.props.loggeduser.orders);
-        // if (this.props.loggeduser.orders){
-            console.log(this.props.loggeduser, "this is logged user");
-            orders = this.props.loggeduser.orders.map(
-                (order, key) => {
-                    return <OrderOwed order = {order} id={key} />
-                })
-            // );
-    
-        // }
-    return (
-        <div className="container orders-owed-container">
-            {orders}
-        </div>
-    )
-  }
+        return (
+            <table className="ReceiptTable">
+                <thead>
+                    <tr>
+                        <td>Item ID</td>
+                        <td>Item Name</td>
+                        <td>Price</td>
+                        <td>Receipt ID</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {this.state.orders ?
+                        this.state.orders.map((order) => (
+                            <tr key={order.id}>
+                                <td>
+                                    {order.id}
+                                </td>
+                                <td>
+                                    {order.itemName}
+                                </td>
+                                <td>
+                                    ${order.price}
+                                </td>
+                                <td>
+                                    {order.receiptId}
+                                </td>
+                                <td>
+                                    {order.paid ?
+                                        "Paid!"
+                                        :
+                                        <PayButton amount={order.price} />
+                                    }
+                                </td>
+                            </tr>
+                        )
+                        )
+                        :
+                        ""}
+                    <tr>
+
+                    </tr>
+                </tbody>
+            </table>
+        )
+    }
 }
-    
+
 export default OrdersOwedContainer;

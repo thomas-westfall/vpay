@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import './LoginPage.css';
 
 class LoginPage extends Component {
@@ -16,13 +16,16 @@ class LoginPage extends Component {
   handleChangeUsername = (event) => {
     this.setState({ username: event.target.value })
   }
-  handleSubmit = (submit) => {
+  handleSubmit = async (submit) => {
     submit.preventDefault()
     const userToLog = {
       "username": this.state.username,
       "password": this.state.password,
     }
-    this.props.logIn(userToLog)
+    await this.props.logIn(userToLog)
+    if(this.props.isLoggedIn) {
+      this.props.history.push("/home");
+    }
   }
   showPass() {
     var x = document.getElementById("password");
@@ -56,8 +59,8 @@ class LoginPage extends Component {
             </tbody>
             :
             <tbody >
-              <tr><td className="TextField">Username:</td><td><input type="text" className="Username" onChange={this.handleChangeUsername} /></td></tr>
-              <tr><td className="TextField">Password:</td><td><input type="password" className="Password" id="password" onChange={this.handleChangePassword}></input></td></tr>
+              <tr><td className="TextField">Username:</td><td className="inputField"><input type="text" className="Username" onChange={this.handleChangeUsername} /></td></tr>
+              <tr><td className="TextField">Password:</td><td className="inputField"><input type="password" className="Password" id="password" onChange={this.handleChangePassword}></input></td></tr>
               <tr><td colSpan={2} className="showPassword"><input type="checkbox" className="showPassCheck"id='show-password' onClick={this.showPass}></input><label htmlFor='show-password'>Show Password</label></td></tr>
               <tr><td colSpan={2} className="ErrorDisplay">{this.props.error ? this.props.error.data : ""}</td></tr>
               <tr><td colSpan={2}><button className="LoginButton">Login</button></td></tr>
@@ -71,4 +74,4 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginPage;
+export default withRouter(LoginPage);

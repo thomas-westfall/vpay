@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import './HomePage.css';
 import AllReceipts from './AllReceipts'
 import OrdersOwedContainer from './OrdersOwedContainer';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
+import logo from './images/vpayLogov1.png';
 
 class HomePage extends Component {
   constructor(props) {
@@ -37,58 +38,70 @@ class HomePage extends Component {
       <div className="container-fluid">
 
         <nav className="navbar navbar-fixed-top">
-          <p className="navbar-brand">vPay</p>
-          <h1>Welcome back {this.props.loggeduser.firstName} {this.props.loggeduser.lastName}</h1>
+          <img className="logoImg" src={logo} alt="logo" />
           <Link className="btn btn-danger" to='/' onClick={this.logout}>Log out</Link>
         </nav>
 
         <div className="row">
-          <div className="col">
-            <div className="row">
-              <h1>Upload file</h1>
+          <div className="colTL">
+            <div className="TopRow">
+              <table className="welcomeTable">
+                <tbody>
+                  <tr>
+                    <td className="welcomeTableText">
+                      <h1>Nice day for some food, {this.props.loggeduser.firstName}!</h1>
+                      Through this website, you'll be able to assign the orders that your friend/family/enemy made with YOUR money. Have them pay you back so you can call it even!
+                    </td>
+                    <td>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <div className="row">
+          </div>
+
+          <div className="colTR">
+            <div className="TopRow">
+              <h1>Receipt History</h1>
+            </div>
+            <div className="TopRowTX">
+              <div className="receiptHistory">
+                <AllReceipts loggeduser={this.props.loggeduser} />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="colBL">
+            <div className="TopRow">
+              <h1>Upload A Receipt</h1>
+            </div>
+            <div className="TopRowT">
               <form method="post" action="#" id="#" className="upload-form">
                 <div className="form-group files">
                   <input type="file" className="form-control" name="file" onChange={this.onChangeHandler} multiple="" />
                 </div>
               </form>
             </div>
-            {/* <div className="receiptHistory">
-              <AllReceipts loggeduser={this.props.loggeduser} />
-            </div> */}
-
-          </div>
-
-          <div className="col">
             <center>
-              <button type="button" className="btn btn-success" onClick={() => this.props.fetchReceiptData(this.state.selectedFile)}>Upload</button>
+              <button type="button" className="uploadButton" onClick={() => this.props.fetchReceiptData(this.state.selectedFile)}>Upload</button>
               {this.props.data.amounts ?
                 <Link to="/orders">
-                  <button className="btn btn-primary">Proceed</button></Link> :
-                <button className="btn btn-secondary">No Orders</button>}
+                  <button className="toOrdersButtonS">Proceed</button></Link> :
+                <button className="toOrdersButtonB">No Orders</button>}
             </center>
-
           </div>
-        </div>
-
-
-        <div>
-
-          <div className="col">
-            <div className="row">
+          <div className="colBR">
+            <div className="TopRow">
+              <h1>Order History</h1>
+            </div>
+            <div className="TopRowTX">
               <div className="receiptHistory">
-                <AllReceipts loggeduser={this.props.loggeduser} />
+                <OrdersOwedContainer loggeduser={this.props.loggeduser} />
               </div>
             </div>
           </div>
-
         </div>
-        <div className="row">
-          <OrdersOwedContainer loggeduser={this.props.loggeduser} />
-        </div>
-
-
       </div>
     )
   }
