@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import './LoginPage.css';
 
 class LoginPage extends Component {
@@ -16,13 +16,16 @@ class LoginPage extends Component {
   handleChangeUsername = (event) => {
     this.setState({ username: event.target.value })
   }
-  handleSubmit = (submit) => {
+  handleSubmit = async (submit) => {
     submit.preventDefault()
     const userToLog = {
       "username": this.state.username,
       "password": this.state.password,
     }
-    this.props.logIn(userToLog)
+    await this.props.logIn(userToLog)
+    if(this.props.isLoggedIn) {
+      this.props.history.push("/home");
+    }
   }
   showPass() {
     var x = document.getElementById("password");
@@ -71,4 +74,4 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginPage;
+export default withRouter(LoginPage);
