@@ -142,6 +142,18 @@
   background: #208137;
   transition: 0.3s;
 }
+.colTL{
+  width: 50%;
+}
+.colTR{
+  width: 50%;
+}
+.colBL{
+  width: 50%;
+}
+.colBR{
+  width: 50%;
+}
 .toOrdersButtonS{
   color: #fff;
   background-color: #28a745;
@@ -158,6 +170,7 @@
   margin-left: 4%;
   transition: 0.3s;
 }
+
 .toOrdersButtonS:hover{
   color: #fff;
   background: #25963f;

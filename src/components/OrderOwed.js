@@ -1,3 +1,9 @@
+// NO LONGER IN USE, CAN STILL USE THIS TO LOOK OVER
+
+
+
+
+
 import React, { Component } from 'react';
 import './OrderOwed.css';
 import PayButton from './PayButton'
@@ -9,7 +15,7 @@ class OrderOwed extends Component {
         console.log(order);
     return (
         <div className="card">
-            <div className="row row-title">
+            {/* <div className="row row-title">
                 <h1>Order number {this.props.id}</h1>
             </div>
             <div className="row">
@@ -34,8 +40,8 @@ class OrderOwed extends Component {
             </div>
             <div className="row">
                 <div class="col"><button type="button" class="btn btn-primary">Pay now?</button></div>
-            </div>
-        <PayButton amount={order.price}/>
+            </div> */}
+        
         
            
         </div>

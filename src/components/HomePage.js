@@ -43,9 +43,41 @@ class HomePage extends Component {
         </nav>
 
         <div className="row">
-          <div className="col">
+          <div className="colTL">
             <div className="TopRow">
               <h1>Upload file</h1>
+            </div>
+            {/* <div className="TopRowT">
+              <form method="post" action="#" id="#" className="upload-form">
+                <div className="form-group files">
+                  <input type="file" className="form-control" name="file" onChange={this.onChangeHandler} multiple="" />
+                </div>
+              </form>
+            </div>
+            <center>
+              <button type="button" className="uploadButton" onClick={() => this.props.fetchReceiptData(this.state.selectedFile)}>Upload</button>
+              {this.props.data.amounts ?
+                <Link to="/orders">
+                  <button className="toOrdersButtonS">Proceed</button></Link> :
+                <button className="toOrdersButtonB">No Orders</button>}
+            </center> */}
+          </div>
+            
+          <div className="colTR">
+            <div className="TopRow">
+            <h1>Receipt History</h1>
+              </div>
+              <div className="TopRowTX">
+              <div className="receiptHistory">
+                <AllReceipts loggeduser={this.props.loggeduser} />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="colBL">
+            <div className="TopRow">
+              <h1>Upload A Receipt</h1>
             </div>
             <div className="TopRowT">
               <form method="post" action="#" id="#" className="upload-form">
@@ -62,32 +94,17 @@ class HomePage extends Component {
                 <button className="toOrdersButtonB">No Orders</button>}
             </center>
           </div>
-
-          <div className="col">
+          <div className="colBR">
             <div className="TopRow">
-            <h1>Receipt History</h1>
+            <h1>Order History</h1>
               </div>
               <div className="TopRowTX">
               <div className="receiptHistory">
-                <AllReceipts loggeduser={this.props.loggeduser} />
+              <OrdersOwedContainer loggeduser={this.props.loggeduser} />
               </div>
             </div>
           </div>
         </div>
-
-
-        <div>
-
-          <div className="col">
-
-          </div>
-
-        </div>
-        <div className="row">
-          <OrdersOwedContainer loggeduser={this.props.loggeduser} />
-        </div>
-
-
       </div>
     )
   }
