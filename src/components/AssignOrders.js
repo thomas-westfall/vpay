@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,  withRouter } from 'react-router-dom';
 import axios from 'axios';
 // import { Alert } from 'reactstrap';
 // import { UncontrolledAlert } from 'reactstrap';
@@ -33,7 +33,8 @@ class AssignOrders extends Component {
       errortext: "",
       numberOrders: 0,
       tipPercentChange: 0,
-      tipPercent: 0
+      tipPercent: 0,
+      confirm: false
     }
 
   }
@@ -115,7 +116,13 @@ class AssignOrders extends Component {
     }
   }
 
-
+  handleConfirm = (event) => {
+    console.log("RUNNNNNING")
+    this.setState({ confirm : true })
+  }
+  handleCancel = (event) => {
+    this.setState({ confirm : false })
+  }
   handleSubmit = async (event) => {
     await axios.get(`https://vpay-backend-auth.herokuapp.com/api/users/${this.state.username}`)
 
@@ -203,6 +210,9 @@ class AssignOrders extends Component {
       .catch(err => {
         console.log(err.response)
       })
+      if(this.state.confirm) {
+        this.props.history.push("/home");
+      }
   }
 
   handleChangeUsername = (event) => {
@@ -330,8 +340,8 @@ class AssignOrders extends Component {
           <h1 className="header">Rearrange Your Orders</h1>
 
           <div className="ml-auto">
-            <button className="finalize" onClick={this.handleFinalize}>Finalize</button>
-            <Link className="btn btn-danger" to="/home">Cancel</Link>
+            {this.state.confirm ? <div>Are you sure you want to finalize these orders? <button className="final" onClick={this.handleFinalize}>Yes</button><button className="finalno"onClick={this.handleCancel}>No</button></div> : (<div><button className="finalize btn btn-danger" onClick={this.handleConfirm}>Finalize</button><Link className="btn btn-danger" to="/home">Cancel</Link></div>)}
+            
           </div>
         </nav>
 
@@ -339,7 +349,7 @@ class AssignOrders extends Component {
           <table className="topPageTable">
             <thead >
               <tr className="receiptHead">
-                <td className="headText">Total Cost: {this.state.totalReceiptCost} +(${this.state.totalReceiptCost * ((this.state.tipPercent) / 100)} Tips)</td>
+                <td className="headText">Total Cost: {this.state.totalReceiptCost} +(${(this.state.totalReceiptCost * ((this.state.tipPercent) / 100)).toFixed(2)} Tips)</td>
                 <td className="headText">Current Tip Percent: {this.state.tipPercent}% </td>
               </tr>
             </thead>
@@ -404,9 +414,18 @@ class AssignOrders extends Component {
             </div>
           </div>
         </div>
+        <div>
+          <table className="topPageTable">
+            <thead >
+              <tr className="receiptHead">
+                <td className="headText">Number of Users: {Object.keys(this.state.groups).length-2}</td>
+              </tr>
+            </thead>
+          </table>
+        </div>
       </div >
     );
   }
 }
 
-export default AssignOrders;
+export default withRouter(AssignOrders);
