@@ -23,6 +23,7 @@ class HomePage extends Component {
 
   componentDidMount() {
     this.props.resetReceiptData();
+    this.props.resetOrdersData();
     //console.log(this.props.loggeduser.email)
   }
   onChangeHandler = event => {
@@ -87,9 +88,12 @@ class HomePage extends Component {
                     <tr>
                       <div>
                         {console.log(this.props)}
+                        {this.props.loggeduser.balance == 0 ?
+                        "":
                         <form action={"/pay/" + this.state.amount + "/" + this.state.email + "/" + this.props.loggeduser.username} method="post">
-                          <input type="submit" value="Cash out"></input>
+                          <input className="cView"type="submit" value="Cash out"></input>
                         </form>
+                        }
                       </div>
                     </tr>
                   </tbody>

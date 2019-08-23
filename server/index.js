@@ -63,12 +63,13 @@ app.post('/pay/:amount/:email/:username', function (req, res) {
         console.log(data);
     });
     //res.sendFile(path.join(__dirname, '../build/', 'index.html'));
-    //res.send(200);
-    res.end();
+    res.send("Cash out successful!");
+    //res.end();
 });
 
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+app.get('/a', function (req, res) {
+  //res.sendFile(path.join(__dirname, '', 'indedx.html'));
+  res.send(200)
 });
 
 app.listen(process.env.PORT || 8080);
