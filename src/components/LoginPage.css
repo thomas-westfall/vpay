@@ -78,13 +78,13 @@
     background: rgb(72, 219, 141);
     transition: 0.3s;
 }
+.LoginButton:active {
+    box-shadow: 0 0 #1d4100; 
+    background-color: rgb(55, 155, 102);
+}
 .showPassword{
     font-size: 12px;
 }
 .showPassCheck{
     margin-right: 5px;
-}
-.LoginButton:active {
-    box-shadow: 0 0 #1d4100; 
-    background-color: rgb(55, 155, 102);
 }
