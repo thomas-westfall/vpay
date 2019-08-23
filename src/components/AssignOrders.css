@@ -1,10 +1,4 @@
-/* .itemName {
-    text-align: left;
-}
-.itemCost {
-    color: rgb(33, 141, 0);
-    text-align: right;
-}
+/* 
 .itemRow {
     width: 100%;
 }
@@ -180,4 +174,11 @@
 .finalno:active {
     box-shadow: 0 0 #1d4100; 
     background-color: rgb(55, 155, 102);
+}
+.itemName {
+    text-align: left;
+}
+.itemCost {
+    color: rgb(33, 141, 0);
+    text-align: right;
 }
