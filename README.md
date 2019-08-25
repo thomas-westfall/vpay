@@ -1,11 +1,37 @@
 # vPay
-
+Backend: (https://github.com/tongsalex/vpay-backend)
+## Usage
+```npm install```  
+```npm run dev```  
+Navigate to http://localhost:3000 in your web browser
 ## Concept
-
+vPay is an web application that allows users to upload a photo of a restaurant receipt and split the bill among users by food ordered, tip and tax percentage. It allows user login with authentication, and stores each user's receipt and order history in a Postgres database. It uses the Taggun API to obtain the receipt text, and the PayPal API to handle payments between users. 
 ## Technology
+Frontend:  
+* React.js
+* Redux
+* EJS
+* Paypal Rest SDK
+* HTML
+* CSS
+* Axios
+  
+Backend:  
+* Node
+* Express
+* PostgreSQL
+* Sequelize
+* Passport
+* CORS
+* Cookie Parse
 
 ### User Story
-
+- Create an account and log in  
+- Land on a visually pleasing homepage that displays order and receipt history
+- Upload a receipt 
+- Add users by username and create orders by dragging food items to different users
+- Log in to PayPal and pay off an indivudal order
+- Cash out their balance
 ### Wireframes
 #### Login/Signup Page
 ![wireframe1](./media/wireframe1.png "Wireframe1")
