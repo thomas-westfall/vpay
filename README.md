@@ -32,6 +32,15 @@ Backend:
 - Add users by username and create orders by dragging food items to different users
 - Log in to PayPal and pay off an indivudal order
 - Cash out their balance
+
+### Visuals
+![Login Page](https://i.imgur.com/Op8RIoL.png)
+![Homepage](https://i.imgur.com/EKHzHn0.png)
+![SingleReceipt](https://i.imgur.com/IdKdsbQ.png)
+![OrdersStart](https://i.imgur.com/UQMDXAh.png)
+![OrdersEnd](https://i.imgur.com/GvSvBkI.png)
+![Orders](https://i.imgur.com/mZwgwqs.png)
+
 ### Wireframes
 #### Login/Signup Page
 ![wireframe1](./media/wireframe1.png "Wireframe1")
