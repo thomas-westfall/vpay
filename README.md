@@ -37,6 +37,7 @@ Backend:
 ![Login Page](https://i.imgur.com/Op8RIoL.png)
 ![Homepage](https://i.imgur.com/EKHzHn0.png)
 ![SingleReceipt](https://i.imgur.com/IdKdsbQ.png)
+![Receipt](https://i.imgur.com/9m2LmKI.jpg)
 ![OrdersStart](https://i.imgur.com/UQMDXAh.png)
 ![OrdersEnd](https://i.imgur.com/GvSvBkI.png)
 ![Orders](https://i.imgur.com/mZwgwqs.png)
