@@ -27,7 +27,7 @@ export const fetchReceiptDataThunk = (selectedFile) => (dispatch) => {
       headers: {
         "Content-Type": "multipart/form-data",
         "Accept": "application/json",
-        "apikey": "e6d1b110bdf511e98bfadfb7eb1aa8b5"
+        "apikey": "30a704a0d9b911e98bfadfb7eb1aa8b5"
       }
     })
   .then(res => { // then print response status
