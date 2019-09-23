@@ -6,6 +6,8 @@ import AllOrders from './AllOrders';
 import OrdersOwedContainer from './OrdersOwedContainer';
 import { withRouter } from 'react-router-dom';
 import logo from './images/vpayLogov1.png';
+const axios = require('axios');
+const paypal_sdk = require('paypal-rest-sdk');
 
 class HomePage extends Component {
   constructor(props) {
@@ -43,6 +45,56 @@ class HomePage extends Component {
 
   displayorder = (val) => {
     this.setState({ tlbox: val })
+  }
+
+  checkout = () => {
+    paypal_sdk.configure({
+      'mode': 'sandbox',
+      'client_id': 'AYc_WD_FqZRhsF9vpUmXank8pwsAMS9Xjz3y89LeJ3kXQ_f5jumCjCIKnvYafaGZ0QOHYVs9GeY-M7cF',
+      'client_secret': 'EMH6VI34GAwYTfH1ad5wiAU1Wf2_oZBWNYaSuqBy0IMA_tM9Xo8aSbK4mgETbHE1Pg8GLV4PACE5b35m'
+    })
+    
+    var config_opts = {
+        'mode':'sandbox',
+        'client_id': 'AYc_WD_FqZRhsF9vpUmXank8pwsAMS9Xjz3y89LeJ3kXQ_f5jumCjCIKnvYafaGZ0QOHYVs9GeY-M7cF',
+        'client_secret': 'EEMH6VI34GAwYTfH1ad5wiAU1Wf2_oZBWNYaSuqBy0IMA_tM9Xo8aSbK4mgETbHE1Pg8GLV4PACE5b35m'
+    };
+
+    var create_payment_json = {
+      "sender_batch_header": {
+          "email_subject": "Vpay Payment",
+          "recipient_type": "EMAIL"
+      },
+      "items": [
+          {
+              "recipient_type": "EMAIL",
+              "amount": {
+                  "value": this.state.amount,
+                  "currency": "USD"
+              },
+              "note": "Thank you for using Vpay!",
+              "sender_item_id": "123",
+              "receiver": this.state.email
+          }
+      ]
+  };
+
+  paypal_sdk.payout.create(create_payment_json,config_opts, function (err, data) {
+      if (err) console.log(err);
+      else{
+          axios({
+              method: 'put',
+              url: 'https://vpay-backend-auth.herokuapp.com/api/users/balance',
+              data: {
+                username: this.props.loggeduser.username,
+                balance: 0
+              }
+            });
+      }
+      console.log("Create Payment Response");
+      console.log(data);
+  });
+  
   }
 
   render() {
@@ -90,9 +142,10 @@ class HomePage extends Component {
                         {console.log(this.props)}
                         {this.props.loggeduser.balance == 0 ?
                         "":
-                        <form action={"/pay/" + this.state.amount + "/" + this.state.email + "/" + this.props.loggeduser.username} method="post">
-                          <input className="cView"type="submit" value="Cash out"></input>
-                        </form>
+                        // <form action={"/pay/" + this.state.amount + "/" + this.state.email + "/" + this.props.loggeduser.username} method="post">
+                        //   <input className="cView"type="submit" value="Cash out"></input>
+                        // </form>
+                        <button onClick={() => this.checkout()}></button>
                         }
                       </div>
                     </tr>
