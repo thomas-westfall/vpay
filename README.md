@@ -44,13 +44,13 @@ Backend:
 
 ### Wireframes
 #### Login/Signup Page
-![wireframe1](./media/wireframe1.png "Wireframe1")
+![wireframe1](./client/media/wireframe1.png "Wireframe1")
 #### Dashboard
-![wireframe2](./media/wireframe2.png "Wireframe2")
+![wireframe2](./client/media/wireframe2.png "Wireframe2")
 #### Add users to receipt
-![wireframe3](./media/wireframe3.png "Wireframe3")
+![wireframe3](./client/media/wireframe3.png "Wireframe3")
 #### What did you eat on this order?
-![wireframe4](./media/wireframe4.png "Wireframe4")
+![wireframe4](./client/media/wireframe4.png "Wireframe4")
 
 ### ERD
 ![vpayERD](./media/vpayERD.jpeg "vPay ERD")
