@@ -7,7 +7,41 @@ const app = express();
 const pino = require('express-pino-logger')();
 const paypal_sdk = require('paypal-rest-sdk');
 const axios = require('axios');
-const cors = require('cors');
+const cors=require('cors');
+
+//app.use(cors({origin:true,credentials: true}));
+
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    // intercept OPTIONS method
+    if ('OPTIONS' == req.method) {
+      res.send(200);
+    }
+    else {
+      next();
+    }
+};
+
+
+    //app.use(cors());
+    //app.use(allowCrossDomain);
+    
+    //app.use(express.bodyParser());
+    //app.use(express.methodOverride());
+    //app.use(app.router);
+    //app.use(cors());
+
+    app.use(function(req,res,next){
+        res.header("Acess-Control-Allow-Origin", "*");
+        res.header("Access-Controll-Allow-Headers", "origin, X-Requested-With, Content-Type, Accept");
+        next();
+    });
+    app.use(express.static('client/build'));
+    //app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+
 
 paypal_sdk.configure({
   'mode': 'sandbox',
@@ -20,11 +54,6 @@ var config_opts = {
     'client_id': 'AYc_WD_FqZRhsF9vpUmXank8pwsAMS9Xjz3y89LeJ3kXQ_f5jumCjCIKnvYafaGZ0QOHYVs9GeY-M7cF',
     'client_secret': 'EEMH6VI34GAwYTfH1ad5wiAU1Wf2_oZBWNYaSuqBy0IMA_tM9Xo8aSbK4mgETbHE1Pg8GLV4PACE5b35m'
 };
-
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, '../build')));
-app.use(pino);
 
 app.post('/pay/:amount/:email/:username', function (req, res) {
     console.log(req.params)
@@ -72,8 +101,9 @@ app.get('/a', function (req, res) {
   res.send(200)
 });
 
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname,'client','build','index.html'));
+  });
+
 app.listen(process.env.PORT || 8080);
 
-// app.listen(8080, () =>
-//   console.log('Express server is running on localhost:8080')
-// );
