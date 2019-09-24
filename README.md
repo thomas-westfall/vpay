@@ -53,7 +53,7 @@ Backend:
 ![wireframe4](./client/media/wireframe4.png "Wireframe4")
 
 ### ERD
-![vpayERD](./media/vpayERD.jpeg "vPay ERD")
+![vpayERD](./client/media/vpayERD.jpeg "vPay ERD")
 
 ### Project Time Frame Given: 8/14-8/23
 
