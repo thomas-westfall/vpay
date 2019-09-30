@@ -1,7 +1,6 @@
 # vPay
 Backend: (https://github.com/tongsalex/vpay-backend)
 ## Usage
-```cd client```  
 ```npm install```  
 ```npm run dev```  
 Navigate to http://localhost:3000 in your web browser
