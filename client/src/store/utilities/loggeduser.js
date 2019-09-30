@@ -31,7 +31,7 @@ export const logInThunk = (user) => async (dispatch) => {
         res = await axios.post(`https://vpay-backend-auth.herokuapp.com/auth/login`, {
             "username": user.username,
             "password": user.password
-        }, { withCredentials: true })
+        })
     }
     catch (authError) {
         return dispatch(error(authError));
@@ -49,7 +49,7 @@ export const logInThunk = (user) => async (dispatch) => {
 export const me = () => async dispatch => {
     try {
         console.log('auth')
-        const res = await axios.get(`https://vpay-backend-auth.herokuapp.com/auth/me`, { withCredentials: true });
+        const res = await axios.get(`https://vpay-backend-auth.herokuapp.com/auth/me`);
         dispatch(logIn(res.data || {}));
     }
     catch (err) {
