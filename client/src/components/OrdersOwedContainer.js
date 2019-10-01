@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './OrdersOwedContainer.css';
-import OrderOwed from './OrderOwed';
 import PayButton from './PayButton';
 
 class OrdersOwedContainer extends Component {
