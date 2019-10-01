@@ -49,7 +49,7 @@ export const logInThunk = (user) => async (dispatch) => {
 export const me = () => async dispatch => {
     try {
         console.log('auth')
-        const res = await axios.get(`https://vpay-backend-auth.herokuapp.com/auth/me`, { withCredentials: true });
+        const res = await axios.get(` https://cors-anywhere.herokuapp.com/https://vpay-backend-auth.herokuapp.com/auth/me`, { withCredentials: false });
         dispatch(logIn(res.data || {}));
     }
     catch (err) {
@@ -59,7 +59,7 @@ export const me = () => async dispatch => {
 export const logOutThunk = () => async (dispatch) => {
     try {
 
-        await axios.delete('https://vpay-backend-auth.herokuapp.com/auth/logout', { withCredentials: true });
+        await axios.delete(' https://cors-anywhere.herokuapp.com/https://vpay-backend-auth.herokuapp.com/auth/logout', { withCredentials: false });
         dispatch(logOut());
     }
     catch (err) {
