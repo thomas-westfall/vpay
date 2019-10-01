@@ -124,7 +124,7 @@ class AssignOrders extends Component {
     this.setState({ confirm : false })
   }
   handleSubmit = async (event) => {
-    await axios.get(`https://vpay-backend-auth.herokuapp.com/api/users/${this.state.username}`)
+    await axios.get(`https://cors-anywhere.herokuapp.com/https://vpay-backend-auth.herokuapp.com/api/users/${this.state.username}`)
 
       .then(res => {
         console.log(res.data, "HERERERE");
@@ -152,7 +152,7 @@ class AssignOrders extends Component {
   }
 
   handleFinalize = async (event) => {
-    await axios.post(`https://vpay-backend-auth.herokuapp.com/api/receipts`, {
+    await axios.post(`https://cors-anywhere.herokuapp.com/https://vpay-backend-auth.herokuapp.com/api/receipts`, {
       userId: this.props.loggeduser.id,
       totalPrice: parseInt(((((this.state.totalReceiptCost - this.state.totalReceiptTax) * (this.state.tipPercent / 100)) + (this.state.totalReceiptCost)).toFixed(2))),
       tipPercent: parseInt(this.state.tipPercent)

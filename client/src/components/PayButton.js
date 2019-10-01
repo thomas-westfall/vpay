@@ -12,7 +12,7 @@ export default class PayButton extends React.Component {
                     // You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
                     await axios({
                         method: 'put',
-                        url: 'https://vpay-backend-auth.herokuapp.com/api/users/balance',
+                        url: 'https://cors-anywhere.herokuapp.com/https://vpay-backend-auth.herokuapp.com/api/users/balance',
                         data: {
                           username: this.props.username,
                           balance: this.props.balance + this.props.amount
@@ -20,7 +20,7 @@ export default class PayButton extends React.Component {
                       });
                       await axios({
                         method: 'put',
-                        url: 'https://vpay-backend-auth.herokuapp.com/api/orders/'+this.props.id,
+                        url: 'https://cors-anywhere.herokuapp.com/https://vpay-backend-auth.herokuapp.com/api/orders/'+this.props.id,
                         data: {
                           username: this.props.username,
                           paid: true
