@@ -1,11 +1,12 @@
 # vPay
 Backend: (https://github.com/tongsalex/vpay-backend)
 ## Usage
-The deployed site can be found here: (https://vpay-frontend.herokuapp.com)
-To run vPay locally:
+The deployed site can be found here: (https://vpay-frontend.herokuapp.com)  
+  
+To run vPay locally, clone this repository and run the following commands:  
 ```npm install```  
-```cd client```
-```npm install```
+```cd client```  
+```npm install```  
 ```npm run dev```  
 Navigate to http://localhost:3000 in your web browser
 ## Concept
