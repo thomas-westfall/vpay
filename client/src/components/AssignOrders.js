@@ -169,7 +169,7 @@ class AssignOrders extends Component {
                 "itemName", eachOrder.props.id,
                 "price ", ((eachOrder.props.cost * (this.state.tipPercent / 100)) + eachOrder.props.cost + (eachOrder.props.cost * (this.state.totalReceiptTax / (this.state.totalReceiptCost - this.state.totalReceiptTax)
                 ))))
-              await axios.post(`https://vpay-backend-auth.herokuapp.com/api/orders`, {
+              await axios.post(`https://cors-anywhere.herokuapp.com/https://vpay-backend-auth.herokuapp.com/api/orders`, {
                 userId: this.state.groups[keyName].id,
                 receiptId: newReceiptId,
                 paid: true,
@@ -177,7 +177,7 @@ class AssignOrders extends Component {
                 price: parseFloat(((eachOrder.props.cost * (this.state.tipPercent / 100)) + eachOrder.props.cost + (eachOrder.props.cost * (this.state.totalReceiptTax / (this.state.totalReceiptCost - this.state.totalReceiptTax)))).toFixed(2))
               })
                 .then(response => {
-                  console.log(response, "WENT THROUGH SUCCESFULLLLLLLY")
+                  console.log(response)
                 }
                 )
                 .catch(error => {
@@ -187,7 +187,7 @@ class AssignOrders extends Component {
           }
           else if ((this.state.groups[keyName].id)) {
             this.state.groups[keyName].theirOrders.map(async (eachOrder) => (
-              await axios.post(`https://vpay-backend-auth.herokuapp.com/api/orders`, {
+              await axios.post(`https://cors-anywhere.herokuapp.com/https://vpay-backend-auth.herokuapp.com/api/orders`, {
                 userId: this.state.groups[keyName].id,
                 receiptId: newReceiptId,
                 paid: false,

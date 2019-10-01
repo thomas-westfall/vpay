@@ -16,31 +16,6 @@ class AllReceipts extends Component {
         })
     }
 
-    // viewreceipt = (eachReceipt) =>{
-    //     console.log("DAWDAWD")
-    //     document.getElementsByClassName("welcomeTableText")[0].innerHTML = "";
-    //     var allOrders = []
-
-    //                         eachReceipt.orders.map(item => {
-    //                         allOrders.push(
-    //                             <div id={item.id} className="order" key={item.id}>
-    //                                 <div className="orderContent">
-    //                                     <p>
-    //                                         <span className="orderId"><u>Order No:</u> {item.id}</span>
-    //                                         <div className="orderName"><u>Order Name:</u> {item.itemName}</div>
-    //                                         <div className="orderPrice"><u>Price:</u> {item.price}</div>
-    //                                     </p>
-    //                                 </div>
-    //                             </div>
-    //                         )
-
-
-
-    //                         })
-                        
-    //     return allOrders
-    // }
-
     render() {
         return (
             <table className="ReceiptTable">

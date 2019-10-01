@@ -37,14 +37,6 @@ class LoginPage extends Component {
   }
   
   render() {
-    // let imgUrl = 'images/berlin.jpg'
-    // let styles = {
-    //     root: {
-    //         backgroundImage: 'url(' + imgUrl + ')',
-    //         backgroundSize: 'cover',
-    //         overflow: 'hidden',
-    //     },
-    // }
     return (
       <div className="LogInPage">
         <form onSubmit={this.handleSubmit} className="form">
