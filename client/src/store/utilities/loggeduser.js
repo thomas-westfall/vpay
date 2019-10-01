@@ -28,10 +28,10 @@ export const logInThunk = (user) => async (dispatch) => {
     let res;
     try {
         console.log(user);
-        res = await axios.post(`https://vpay-backend-auth.herokuapp.com/auth/login`, {
+        res = await axios.post(` https://cors-anywhere.herokuapp.com/https://vpay-backend-auth.herokuapp.com/auth/login`, {
             "username": user.username,
             "password": user.password
-        }, { withCredentials: true })
+        }, { withCredentials: false })
     }
     catch (authError) {
         return dispatch(error(authError));
