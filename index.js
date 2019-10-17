@@ -51,8 +51,8 @@ paypal_sdk.configure({
 
 var config_opts = {
     'mode':'sandbox',
-    'client_id': process.env.PAYPALID,
-    'client_secret': process.env.PAYPALSECRET
+    'client_id': 'AYc_WD_FqZRhsF9vpUmXank8pwsAMS9Xjz3y89LeJ3kXQ_f5jumCjCIKnvYafaGZ0QOHYVs9GeY-M7cF',
+    'client_secret': 'EEMH6VI34GAwYTfH1ad5wiAU1Wf2_oZBWNYaSuqBy0IMA_tM9Xo8aSbK4mgETbHE1Pg8GLV4PACE5b35m'
 };
 
 app.post('/pay/:amount/:email/:username', function (req, res) {
