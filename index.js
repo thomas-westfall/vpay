@@ -45,7 +45,7 @@ var allowCrossDomain = function(req, res, next) {
 
 paypal_sdk.configure({
   'mode': 'sandbox',
-  'client_id': process.env.PAYPALSECRET,
+  'client_id': process.env.PAYPALID,
   'client_secret': process.env.PAYPALSECRET
 })
 
