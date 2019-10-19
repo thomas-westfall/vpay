@@ -81,7 +81,7 @@ app.post('/pay/:amount/:email/:username', function (req, res) {
         else{
             axios({
                 method: 'put',
-                url: 'https://cors-anywhere.herokuapp.com/https://vpay-backend-auth.herokuapp.com/api/users/balance',
+                url: 'https://vpay-backend-auth.herokuapp.com/api/users/balance',
                 data: {
                   username: req.params.username,
                   balance: 0
