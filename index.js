@@ -46,13 +46,13 @@ var allowCrossDomain = function(req, res, next) {
 paypal_sdk.configure({
   'mode': 'sandbox',
   'client_id': 'AYc_WD_FqZRhsF9vpUmXank8pwsAMS9Xjz3y89LeJ3kXQ_f5jumCjCIKnvYafaGZ0QOHYVs9GeY-M7cF',
-  'client_secret': 'EEMH6VI34GAwYTfH1ad5wiAU1Wf2_oZBWNYaSuqBy0IMA_tM9Xo8aSbK4mgETbHE1Pg8GLV4PACE5b35m'
+  'client_secret': 'EMH6VI34GAwYTfH1ad5wiAU1Wf2_oZBWNYaSuqBy0IMA_tM9Xo8aSbK4mgETbHE1Pg8GLV4PACE5b35m'
 })
 
 var config_opts = {
     'mode':'sandbox',
     'client_id': 'AYc_WD_FqZRhsF9vpUmXank8pwsAMS9Xjz3y89LeJ3kXQ_f5jumCjCIKnvYafaGZ0QOHYVs9GeY-M7cF',
-    'client_secret': 'EEMH6VI34GAwYTfH1ad5wiAU1Wf2_oZBWNYaSuqBy0IMA_tM9Xo8aSbK4mgETbHE1Pg8GLV4PACE5b35m'
+    'client_secret': 'EMH6VI34GAwYTfH1ad5wiAU1Wf2_oZBWNYaSuqBy0IMA_tM9Xo8aSbK4mgETbHE1Pg8GLV4PACE5b35m'
 };
 
 app.post('/pay/:amount/:email/:username', function (req, res) {
@@ -81,7 +81,7 @@ app.post('/pay/:amount/:email/:username', function (req, res) {
         else{
             axios({
                 method: 'put',
-                url: 'https://cors-anywhere.herokuapp.com/https://vpay-backend-auth.herokuapp.com/api/users/balance',
+                url: 'https://vpay-backend-auth.herokuapp.com/api/users/balance',
                 data: {
                   username: req.params.username,
                   balance: 0
