@@ -90,7 +90,7 @@ app.post('/pay/:amount/:email/:username', function (req, res) {
         }
         console.log("Create Payment Response");
         console.log(data);
-    }c);
+    });
     //res.sendFile(path.join(__dirname, '../build/', 'index.html'));
     res.send("Cash out successful!");
     //res.end();
