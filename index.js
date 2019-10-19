@@ -81,7 +81,7 @@ app.post('/pay/:amount/:email/:username', function (req, res) {
         else{
             axios({
                 method: 'put',
-                url: 'https://vpay-backend-auth.herokuapp.com/api/users/balance',
+                url: 'https://cors-anywhere.herokuapp.com/https://vpay-backend-auth.herokuapp.com/api/users/balance',
                 data: {
                   username: req.params.username,
                   balance: 0
@@ -90,7 +90,7 @@ app.post('/pay/:amount/:email/:username', function (req, res) {
         }
         console.log("Create Payment Response");
         console.log(data);
-    });
+    }c);
     //res.sendFile(path.join(__dirname, '../build/', 'index.html'));
     res.send("Cash out successful!");
     //res.end();
